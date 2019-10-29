@@ -18,13 +18,13 @@ public class RouletteGameImpl implements RouletteGame {
 
     @PostConstruct
     public void roll() {
+        log.info("Launching new Roulette Game.");
         newNumber();
         getColor();
     }
 
     @Override
     public int newNumber() {
-        log.info("Choosing new number for Roulette");
         this.number = new Random().nextInt(37);
         return this.number;
     }
@@ -73,35 +73,6 @@ public class RouletteGameImpl implements RouletteGame {
         }
         String firstLetter = this.color.toLowerCase().split("")[0];
         return guess.toLowerCase().startsWith(firstLetter);
-    }
-
-    @Override
-    public boolean getResultDozen(int guess) throws Exception {
-        if(!isBetween(guess,1,36)) {
-            throw new Exception("Incorrect number range.");
-        }
-        switch (guess) {
-            case 1:
-                return isBetween(this.number,1,12);
-            case 2:
-                return isBetween(this.number, 13, 24);
-            case 3:
-                return isBetween(this.number, 25, 36);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean getResultLowOrHigh(String guess) throws Exception {
-        if(!guess.toLowerCase().startsWith("l") && !guess.toLowerCase().startsWith("h")) {
-            throw new Exception("Incorrect string entered.");
-        }
-        if (guess.toLowerCase().startsWith("l")) {
-            return isBetween(this.number, 1, 18);
-        } else if (!guess.toLowerCase().startsWith("l")) {
-            return isBetween(this.number, 19, 36);
-        }
-        return false;
     }
 
     private boolean isBetween(int checkedNumber, int min, int max) {
