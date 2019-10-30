@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head id="headId">
 </head>
 <body>
@@ -14,19 +14,19 @@
             <td valign="top">
                 <p style="font-weight: bold">Your hand:</p>
                 <table>
-                    <tr><td th:each="card: ${yourHand}"><img th:src="@{__${card.cardSrc}__}" th:alt="${card}"/></td></tr>
+                    <tr><td id="yourHandList"><img id="yourCard"/></td></tr>
                 </table>
             </td>
             <td  valign="top">
                 <p style="font-weight: bold">Dealer's hand:</p>
                 <table>
-                    <tr><td th:each="card: ${dealersHand}"><img th:src="@{__${card.cardSrc}__}" th:alt="${card}"/></td></tr>
+                    <tr><td id="dealersHandList"><img id="dealersCard"/></td></tr>
                 </table>
             </td>
         </tr>
     </table>
 </div>
-<div class="centerContainer" th:if="${gameFinished==false}">
+<div class="centerContainer" id="divGameNotFinished">
     <table>
         <tr>
             <td>
@@ -44,7 +44,7 @@
         </tr>
     </table>
 </div>
-<div class="centerContainer" th:if="${gameFinished==true}">
+<div class="centerContainer" id="divGameFinished">
     <form method="post">
         <input type="hidden" name="_method" value="again" />
         <input value="Play again" name="again" type="submit" />

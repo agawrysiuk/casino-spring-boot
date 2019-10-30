@@ -3,4 +3,10 @@
     <attr sel="#blackjackImg" th:src="@{images/Casino_Blackjack.png}"/>
     <attr sel="#mainMessage" th:text="${mainMessage}"/>
     <attr sel="#resultMessage" th:text="${resultMessage}"/>
+    <attr sel="#yourHandList" th:each="card: ${yourHand}"/>
+    <attr sel="#yourCard" th:src="@{__${card.cardSrc}__}" th:alt="${card}"/>
+    <attr sel="#dealersHandList" th:each="card: ${dealersHand}"/>
+    <attr sel="#dealersCard" th:src="@{__${card.cardSrc}__}" th:alt="${card}"/>
+    <attr sel="#divGameNotFinished" th:if="${gameFinished==false}"/>
+    <attr sel="#divGameFinished" th:if="${gameFinished==true}"/>
 </thlogic>
