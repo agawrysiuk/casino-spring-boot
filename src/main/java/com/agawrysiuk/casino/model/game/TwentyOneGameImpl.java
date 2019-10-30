@@ -67,7 +67,7 @@ public class TwentyOneGameImpl implements TwentyOneGame {
         }
         gameFinished = true;
         try {
-            while(dealersSum<=14 && !gameWon && !gameLost) {
+            while((dealersSum<=14 || dealersSum<yourSum) && !gameWon && !gameLost) {
                 Card card = cardsInDeck.get(new Random().nextInt(cardsInDeck.size()));
                 dealersHand.add(card);
                 cardsInDeck.remove(card);

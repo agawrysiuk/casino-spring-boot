@@ -19,8 +19,8 @@ public class RouletteGameImpl implements RouletteGame {
     @PostConstruct
     public void roll() {
         log.info("Launching new Roulette Game.");
-        newNumber();
-        getColor();
+//        newNumber();
+//        getColor();
     }
 
     @Override
