@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,7 +25,7 @@ public class RouletteController {
         this.rouletteService = rouletteService;
     }
 
-    @GetMapping(ViewNames.ROULETTE) // change to ViewNames.ROULETTE later on
+    @GetMapping(ViewNames.ROULETTE)
     public String roulette(Model model) {
         rouletteService.reset();
         model.addAttribute(AttributeNames.ROULETTE_MAIN_MESSAGE,rouletteService.getMainMessage());
@@ -32,10 +33,29 @@ public class RouletteController {
         return ViewNames.ROULETTE;
     }
 
-    @RequestMapping(value="/roulette", params = "single", method = RequestMethod.POST)
-    public String rouletteSingleBet(HttpServletRequest request, Model model) {
+    @RequestMapping(value="/roulette", params = "singleFormSubmit", method = RequestMethod.POST)
+    public String rouletteSingle(HttpServletRequest request, Model model, @RequestParam int guessSingle) {
         rouletteService.roll();
         model.addAttribute(AttributeNames.ROULETTE_MAIN_MESSAGE,rouletteService.getMainMessage());
+        model.addAttribute(AttributeNames.ROULETTE_RESULT_MESSAGE,rouletteService.getResultMessageSingle(guessSingle));
+        log.info("model = {}",model);
+        return ViewNames.ROULETTE;
+    }
+
+    @RequestMapping(value="/roulette", params = "redOrBlackFormSubmit", method = RequestMethod.POST)
+    public String rouletteRedOrBlackBet(HttpServletRequest request, Model model, @RequestParam String guessRedOrBlack) {
+        rouletteService.roll();
+        model.addAttribute(AttributeNames.ROULETTE_MAIN_MESSAGE,rouletteService.getMainMessage());
+        model.addAttribute(AttributeNames.ROULETTE_RESULT_MESSAGE,rouletteService.getResultMessageRedOrBlack(guessRedOrBlack));
+        log.info("model = {}",model);
+        return ViewNames.ROULETTE;
+    }
+
+    @RequestMapping(value="/roulette", params = "evenOrOddFormSubmit", method = RequestMethod.POST)
+    public String rouletteEvenOrOddBet(HttpServletRequest request, Model model, @RequestParam String guessEvenOrOdd) {
+        rouletteService.roll();
+        model.addAttribute(AttributeNames.ROULETTE_MAIN_MESSAGE,rouletteService.getMainMessage());
+        model.addAttribute(AttributeNames.ROULETTE_RESULT_MESSAGE,rouletteService.getResultMessageEvenOrOdd(guessEvenOrOdd));
         log.info("model = {}",model);
         return ViewNames.ROULETTE;
     }

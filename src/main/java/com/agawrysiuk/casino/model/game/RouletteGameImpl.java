@@ -77,8 +77,14 @@ public class RouletteGameImpl implements RouletteGame {
         if(!guess.toLowerCase().startsWith("e") && !guess.toLowerCase().startsWith("o")) {
             throw new Exception("Incorrect string entered.");
         }
-        String firstLetter = this.color.toLowerCase().split("")[0];
-        return guess.toLowerCase().startsWith(firstLetter);
+        if(number==0) {
+            return false;
+        }
+        if(guess.toLowerCase().startsWith("e")) {
+            return this.number%2==0;
+        } else {
+            return this.number%2!=0;
+        }
     }
 
     private boolean isBetween(int checkedNumber, int min, int max) {

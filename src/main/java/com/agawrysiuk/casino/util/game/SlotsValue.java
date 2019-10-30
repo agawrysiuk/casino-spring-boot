@@ -11,9 +11,9 @@ public enum SlotsValue {
     EIGHTH(8),
     NINTH(9);
 
-    public int multiplier;
+    public int intValue;
 
-    SlotsValue(int multiplier) {
-        this.multiplier = multiplier;
+    SlotsValue(int intValue) {
+        this.intValue = intValue;
     }
 }

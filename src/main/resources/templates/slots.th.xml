@@ -1,0 +1,5 @@
+<thlogic>
+    <attr sel="#headId" th:replace="~{fragments/head :: headFragment}"/>
+    <attr sel="#slotsImg" th:src="@{images/Casino_Slots.png}"/>
+    <attr sel="#mainMessage" th:text="${mainMessage}"/>
+</thlogic>

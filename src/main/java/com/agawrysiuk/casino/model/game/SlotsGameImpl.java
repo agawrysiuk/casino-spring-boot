@@ -22,9 +22,13 @@ public class SlotsGameImpl implements SlotsGame{
     private SlotsValue[] results;
 
     @PostConstruct
-    public void roll() {
+    public void init() {
         log.info("Launching new Slots Game.");
         results = new SlotsValue[5];
+        multiplier = -1;
+    }
+
+    public void roll() {
         SlotsValue[] slots = SlotsValue.values();
         Random random = new Random();
         for (int i = 0; i<5; i++) {
@@ -34,6 +38,7 @@ public class SlotsGameImpl implements SlotsGame{
     }
 
     private void setMultiplier() {
+        this.multiplier = 0;
         if(Arrays.stream(this.results).distinct().count()==this.results.length) {
             this.multiplier = 0;
             return;
@@ -43,7 +48,7 @@ public class SlotsGameImpl implements SlotsGame{
             if(entry.getValue()==1) {
                 continue;
             }
-            this.multiplier += entry.getKey().multiplier * entry.getValue();
+            this.multiplier += entry.getKey().intValue * entry.getValue();
         }
         this.multiplier = this.multiplier / 10;
     }
