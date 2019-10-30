@@ -2,4 +2,6 @@
     <attr sel="#headId" th:replace="~{fragments/head :: headFragment}"/>
     <attr sel="#slotsImg" th:src="@{images/Casino_Slots.png}"/>
     <attr sel="#mainMessage" th:text="${mainMessage}"/>
+    <attr sel="#tdId" th:each="data: ${slotResults}"/>
+    <attr sel="#pId" th:text="${data}"/>
 </thlogic>

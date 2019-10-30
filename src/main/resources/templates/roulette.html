@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head id="headId">
 </head>
 <body>
@@ -21,7 +21,7 @@
             <td>
                 <form id="singleForm" action="#" method="post">
                     <select id="guessSingle" name="guessSingle">
-                        <option th:each="n : ${#numbers.sequence(0,36)}" th:value="${n}" th:text="${n}"></option>
+                        <option id="optionIterate" ></option>
                     </select>
                 </form>
             </td>

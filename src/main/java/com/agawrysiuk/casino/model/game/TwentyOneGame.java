@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface TwentyOneGame {
     void reset();
-    void hitMe();
+    Card hitMe();
     void dealersChoice();
     int getYourSum();
     int getDealersSum();

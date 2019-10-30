@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head id="headId">
 </head>
 <body>
@@ -10,14 +10,14 @@
 <div class="centerContainer">
     <table class="slotsTable">
         <tr>
-            <td th:each="data: ${slotResults}" class="slotsColumn">
-                <p th:text="${data}" style="font-size:500%; font-weight: bold;"></p>
+            <td id="tdId" class="slotsColumn">
+                <p id="pId" style="font-size:500%; font-weight: bold;"></p>
             </td>
         </tr>
     </table>
 </div>
 <div class="centerContainer">
-    <form action="#" th:method="post" >
+    <form action="#" method="post">
         <input type="hidden" name="_method" value="roll" />
         <button type="submit" id="submitButton">Roll</button>
     </form>

@@ -29,7 +29,7 @@ public class SlotsController {
         return ViewNames.SLOTS;
     }
 
-    @RequestMapping(value="/slots", method = RequestMethod.POST)
+    @RequestMapping(value="/slots", params = "evenOrOddFormSubmit", method = RequestMethod.POST)
     public String newRoll(Model model) {
         slotsService.roll();
         model.addAttribute(AttributeNames.SLOTS_MAIN_MESSAGE, slotsService.getMessage());

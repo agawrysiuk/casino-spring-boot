@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head id="headId">
+</head>
+<body>
+<div class="centerContainer">
+    <img id="blackjackImg" width="400" height="400"/>
+    <h1 id="mainMessage"></h1>
+    <h2 id="resultMessage"></h2>
+</div>
+<div class="centerContainer">
+    <table>
+        <tr>
+            <td valign="top">
+                <p style="font-weight: bold">Your hand:</p>
+                <table>
+                    <tr><td th:each="card: ${yourHand}"><img th:src="@{__${card.cardSrc}__}" th:alt="${card}"/></td></tr>
+                </table>
+            </td>
+            <td  valign="top">
+                <p style="font-weight: bold">Dealer's hand:</p>
+                <table>
+                    <tr><td th:each="card: ${dealersHand}"><img th:src="@{__${card.cardSrc}__}" th:alt="${card}"/></td></tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="centerContainer" th:if="${gameFinished==false}">
+    <table>
+        <tr>
+            <td>
+                <form method="post">
+                    <input type="hidden" name="_method" value="hitMe" />
+                    <input value="Hit me!" name="hitMe" type="submit"/>
+                </form>
+            </td>
+            <td>
+                <form method="post">
+                    <input type="hidden" name="_method" value="hold" />
+                    <input value="Hold" name="hold" type="submit" />
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="centerContainer" th:if="${gameFinished==true}">
+    <form method="post">
+        <input type="hidden" name="_method" value="again" />
+        <input value="Play again" name="again" type="submit" />
+    </form>
+</div>
+</body>
+</html>
