@@ -24,14 +24,15 @@ public class RouletteController {
         this.rouletteService = rouletteService;
     }
 
-    @GetMapping("/") // change to ViewNames.ROULETTE later on
+    @GetMapping(ViewNames.ROULETTE) // change to ViewNames.ROULETTE later on
     public String roulette(Model model) {
+        rouletteService.reset();
         model.addAttribute(AttributeNames.ROULETTE_MAIN_MESSAGE,rouletteService.getMainMessage());
         log.info("model = {}",model);
         return ViewNames.ROULETTE;
     }
 
-    @RequestMapping(params = "single", method = RequestMethod.POST)
+    @RequestMapping(value="/roulette", params = "single", method = RequestMethod.POST)
     public String rouletteSingleBet(HttpServletRequest request, Model model) {
         rouletteService.roll();
         model.addAttribute(AttributeNames.ROULETTE_MAIN_MESSAGE,rouletteService.getMainMessage());

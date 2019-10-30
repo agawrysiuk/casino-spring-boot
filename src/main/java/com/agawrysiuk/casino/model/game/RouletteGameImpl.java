@@ -24,6 +24,12 @@ public class RouletteGameImpl implements RouletteGame {
     }
 
     @Override
+    public void reset() {
+        this.number = -1;
+        this.color = null;
+    }
+
+    @Override
     public int newNumber() {
         this.number = new Random().nextInt(37);
         return this.number;

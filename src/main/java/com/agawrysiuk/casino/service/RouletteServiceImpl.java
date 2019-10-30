@@ -13,6 +13,7 @@ public class RouletteServiceImpl implements RouletteService{
         this.rouletteGame = rouletteGame;
     }
 
+    @Override
     public String getMainMessage() {
         if(rouletteGame.getNumber()==-1) {
             return "Place your bet";
@@ -21,7 +22,13 @@ public class RouletteServiceImpl implements RouletteService{
         }
     }
 
+    @Override
     public void roll() {
         rouletteGame.newNumber();
+    }
+
+    @Override
+    public void reset() {
+        rouletteGame.reset();
     }
 }
