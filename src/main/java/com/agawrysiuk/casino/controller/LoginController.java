@@ -12,10 +12,14 @@ import java.util.List;
 @Controller
 public class LoginController {
 
-    @Autowired
-    private CasinoUserRepository casinoUserRepository;
+    private final CasinoUserRepository casinoUserRepository;
 
-    @GetMapping(path="/all")
+    @Autowired
+    public LoginController(CasinoUserRepository casinoUserRepository) {
+        this.casinoUserRepository = casinoUserRepository;
+    }
+
+    @GetMapping(path="/all") //for testing purposes
     public @ResponseBody List<CasinoUser> getAllUsers() {
         return casinoUserRepository.findAll();
     }
