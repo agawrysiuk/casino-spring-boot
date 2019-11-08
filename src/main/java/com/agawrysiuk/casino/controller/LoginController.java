@@ -23,4 +23,9 @@ public class LoginController {
     public @ResponseBody List<CasinoUser> getAllUsers() {
         return casinoUserRepository.findAll();
     }
+
+    @GetMapping(path="/userOne")
+    public @ResponseBody CasinoUser getUserOne() {
+        return casinoUserRepository.findByNickname("userOne");
+    }
 }
