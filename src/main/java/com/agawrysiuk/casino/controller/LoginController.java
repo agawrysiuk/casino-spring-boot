@@ -32,6 +32,11 @@ public class LoginController {
         return casinoUserRepository.findByNickname("userOne");
     }
 
+    @GetMapping(path="/admin")
+    public @ResponseBody CasinoUser getAdmin() {
+        return casinoUserRepository.findByNickname("admin");
+    }
+
     @GetMapping("/")
     public String index(Model model, Principal principal) {
         model.addAttribute("message", "You are logged in as " + principal.getName());
