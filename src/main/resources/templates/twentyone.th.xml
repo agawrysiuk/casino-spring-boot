@@ -9,4 +9,5 @@
     <attr sel="#dealersCard" th:src="@{__${card.cardSrc}__}" th:alt="${card}"/>
     <attr sel="#divGameNotFinished" th:if="${gameFinished==false}"/>
     <attr sel="#divGameFinished" th:if="${gameFinished==true}"/>
+    <attr sel="#headerId" th:replace="~{fragments/header :: headerFragment}"/>
 </thlogic>

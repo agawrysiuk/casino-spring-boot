@@ -5,4 +5,5 @@
     <attr sel="#moneyMessage" th:text="${moneyMessage}"/>
     <attr sel="#tdId" th:each="data: ${slotResults}"/>
     <attr sel="#pId" th:text="${data}"/>
+    <attr sel="#headerId" th:replace="~{fragments/header :: headerFragment}"/>
 </thlogic>

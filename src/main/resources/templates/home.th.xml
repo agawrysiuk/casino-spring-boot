@@ -2,4 +2,8 @@
     <attr sel="#headId" th:replace="~{fragments/head :: headFragment}"/>
     <attr sel="#messageText" th:text="${message}"/>
     <attr sel="#footerId" th:replace="~{fragments/footer :: footerFragment}"/>
+    <attr sel="#headerId" th:replace="~{fragments/header :: headerFragment}"/>
+    <attr sel="#blackjackImg" th:src="@{images/Casino_Blackjack.png}"/>
+    <attr sel="#rouletteImg" th:src="@{images/Casino_Roulette.png}"/>
+    <attr sel="#slotsImg" th:src="@{images/Casino_Slots.png}"/>
 </thlogic>

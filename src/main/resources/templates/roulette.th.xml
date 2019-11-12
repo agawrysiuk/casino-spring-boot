@@ -4,4 +4,5 @@
     <attr sel="#mainMessage" th:text="${rouletteMainMessage}"/>
     <attr sel="#resultMessage" th:text="${rouletteResultMessage}"/>
     <attr sel="#optionIterate" th:each="n : ${#numbers.sequence(0,36)}" th:value="${n}" th:text="${n}"/>
+    <attr sel="#headerId" th:replace="~{fragments/header :: headerFragment}"/>
 </thlogic>
