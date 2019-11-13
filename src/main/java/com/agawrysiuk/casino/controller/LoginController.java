@@ -27,11 +27,6 @@ public class LoginController {
         return casinoUserRepository.findAll();
     }
 
-    @GetMapping(path="/userOne")
-    public @ResponseBody CasinoUser getUserOne() {
-        return casinoUserRepository.findByNickname("userOne");
-    }
-
     @GetMapping(path="/admin")
     public @ResponseBody CasinoUser getAdmin() {
         return casinoUserRepository.findByNickname("admin");

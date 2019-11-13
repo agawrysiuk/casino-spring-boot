@@ -13,5 +13,6 @@ public class CasinoUser {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String nickname;
+    private String email;
     private double balance;
 }
