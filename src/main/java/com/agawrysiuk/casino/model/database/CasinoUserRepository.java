@@ -1,6 +1,5 @@
-package com.agawrysiuk.casino.repo;
+package com.agawrysiuk.casino.model.database;
 
-import com.agawrysiuk.casino.model.accounts.CasinoUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

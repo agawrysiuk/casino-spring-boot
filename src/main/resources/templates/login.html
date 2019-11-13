@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head id="headId">
 </head>
 <body>
 <h1>Login page</h1>
-<p th:if="${loginError}" class="error">Wrong user or password</p>
-<form th:action="@{/login}" method="post">
+<p id="loginPrintError" class="error">Wrong user or password</p>
+<form id="loginForm" method="post">
     <label for="username">Username</label>:
     <input type="text" id="username" name="username" autofocus="autofocus" /> <br />
     <label for="password">Password</label>:

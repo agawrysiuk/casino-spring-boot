@@ -1,4 +1,4 @@
-package com.agawrysiuk.casino.model.accounts;
+package com.agawrysiuk.casino.model.database;
 
 import lombok.Data;
 
