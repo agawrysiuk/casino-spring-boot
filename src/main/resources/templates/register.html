@@ -9,14 +9,15 @@
     <div>
         <label>Username</label>
         <input th:field="*{username}"/>
-        <p th:each="error: ${#fields.errors('username')}"
-           th:text="${error}">Validation error</p>
+        <p th:if="${#fields.hasErrors('username')}"
+           th:errors="*{username}">Validation error</p>
     </div>
     <div>
         <label>Email</label>
-        <input type="email" th:field="*{email}"/>
-        <p th:each="error : ${#fields.errors('email')}"
-           th:text="${error}">Validation error</p>
+        <input type="email" th:field="*{email}"
+               th:class="${#fields.hasErrors('email')}? fieldError"/>
+        <p th:if="${#fields.hasErrors('email')}"
+           th:errors="*{email}">Validation error</p>
     </div>
     <div>
         <label>Password</label>

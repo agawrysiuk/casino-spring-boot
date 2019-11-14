@@ -27,6 +27,11 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(email);
     }
 
+
+    public User findByUsername(String username){
+        return userRepository.findByUsername(username);
+    };
+
     public User findByConfirmationToken(String confirmationToken) {
         return userRepository.findByConfirmationToken(confirmationToken);
     }

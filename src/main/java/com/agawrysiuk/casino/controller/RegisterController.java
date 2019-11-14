@@ -1,6 +1,5 @@
 package com.agawrysiuk.casino.controller;
 
-import com.agawrysiuk.casino.model.database.User;
 import com.agawrysiuk.casino.model.database.UserDto;
 import com.agawrysiuk.casino.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,33 +38,32 @@ public class RegisterController {
 
     @RequestMapping(value = "/register", params="register", method = RequestMethod.POST)
     public ModelAndView registerUserAccount(
-            @ModelAttribute("userdto") @Valid UserDto accountDto,
+            @ModelAttribute("userdto") @Valid UserDto userDto,
             BindingResult result,
             WebRequest request,
             Errors errors) {
 
-        User registered = new User();
         log.info("showRegistrationForm() started");
         if (!result.hasErrors()) {
             log.info("showRegistrationForm() ---- NO ERRORS");
-            registered = createUserAccount(accountDto, result);
-        }
-        if (registered != null) {
-            result.rejectValue("email", "message.regError");
-            log.info("showRegistrationForm() ---- EMAIL EXISTS");
+            if (userService.findByEmail(userDto.getEmail()) != null) {
+                result.addError(new FieldError("userDto","email","Email already exists."));
+                log.info("showRegistrationForm() ---- EMAIL EXISTS");
+            }
+            if(userService.findByUsername(userDto.getUsername()) != null) {
+                result.addError(new FieldError("userDto","username","Username already exists."));
+                log.info("showRegistrationForm() ---- USERNAME EXISTS");
+            }
         }
         if (result.hasErrors()) {
-            log.info("showRegistrationForm() ---- ERRORS {}",accountDto);
-            return new ModelAndView("register", "userdto", accountDto);
-        }
-        else {
-            log.info("showRegistrationForm() ---- NO ERRORS {}",accountDto);
-            userService.registerNewUserAccount(accountDto);
-            return new ModelAndView("successRegister", "userdto", accountDto);
+            log.info("showRegistrationForm() ---- ERROR {}",userDto);
+            log.info("result = {}", result);
+            return new ModelAndView("register", "userdto", userDto);
+        } else {
+            log.info("showRegistrationForm() ---- NO ERRORS {}",userDto);
+            userService.registerNewUserAccount(userDto);
+            return new ModelAndView("successRegister", "userdto", userDto);
         }
     }
 
-    private User createUserAccount(UserDto accountDto, BindingResult result) {
-        return userService.findByEmail(accountDto.getEmail());
-    }
 }
