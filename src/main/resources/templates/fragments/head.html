@@ -1,55 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head id="headId">
     <meta charset="UTF-8">
     <title>Web Casino</title>
-    <style>
-        table,th,td {
-            margin-left:auto;
-            margin-right:auto;
-            text-align: center;
-            padding: 5px;
-            border-spacing: 50px 0;
-        }
-        div.centerContainer {
-            text-align: center;
-        }
-        table.slotsTable {
-            border-collapse: collapse;
-            border-style: hidden;
-        }
-
-        table td.slotsColumn {
-            padding: 50px;
-            border: 1px solid black;
-        }
-        ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: #333;
-        }
-
-        li {
-            float: left;
-        }
-
-        li a {
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
-        li a:hover:not(.active) {
-            background-color: #111;
-        }
-
-        .active {
-            background-color: #4CAF50;
-        }
-    </style>
+    <!--        styles created using existing code @ https://codepen.io/KovJonas/pen/BoPOPY-->
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../../css/gtvg.css" th:href="@{/css/full.css}" />
 </head>
 <body>
 
