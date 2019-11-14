@@ -35,7 +35,7 @@ public class UserController {
     // Login form
     @RequestMapping("/login")
     public String login() {
-        return "login.html";
+        return "login";
     }
 
     // Login form with error

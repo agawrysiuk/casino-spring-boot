@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .usersByUsernameQuery("select username, password, enabled"
                         + " from users where username=?")
                 .authoritiesByUsernameQuery("select username, authority "
-                        + "from authorities where username=?")
+                        + "from users where username=?")
                 .passwordEncoder(new BCryptPasswordEncoder());
     }
 
@@ -40,7 +40,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().anyRequest().hasAnyRole("ADMIN", "USER")
+        http
+                .authorizeRequests().antMatchers("/register**","/successRegister**").permitAll()
+                .and()
+                .authorizeRequests().anyRequest().hasAnyRole("ADMIN", "USER")
                 .and()
                 .formLogin().loginPage("/login").defaultSuccessUrl("/").failureUrl("/login-error").permitAll()
                 .and()
