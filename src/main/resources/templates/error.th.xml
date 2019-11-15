@@ -1,9 +1,4 @@
 <thlogic>
     <attr sel="#headId" th:replace="~{fragments/head :: headFragment}"/>
-    <attr sel="#errorBody"
-          th:with="httpStatus=${T(org.springframework.http.HttpStatus)
-          .valueOf(#response.status)}"/>
-    <attr sel="#errorH1" th:text="|${httpStatus} - ${httpStatus.reasonPhrase}|"/>
-    <attr sel="#errorPara" th:utext="${errorMessage}"/>
-    <attr sel="#homeLink" th:href="@{/home.html}"/>
+    <attr sel="#homeLink" th:href="@{/}"/>
 </thlogic>
