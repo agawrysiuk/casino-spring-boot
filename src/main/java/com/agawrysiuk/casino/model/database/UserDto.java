@@ -2,6 +2,7 @@ package com.agawrysiuk.casino.model.database;
 
 import com.agawrysiuk.casino.model.database.validator.PasswordMatches;
 import com.agawrysiuk.casino.model.database.validator.ValidEmail;
+import com.agawrysiuk.casino.model.database.validator.ValidPassword;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
@@ -16,6 +17,7 @@ public class UserDto {
 
     @NotNull
     @NotEmpty
+    @ValidPassword
     private String password;
     private String matchingPassword;
 
