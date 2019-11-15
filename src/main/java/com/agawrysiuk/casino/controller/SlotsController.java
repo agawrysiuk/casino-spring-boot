@@ -31,7 +31,7 @@ public class SlotsController {
     @GetMapping(ViewNames.SLOTS)
     public String slots(Model model,Principal principal) {
         CasinoUser user = userService.findUsername(principal.getName());
-        model.addAttribute("moneyMessage", "Your balance is " + user.getBalance());
+        model.addAttribute("moneyMessage", "Your balance is " + String.format("%1$,.2f", user.getBalance()));
         model.addAttribute(AttributeNames.SLOTS_MAIN_MESSAGE, slotsService.getMessage());
         model.addAttribute("slotResults",slotsService.getResults());
         log.info("model = {}",model);
@@ -46,7 +46,7 @@ public class SlotsController {
         user.setBalance(user.getBalance() - 1 + moneyResult);
         userService.updateBalance(user.getBalance(),user.getNickname());
         model.addAttribute("moneyMessage",
-                "You bet 1 $. You got " + moneyResult + ". Your balance is now " + user.getBalance());
+                "You bet 1 $. You got " + moneyResult + ". Your balance is now " + String.format("%1$,.2f", user.getBalance()));
         model.addAttribute(AttributeNames.SLOTS_MAIN_MESSAGE, slotsService.getMessage());
         model.addAttribute("slotResults",slotsService.getResults());
         log.info("model = {}",model);

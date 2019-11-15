@@ -6,4 +6,7 @@
     <attr sel="#blackjackImg" th:src="@{images/Casino_Blackjack.png}"/>
     <attr sel="#rouletteImg" th:src="@{images/Casino_Roulette.png}"/>
     <attr sel="#slotsImg" th:src="@{images/Casino_Slots.png}"/>
+    <attr sel="#linkSlots" th:href="slots"/>
+    <attr sel="#linkRoulette" th:href="roulette"/>
+    <attr sel="#linkTwentyOne" th:href="twentyone"/>
 </thlogic>

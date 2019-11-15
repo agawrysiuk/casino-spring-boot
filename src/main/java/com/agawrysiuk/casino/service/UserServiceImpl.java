@@ -27,18 +27,9 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(email);
     }
 
-
     public User findByUsername(String username){
         return userRepository.findByUsername(username);
     };
-
-    public User findByConfirmationToken(String confirmationToken) {
-        return userRepository.findByConfirmationToken(confirmationToken);
-    }
-
-    public void saveUser(User user) {
-        userRepository.save(user);
-    }
 
     @Transactional
     @Override
@@ -56,14 +47,6 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
 
         return user;
-    }
-
-    private boolean emailExists(String email) {
-        User user = userRepository.findByEmail(email);
-        if (user != null) {
-            return true;
-        }
-        return false;
     }
 
     // == Game ==

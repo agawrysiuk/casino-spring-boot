@@ -1,6 +1,7 @@
 <thlogic>
     <attr sel="#headerId" th:fragment="headerFragment"/>
-    <attr sel="#linkHome" th:href="home"/>
+    <attr sel="#casinoLogo" th:src="@{images/casino-logo.png}"/>
+    <attr sel="#linkHome" th:href="@{/}"/>
     <attr sel="#linkSlots" th:href="slots" th:text="Slots"/>
     <attr sel="#linkRoulette" th:href="roulette" th:text="Roulette"/>
     <attr sel="#linkTwentyOne" th:href="twentyone" th:text="TwentyOne"/>

@@ -23,11 +23,9 @@
                 <input type="password" th:field="*{matchingPassword}" placeholder="Retype password"/>
             </div>
             <input value="Register" name="register" type="submit" form="registerForm"/>
-            <input value="Login" name="login" type="submit"/>
             <p th:each="err : ${#fields.errors('*')}" th:text="${err}">Error</p>
         </form>
-
-
+        <p>Have an account? <a href="/login">Log in now!</a></p>
     </div>
 </div>
 </body>

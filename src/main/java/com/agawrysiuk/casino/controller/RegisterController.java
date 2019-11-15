@@ -35,11 +35,6 @@ public class RegisterController {
         return "register";
     }
 
-    @RequestMapping(value = "/register",params = "login", method = RequestMethod.POST)
-    public String goToLogin() {
-        return "login";
-    }
-
     @RequestMapping(value = "/register", params="register", method = RequestMethod.POST)
     public ModelAndView registerUserAccount(
             @ModelAttribute("userdto") @Valid UserDto userDto,

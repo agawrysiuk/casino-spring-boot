@@ -6,9 +6,7 @@ import com.agawrysiuk.casino.model.database.UserDto;
 
 public interface UserService {
     User findByEmail(String email);
-    User findByConfirmationToken(String confirmationToken);
     User findByUsername(String username);
-    void saveUser(User user);
     User registerNewUserAccount(UserDto accountDto);
 
     CasinoUser findUsername(String nickname);

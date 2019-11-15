@@ -6,4 +6,5 @@
     <attr sel="#tdId" th:each="data: ${slotResults}"/>
     <attr sel="#pId" th:text="${data}"/>
     <attr sel="#headerId" th:replace="~{fragments/header :: headerFragment}"/>
+    <attr sel="#footerId" th:replace="~{fragments/footer :: footerFragment}"/>
 </thlogic>
