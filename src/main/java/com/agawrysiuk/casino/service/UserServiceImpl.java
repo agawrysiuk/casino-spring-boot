@@ -55,6 +55,14 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
+    public void changePassword(PasswordDto passwordDto) {
+        log.info("changePassword() in service started");
+        User user = userRepository.findByUsername(passwordDto.getUsername());
+        user.setPassword(new BCryptPasswordEncoder().encode(passwordDto.getPassword()));
+        userRepository.save(user);
+        log.info("changePassword() in service finished");
+    }
+
     // == Game ==
     public CasinoUser findCasinoUserByUsername(String nickname) {
         return casinoUserRepository.findByNickname(nickname);

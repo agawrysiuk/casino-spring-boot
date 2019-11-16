@@ -44,6 +44,7 @@ table td.slotsColumn {
     padding: 30px;
     border: 1px solid black;
 }
+
 ul {
     list-style-type: none;
     margin: 0;
@@ -63,6 +64,7 @@ li a {
     padding: 14px 16px;
     text-decoration: none;
 }
+
 li a:hover:not(.active) {
     background-color: #1e2127;
 }
@@ -125,7 +127,9 @@ input[type="password"]:focus {
 
 input[type="submit"] {
     margin-top: 28px;
-    width: 120px;
+    width: auto;
+    padding-left: 10px;
+    padding-right: 10px;
     height: 32px;
     background: #16a085;
     border: none;
@@ -175,7 +179,7 @@ input[type="submit"]:active {
     top: 50px;
     left: 50px;
     margin: 5% auto;
-    width: 600px;
+    width: auto;
     height: auto;
     background: #FFF;
     border-radius: 2px;
@@ -189,6 +193,55 @@ input[type="submit"]:active {
     left: 0;
     box-sizing: border-box;
     padding: 40px;
-    width: 500px;
+    width: auto;
     height: auto;
+}
+
+table.tableAccount {
+    margin-left:auto;
+    margin-right:auto;
+    padding: 5px;
+    border-spacing: 50px 0;
+}
+
+td.accountNormal {
+    width: 150px;
+    text-align: left;
+}
+
+td.accountBold {
+    width: auto;
+    text-align: left;
+    font-weight: bold;
+}
+
+button.redirect {
+    margin-top: 28px;
+    width: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 32px;
+    background: #16a085;
+    border: none;
+    border-radius: 2px;
+    color: #FFF;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    display: inline-block;
+    text-transform: uppercase;
+    transition: 0.1s ease;
+    cursor: pointer;
+}
+
+button.redirect:hover,
+button.redirect:focus {
+    opacity: 0.8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    transition: 0.1s ease;
+}
+
+button.redirect:active {
+    opacity: 1;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    transition: 0.1s ease;
 }

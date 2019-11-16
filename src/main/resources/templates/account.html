@@ -6,8 +6,35 @@
 <header id="headerId"></header>
 <div id="account-page">
     <div class="account-box">
-        <h2 style="font-weight: bold;" id="messageText">${message}</h2>
-        <p>Here is some text.</p>
+        <h2 style="font-weight: bold;text-align:left" id="messageText">${message}</h2>
+        <p>Here is information about your account:</p>
+        <table class="tableAccount">
+            <tr>
+                <td class="accountNormal">Username:</td>
+                <td th:text="${casinoUser.nickname}" class="accountBold"></td>
+            </tr>
+            <tr>
+                <td class="accountNormal">Balance:</td>
+                <td th:text="${balance}" class="accountBold"></td>
+            </tr>
+            <tr>
+                <td class="accountNormal">First name:</td>
+                <td th:text="${casinoUser.firstname}" class="accountBold"></td>
+            </tr>
+            <tr>
+                <td class="accountNormal">Name:</td>
+                <td th:text="${casinoUser.secondname}" class="accountBold"></td>
+            </tr>
+            <tr>
+                <td class="accountNormal">Date of birth:</td>
+                <td th:text="${casinoUser.birthdate}" class="accountBold"></td>
+            </tr>
+            <tr>
+                <td class="accountNormal">Country of residence:</td>
+                <td th:text="${casinoUser.country}" class="accountBold"></td>
+            </tr>
+        </table>
+        <button class="redirect" onclick="location.href='/password'" type="button">Change password</button>
     </div>
 </div>
 <footer id="footerId"></footer>

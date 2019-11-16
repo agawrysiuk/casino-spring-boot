@@ -1,9 +1,10 @@
 package com.agawrysiuk.casino.model.database;
 
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Data
@@ -15,7 +16,6 @@ public class User {
     private String email;
     private String password;
     private boolean enabled;
-    private String confirmationToken;
     private String authority;
 
 }
