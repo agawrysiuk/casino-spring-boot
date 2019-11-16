@@ -98,4 +98,22 @@ public class UserController {
         }
     }
 
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    public String editForm(WebRequest request, Model model, Principal principal) {
+        CasinoUser casinoUser = userService.findCasinoUserByUsername(principal.getName());
+        model.addAttribute("casinoUser", casinoUser);
+        model.addAttribute("confirmationMessage", null);
+        return "edit";
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String editInformation(
+            @ModelAttribute("casinoUser") CasinoUser casinoUser, Model model, Principal principal) {
+        casinoUser.setNickname(principal.getName());
+        userService.updateCasinoUserInformation(casinoUser);
+        model.addAttribute("casinoUser", casinoUser);
+        model.addAttribute("confirmationMessage", "Information updated");
+        return "edit";
+    }
+
 }

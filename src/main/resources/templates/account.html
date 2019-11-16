@@ -18,11 +18,11 @@
                 <td th:text="${balance}" class="accountBold"></td>
             </tr>
             <tr>
-                <td class="accountNormal">First name:</td>
+                <td class="accountNormal">Name:</td>
                 <td th:text="${casinoUser.firstname}" class="accountBold"></td>
             </tr>
             <tr>
-                <td class="accountNormal">Name:</td>
+                <td class="accountNormal">Surname:</td>
                 <td th:text="${casinoUser.secondname}" class="accountBold"></td>
             </tr>
             <tr>
@@ -34,6 +34,7 @@
                 <td th:text="${casinoUser.country}" class="accountBold"></td>
             </tr>
         </table>
+        <button class="redirect" onclick="location.href='/edit'" type="button">Edit information</button>
         <button class="redirect" onclick="location.href='/password'" type="button">Change password</button>
     </div>
 </div>

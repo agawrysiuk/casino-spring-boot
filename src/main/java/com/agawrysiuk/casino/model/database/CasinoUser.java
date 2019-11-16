@@ -11,7 +11,7 @@ import java.sql.Date;
 public class CasinoUser {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nickname;
     private double balance;

@@ -13,4 +13,5 @@ public interface UserService {
 
     CasinoUser findCasinoUserByUsername(String nickname);
     void updateCasinoUserBalance(double balance, String nickname);
+    void updateCasinoUserInformation(CasinoUser casinoUser);
 }

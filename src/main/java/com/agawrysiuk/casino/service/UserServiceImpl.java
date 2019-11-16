@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
 
     public User findUserByUsername(String username){
         return userRepository.findByUsername(username);
-    };
+    }
 
     @Transactional
     @Override
@@ -70,5 +70,14 @@ public class UserServiceImpl implements UserService {
 
     public void updateCasinoUserBalance(double balance, String nickname) {
         casinoUserRepository.updateBalance(balance, nickname);
+    }
+
+    public void updateCasinoUserInformation(CasinoUser casinoUser) {
+        CasinoUser existingUser = casinoUserRepository.findByNickname(casinoUser.getNickname());
+        existingUser.setFirstname(casinoUser.getFirstname());
+        existingUser.setSecondname(casinoUser.getSecondname());
+        existingUser.setBirthdate(casinoUser.getBirthdate());
+        existingUser.setCountry(casinoUser.getCountry());
+        casinoUserRepository.save(existingUser);
     }
 }
