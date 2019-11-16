@@ -30,7 +30,7 @@ public class SlotsController {
 
     @GetMapping(ViewNames.SLOTS)
     public String slots(Model model,Principal principal) {
-        CasinoUser user = userService.findUsername(principal.getName());
+        CasinoUser user = userService.findCasinoUserByUsername(principal.getName());
         model.addAttribute("moneyMessage", "Your balance is " + String.format("%1$,.2f", user.getBalance()) + " $.");
         model.addAttribute(AttributeNames.SLOTS_MAIN_MESSAGE, slotsService.getMessage());
         model.addAttribute("slotResults",slotsService.getResults());
@@ -41,10 +41,10 @@ public class SlotsController {
     @RequestMapping(value="/slots", params = "roll", method = RequestMethod.POST)
     public String newRoll(Model model, Principal principal) {
         slotsService.roll();
-        CasinoUser user = userService.findUsername(principal.getName());
+        CasinoUser user = userService.findCasinoUserByUsername(principal.getName());
         double moneyResult = 1*slotsService.getMultiplier();
         user.setBalance(user.getBalance() - 1 + moneyResult);
-        userService.updateBalance(user.getBalance(),user.getNickname());
+        userService.updateCasinoUserBalance(user.getBalance(),user.getNickname());
         //todo change that to user service
         model.addAttribute("moneyMessage",
                 "You bet 1 $. You got " + String.format("%1$,.2f", moneyResult) + " $. Your balance is now " + String.format("%1$,.2f", user.getBalance()) + " $.");

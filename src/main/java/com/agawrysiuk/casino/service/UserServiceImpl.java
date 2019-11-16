@@ -23,11 +23,11 @@ public class UserServiceImpl implements UserService {
 
 
     // == Registration ==
-    public User findByEmail(String email) {
+    public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
-    public User findByUsername(String username){
+    public User findUserByUsername(String username){
         return userRepository.findByUsername(username);
     };
 
@@ -36,6 +36,12 @@ public class UserServiceImpl implements UserService {
     public User registerNewUserAccount(UserDto accountDto) {
 
         log.info("registerNewUserAccount() started");
+
+        CasinoUser casinoUser = new CasinoUser();
+        casinoUser.setBalance(0.00);
+        casinoUser.setNickname(accountDto.getUsername());
+        casinoUser.setIsactive(false);
+        casinoUserRepository.save(casinoUser);
 
         User user = new User();
         user.setUsername(accountDto.getUsername());
@@ -50,11 +56,11 @@ public class UserServiceImpl implements UserService {
     }
 
     // == Game ==
-    public CasinoUser findUsername(String nickname) {
+    public CasinoUser findCasinoUserByUsername(String nickname) {
         return casinoUserRepository.findByNickname(nickname);
     }
 
-    public void updateBalance(double balance, String nickname) {
+    public void updateCasinoUserBalance(double balance, String nickname) {
         casinoUserRepository.updateBalance(balance, nickname);
     }
 }

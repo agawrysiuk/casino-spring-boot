@@ -45,11 +45,11 @@ public class RegisterController {
         log.info("showRegistrationForm() started");
         if (!result.hasErrors()) {
             log.info("showRegistrationForm() ---- NO ERRORS");
-            if (userService.findByEmail(userDto.getEmail()) != null) {
+            if (userService.findUserByEmail(userDto.getEmail()) != null) {
                 result.addError(new FieldError("userDto","email","Email already exists."));
                 log.info("showRegistrationForm() ---- EMAIL EXISTS");
             }
-            if(userService.findByUsername(userDto.getUsername()) != null) {
+            if(userService.findUserByUsername(userDto.getUsername()) != null) {
                 result.addError(new FieldError("userDto","username","Username already exists."));
                 log.info("showRegistrationForm() ---- USERNAME EXISTS");
             }

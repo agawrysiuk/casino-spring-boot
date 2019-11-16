@@ -5,10 +5,10 @@ import com.agawrysiuk.casino.model.database.User;
 import com.agawrysiuk.casino.model.database.UserDto;
 
 public interface UserService {
-    User findByEmail(String email);
-    User findByUsername(String username);
+    User findUserByEmail(String email);
+    User findUserByUsername(String username);
     User registerNewUserAccount(UserDto accountDto);
 
-    CasinoUser findUsername(String nickname);
-    void updateBalance(double balance, String nickname);
+    CasinoUser findCasinoUserByUsername(String nickname);
+    void updateCasinoUserBalance(double balance, String nickname);
 }

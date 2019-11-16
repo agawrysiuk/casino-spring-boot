@@ -23,12 +23,11 @@ public class UserController {
 
     @GetMapping(path="/admin")
     public @ResponseBody CasinoUser getAdmin() {
-        return userService.findUsername("admin");
+        return userService.findCasinoUserByUsername("admin");
     }
 
     @GetMapping("/")
-    public String index(Model model, Principal principal) {
-        model.addAttribute("message", "You are logged in as " + principal.getName());
+    public String index() {
         return "home";
     }
 
@@ -43,6 +42,15 @@ public class UserController {
     public String loginError(Model model) {
         model.addAttribute("loginError", true);
         return "login";
+    }
+
+    // Account page
+    @GetMapping("/account")
+    public String yourAccount(Model model, Principal principal) {
+        CasinoUser casinoUser = userService.findCasinoUserByUsername(principal.getName());
+        model.addAttribute("message", "You are logged in as " + principal.getName());
+
+        return "account";
     }
 
 }
