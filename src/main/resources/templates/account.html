@@ -37,6 +37,17 @@
         <button class="redirect" onclick="location.href='/edit'" type="button">Edit information</button>
         <button class="redirect" onclick="location.href='/password'" type="button">Change password</button>
     </div>
+
+</div>
+<div id="account-page2">
+    <div class="account-box2">
+        <table>
+            <tr><td>Balance:</td></tr>
+            <tr><td><h1 style="font-weight: bolder; font-size: 75px" th:text="${balance}">balance</h1></td></tr>
+            <tr><td><button class="deposit" onclick="location.href='/deposit'" type="button">Deposit now</button></td></tr>
+        </table>
+
+    </div>
 </div>
 <footer id="footerId"></footer>
 </body>

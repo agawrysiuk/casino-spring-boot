@@ -71,7 +71,7 @@ public class UserController {
         return "password";
     }
 
-    @RequestMapping(value = "/password", params="updatePassword", method = RequestMethod.POST)
+    @RequestMapping(value = "/password", params = "updatePassword", method = RequestMethod.POST)
     public ModelAndView changePassword(
             @ModelAttribute("passwordDto") @Valid PasswordDto passwordDto,
             BindingResult result,
@@ -82,8 +82,8 @@ public class UserController {
         log.info("changePassword() started");
         if (!result.hasErrors()) {
             log.info("changePassword() ---- NO ERRORS");
-            if (!BCrypt.checkpw(passwordDto.getOldPassword(),userService.findUserByUsername(principal.getName()).getPassword())) {
-                result.addError(new FieldError("passwordDto","oldPassword","Incorrect old password."));
+            if (!BCrypt.checkpw(passwordDto.getOldPassword(), userService.findUserByUsername(principal.getName()).getPassword())) {
+                result.addError(new FieldError("passwordDto", "oldPassword", "Incorrect old password."));
                 log.info("changePassword() ---- OLD PASSWORD WRONG");
             }
         }
@@ -92,7 +92,7 @@ public class UserController {
             return new ModelAndView("password", "passwordDto", passwordDto);
         } else {
             passwordDto.setUsername(principal.getName());
-            log.info("changePassword() ---- NO ERRORS {}",passwordDto);
+            log.info("changePassword() ---- NO ERRORS {}", passwordDto);
             userService.changePassword(passwordDto);
             return new ModelAndView("successPassword", "passwordDto", passwordDto);
         }
@@ -116,4 +116,8 @@ public class UserController {
         return "edit";
     }
 
+    @GetMapping("/deposit")
+    public String depositPage() {
+        return "deposit";
+    }
 }
