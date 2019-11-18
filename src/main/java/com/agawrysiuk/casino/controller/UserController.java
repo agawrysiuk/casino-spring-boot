@@ -143,4 +143,14 @@ public class UserController {
     public String successDeposit() {
         return ViewNames.DEPOSIT_SUCCESS;
     }
+
+    @RequestMapping(ViewNames.PASSWORD_SUCCESS)
+    public String successPassword() {
+        return ViewNames.PASSWORD_SUCCESS;
+    }
+
+    @GetMapping(ViewNames.NO_MONEY_PAGE)
+    public String noMoneyPage() {
+        return ViewNames.NO_MONEY_PAGE;
+    }
 }

@@ -90,4 +90,9 @@ public class UserServiceImpl implements UserService {
         existingUser.setCountry(casinoUser.getCountry());
         casinoUserRepository.save(existingUser);
     }
+
+    public boolean checkBalance(String nickname, double minNeeded) {
+        CasinoUser user = casinoUserRepository.findByNickname(nickname);
+        return user.getBalance()>=minNeeded;
+    }
 }

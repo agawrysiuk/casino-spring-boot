@@ -29,6 +29,9 @@ public class TwentyOneController {
 
     @GetMapping(ViewNames.TWENTYONE)
     public String twentyone(Model model, Principal principal) {
+        if (!userService.checkBalance(principal.getName(), 10)) {
+            return "redirect:/"+ViewNames.NO_MONEY_PAGE;
+        }
         twentyOneService.resetGame();
         double userBalance = userService.findCasinoUserByUsername(principal.getName()).getBalance();
         String resultMessage = "Your balance is " + String.format("%1$,.2f", userBalance) + " $. Bet is 10 $.";

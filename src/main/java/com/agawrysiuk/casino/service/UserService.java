@@ -15,4 +15,5 @@ public interface UserService {
     void updateCasinoUserBalance(double balance, String nickname);
     void updateCasinoUserInformation(CasinoUser casinoUser);
     void depositToCasinoUser(double balance, String nickname);
+    boolean checkBalance(String nickname, double minNeeded);
 }

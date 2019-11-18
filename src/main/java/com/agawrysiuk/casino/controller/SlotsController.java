@@ -30,6 +30,9 @@ public class SlotsController {
 
     @GetMapping(ViewNames.SLOTS)
     public String slots(Model model, Principal principal) {
+        if (!userService.checkBalance(principal.getName(), 1)) {
+            return "redirect:/"+ViewNames.NO_MONEY_PAGE;
+        }
         CasinoUser user = userService.findCasinoUserByUsername(principal.getName());
         model.addAttribute(AttributeNames.SLOTS_MONEY_MESSAGE, "Your balance is " + String.format("%1$,.2f", user.getBalance()) + " $.");
         model.addAttribute(AttributeNames.SLOTS_MAIN_MESSAGE, slotsService.getMessage());
@@ -40,6 +43,9 @@ public class SlotsController {
 
     @RequestMapping(value = ViewNames.SLOTS, params = "roll", method = RequestMethod.POST)
     public String newRoll(Model model, Principal principal) {
+        if (!userService.checkBalance(principal.getName(), 1)) {
+            return "redirect:/"+ViewNames.NO_MONEY_PAGE;
+        }
         slotsService.roll();
         double userBalance = userService.findCasinoUserByUsername(principal.getName()).getBalance();
         double moneyResult = 1 * slotsService.getMultiplier();

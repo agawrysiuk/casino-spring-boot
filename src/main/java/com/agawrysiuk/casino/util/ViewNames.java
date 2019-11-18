@@ -18,6 +18,7 @@ public final class ViewNames {
     public static final String ROULETTE = "roulette";
     public static final String SLOTS = "slots";
     public static final String TWENTYONE = "twentyone";
+    public static final String NO_MONEY_PAGE = "nomoney";
 
     private ViewNames() {
     }

@@ -33,7 +33,7 @@ public class RegisterController {
     public String showRegistrationForm(WebRequest request, Model model) {
         UserDto userDto = new UserDto();
         model.addAttribute("userdto", userDto);
-        return "register";
+        return ViewNames.REGISTER;
     }
 
     @RequestMapping(value = ViewNames.REGISTER, params = "register", method = RequestMethod.POST)
@@ -64,6 +64,11 @@ public class RegisterController {
             userService.registerNewUserAccount(userDto);
             return new ModelAndView(ViewNames.REGISTER_SUCCESS, "userdto", userDto);
         }
+    }
+
+    @RequestMapping(ViewNames.REGISTER_SUCCESS)
+    public String successRegister() {
+        return ViewNames.REGISTER_SUCCESS;
     }
 
 }
