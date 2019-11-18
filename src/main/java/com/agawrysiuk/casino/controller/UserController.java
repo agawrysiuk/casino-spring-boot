@@ -1,6 +1,7 @@
 package com.agawrysiuk.casino.controller;
 
 import com.agawrysiuk.casino.model.database.CasinoUser;
+import com.agawrysiuk.casino.model.database.CreditCardObject;
 import com.agawrysiuk.casino.model.database.PasswordDto;
 import com.agawrysiuk.casino.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -117,7 +118,34 @@ public class UserController {
     }
 
     @GetMapping("/deposit")
-    public String depositPage() {
+    public String depositPage(Model model, Principal principal) {
+        CreditCardObject creditCard = new CreditCardObject();
+        model.addAttribute("card", creditCard);
         return "deposit";
+    }
+
+    @RequestMapping(value = "/deposit", params = "deposit", method = RequestMethod.POST)
+    public ModelAndView depositMoney(
+            @ModelAttribute("card") @Valid CreditCardObject creditCard,
+            BindingResult result,
+            WebRequest request,
+            Errors errors,
+            Principal principal) {
+
+        log.info("depositMoney() started");
+        if (result.hasErrors()) {
+            log.info("result = {}", result);
+            return new ModelAndView("deposit", "card", creditCard);
+        } else {
+            log.info("depositMoney() ---- NO ERRORS {}", creditCard);
+            log.info("principal = {}",principal);
+            userService.depositToCasinoUser(Integer.parseInt(creditCard.getDepositAmount()), principal.getName());
+            return new ModelAndView("successDeposit");
+        }
+    }
+
+    @RequestMapping("successDeposit")
+    public String successDeposit() {
+        return "successDeposit";
     }
 }
