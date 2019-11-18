@@ -24,6 +24,7 @@ public class RouletteServiceImpl implements RouletteService {
 
     @Override
     public String getResultMessageRedOrBlack(String guess) {
+
         try {
             return (rouletteGame.getResultRedOrBlack(guess)) ?
                     "You won" :
@@ -57,7 +58,7 @@ public class RouletteServiceImpl implements RouletteService {
 
     @Override
     public void roll() {
-        rouletteGame.newNumber();
+        rouletteGame.roll();
     }
 
     @Override

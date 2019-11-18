@@ -17,7 +17,7 @@ public class RouletteGameImpl implements RouletteGame {
     private String color;
 
     @PostConstruct
-    public void roll() {
+    public void start() {
         log.info("Launching new Roulette Game.");
 //        newNumber();
 //        getColor();
@@ -30,8 +30,9 @@ public class RouletteGameImpl implements RouletteGame {
     }
 
     @Override
-    public int newNumber() {
+    public int roll() {
         this.number = new Random().nextInt(37);
+        getColor();
         return this.number;
     }
 

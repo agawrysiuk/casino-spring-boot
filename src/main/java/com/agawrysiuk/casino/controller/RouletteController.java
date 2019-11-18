@@ -66,7 +66,7 @@ public class RouletteController {
         resultMessage.append("You bet 1 $. ");
         String message = rouletteService.getResultMessageRedOrBlack(guessRedOrBlack);
         double moneyResult;
-        if (message.equals("You lost")) {
+        if (message.contains("You lost")) {
             resultMessage.append(message);
             moneyResult = -1;
         } else {

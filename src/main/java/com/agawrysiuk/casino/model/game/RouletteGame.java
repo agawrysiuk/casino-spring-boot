@@ -1,7 +1,7 @@
 package com.agawrysiuk.casino.model.game;
 
 public interface RouletteGame {
-    int newNumber();
+    int roll();
     String getColor();
     int getNumber();
     void reset();

@@ -78,7 +78,7 @@ public class TwentyOneController {
         model.addAttribute(AttributeNames.TWENTYONE_YOUR_HAND, twentyOneService.getYourCards());
         model.addAttribute(AttributeNames.TWENTYONE_DEALERS_HAND, twentyOneService.getDealersCards());
         model.addAttribute(AttributeNames.TWENTYONE_FINISHED, gameState);
-        model.addAttribute("moneyMessage", moneyMessage);
+        model.addAttribute(AttributeNames.TWENTYONE_MONEY_MESSAGE, moneyMessage);
         log.info("model = {}", model);
         return ViewNames.TWENTYONE;
     }
