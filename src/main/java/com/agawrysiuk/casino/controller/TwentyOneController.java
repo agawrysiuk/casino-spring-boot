@@ -1,6 +1,7 @@
 package com.agawrysiuk.casino.controller;
 
 import com.agawrysiuk.casino.service.TwentyOneService;
+import com.agawrysiuk.casino.service.UserService;
 import com.agawrysiuk.casino.util.AttributeNames;
 import com.agawrysiuk.casino.util.ViewNames;
 import lombok.extern.slf4j.Slf4j;
@@ -11,22 +12,28 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.security.Principal;
+
 @Slf4j
 @Controller
 public class TwentyOneController {
 
     private final TwentyOneService twentyOneService;
+    private final UserService userService;
 
     @Autowired
-    public TwentyOneController(TwentyOneService twentyOneService) {
+    public TwentyOneController(TwentyOneService twentyOneService,UserService userService) {
         this.twentyOneService = twentyOneService;
+        this.userService = userService;
     }
 
     @GetMapping(ViewNames.TWENTYONE)
-    public String twentyone(Model model){
+    public String twentyone(Model model, Principal principal){
         twentyOneService.resetGame();
+        double userBalance = userService.findCasinoUserByUsername(principal.getName()).getBalance();
+        String resultMessage = "Your balance is " + String.format("%1$,.2f", userBalance) + " $. Bet is 10 $.";
         model.addAttribute(AttributeNames.TWENTYONE_MAIN_MESSAGE, twentyOneService.getMainMessage());
-        model.addAttribute(AttributeNames.TWENTYONE_RESULT_MESSAGE, twentyOneService.getResultMessage());
+        model.addAttribute(AttributeNames.TWENTYONE_RESULT_MESSAGE, resultMessage);
         model.addAttribute(AttributeNames.TWENTYONE_YOUR_HAND,twentyOneService.getYourCards());
         model.addAttribute(AttributeNames.TWENTYONE_DEALERS_HAND, twentyOneService.getDealersCards());
         model.addAttribute(AttributeNames.TWENTYONE_FINISHED,twentyOneService.getGameState());
@@ -35,37 +42,43 @@ public class TwentyOneController {
     }
 
     @RequestMapping(value="/twentyone", params = "hitMe", method = RequestMethod.POST)
-    public String newCard(Model model) {
+    public String newCard(Model model, Principal principal) {
         twentyOneService.hitMe();
-        model.addAttribute(AttributeNames.TWENTYONE_MAIN_MESSAGE, twentyOneService.getMainMessage());
-        model.addAttribute(AttributeNames.TWENTYONE_RESULT_MESSAGE, twentyOneService.getResultMessage());
-        model.addAttribute(AttributeNames.TWENTYONE_YOUR_HAND,twentyOneService.getYourCards());
-        model.addAttribute(AttributeNames.TWENTYONE_DEALERS_HAND, twentyOneService.getDealersCards());
-        model.addAttribute(AttributeNames.TWENTYONE_FINISHED,twentyOneService.getGameState());
-        log.info("model = {}",model);
-        return ViewNames.TWENTYONE;
+        return getGameString(model, principal);
     }
 
     @RequestMapping(value="/twentyone", params = "hold", method = RequestMethod.POST)
-    public String waitForDealer(Model model) {
+    public String waitForDealer(Model model,Principal principal) {
         twentyOneService.dealersTurn();
-        model.addAttribute(AttributeNames.TWENTYONE_MAIN_MESSAGE, twentyOneService.getMainMessage());
-        model.addAttribute(AttributeNames.TWENTYONE_RESULT_MESSAGE, twentyOneService.getResultMessage());
-        model.addAttribute(AttributeNames.TWENTYONE_YOUR_HAND,twentyOneService.getYourCards());
-        model.addAttribute(AttributeNames.TWENTYONE_DEALERS_HAND, twentyOneService.getDealersCards());
-        model.addAttribute(AttributeNames.TWENTYONE_FINISHED,twentyOneService.getGameState());
-        log.info("model = {}",model);
-        return ViewNames.TWENTYONE;
+        return getGameString(model, principal);
     }
 
     @RequestMapping(value="/twentyone", params = "again", method = RequestMethod.POST)
-    public String playAgain(Model model) {
-        twentyOneService.resetGame();
+    public String playAgain(Model model,Principal principal) {
+        return twentyone(model,principal);
+    }
+
+    private String getGameString(Model model, Principal principal) {
+        boolean gameState = twentyOneService.getGameState();
+        double userBalance = userService.findCasinoUserByUsername(principal.getName()).getBalance();
+        String moneyMessage = "";
+        if(gameState) {
+            if(twentyOneService.getGameResult()) {
+                userBalance+=10;
+                moneyMessage = "You won 10 $. ";
+            } else {
+                userBalance-=10;
+                moneyMessage = "You lost 10 $. ";
+            }
+            moneyMessage += "Your balance is " + String.format("%1$,.2f", userBalance) + " $.";
+        }
+        userService.updateCasinoUserBalance(userBalance,principal.getName());
         model.addAttribute(AttributeNames.TWENTYONE_MAIN_MESSAGE, twentyOneService.getMainMessage());
         model.addAttribute(AttributeNames.TWENTYONE_RESULT_MESSAGE, twentyOneService.getResultMessage());
         model.addAttribute(AttributeNames.TWENTYONE_YOUR_HAND,twentyOneService.getYourCards());
         model.addAttribute(AttributeNames.TWENTYONE_DEALERS_HAND, twentyOneService.getDealersCards());
-        model.addAttribute(AttributeNames.TWENTYONE_FINISHED,twentyOneService.getGameState());
+        model.addAttribute(AttributeNames.TWENTYONE_FINISHED,gameState);
+        model.addAttribute("moneyMessage",moneyMessage);
         log.info("model = {}",model);
         return ViewNames.TWENTYONE;
     }

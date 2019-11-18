@@ -45,7 +45,6 @@ public class SlotsController {
         double moneyResult = 1*slotsService.getMultiplier();
         userBalance = userBalance - 1 + moneyResult;
         userService.updateCasinoUserBalance(userBalance,principal.getName());
-        //todo change that to user service
         model.addAttribute("moneyMessage",
                 "You bet 1 $. You got " + String.format("%1$,.2f", moneyResult) + " $. Your balance is now " + String.format("%1$,.2f", userBalance) + " $.");
         model.addAttribute(AttributeNames.SLOTS_MAIN_MESSAGE, slotsService.getMessage());

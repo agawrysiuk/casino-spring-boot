@@ -50,7 +50,7 @@ public class SlotsGameImpl implements SlotsGame{
             }
             this.multiplier += Math.pow(entry.getKey().intValue * entry.getValue(),entry.getValue()-1);
         }
-        this.multiplier = this.multiplier / 10;
+        this.multiplier = this.multiplier / 100;
     }
 
     @Override
