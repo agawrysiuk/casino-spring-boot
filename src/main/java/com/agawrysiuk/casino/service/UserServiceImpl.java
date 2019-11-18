@@ -69,7 +69,17 @@ public class UserServiceImpl implements UserService {
     }
 
     public void updateCasinoUserBalance(double balance, String nickname) {
-        casinoUserRepository.updateBalance(balance, nickname);
+        log.info("updateCasinoUserBalance() started");
+        CasinoUser user = casinoUserRepository.findByNickname(nickname);
+        user.setBalance(balance);
+        casinoUserRepository.save(user);
+    }
+
+    public void depositToCasinoUser(double balance, String nickname) {
+        log.info("depositToCasinoUser() started");
+        CasinoUser user = casinoUserRepository.findByNickname(nickname);
+        user.setBalance(user.getBalance() + balance);
+        casinoUserRepository.save(user);
     }
 
     public void updateCasinoUserInformation(CasinoUser casinoUser) {

@@ -9,7 +9,7 @@
 
 </head>
 <body id="errorBody">
-<form>
+<form id="depositForm" action="" th:object="${card}" method="POST">
     <div class="form-container">
         <div class="personal-information">
             <h1>Payment Information</h1><img src="http://i76.imgup.net/accepted_c22e0.png"/>
@@ -17,33 +17,29 @@
 
         <div class="box">
             <div class="smallbox">
-                <input type="text" name="first-name" placeholder="First Name" onkeyup="lettersOnly(this);"/>
+                <input th:field="*{firstName}" type="text" name="first-name" placeholder="First Name" onkeyup="lettersOnly(this);"/>
             </div>
             <div class="smallbox">
-                <input type="text" name="last-name" placeholder="Surname" onkeyup="lettersOnly(this);"/>
+                <input th:field="*{surname}" type="text" name="last-name" placeholder="Surname" onkeyup="lettersOnly(this);"/>
             </div>
         </div>
-        <input type="text" name="number" placeholder="Card Number" onkeyup="numbersOnly(this);"/>
+        <input th:field="*{cardNumber}" type="text" name="number" placeholder="Card Number" onkeyup="numbersOnly(this);"/>
         <div class="box">
             <div class="smallbox">
-                <input type="text" name="expiry" placeholder="MM / YY" maxlength="5" onkeyup="formatString(this);"/>
+                <input th:field="*{expiryDate}" type="text" name="expiry" placeholder="MM / YY" maxlength="5" onkeyup="formatString(this);"/>
             </div>
             <div class="smallbox">
-                <input type="text" name="cvc" placeholder="CCV" maxlength="3" onkeyup="numbersOnly(this);"/>
+                <input th:field="*{CCV}" type="text" name="cvc" placeholder="CCV" maxlength="3" onkeyup="numbersOnly(this);"/>
             </div>
         </div>
-        <input type="text" name="amount" placeholder="Deposit amount (USD)" onkeyup="numbersOnly(this);" min="1"/>
+        <input th:field="*{depositAmount}" type="text" name="amount" placeholder="Deposit amount (USD)" onkeyup="numbersOnly(this);" min="1"/>
 
-        <input class="input-button" type="submit" value="Deposit now"/>
+        <input class="input-button" type="submit" value="Deposit now" name="deposit" form="depositForm"/>
         <br/>
-<!--        <div th:if="${#fields.hasAnyErrors()}" id="login-box">-->
-<!--            <div class="registrationForm">-->
-<!--                <p th:each="err : ${#fields.errors('*')}" th:text="${err}">Error</p>-->
-<!--            </div>-->
-<!--        </div>-->
     </div>
 </form>
 </div>
+<p style="color: #a00001" th:each="err : ${#fields.errors('*')}" th:text="${err}">Error</p>
 <script>
     function numbersOnly(input) {
         var regex = /[^0-9]/gi;

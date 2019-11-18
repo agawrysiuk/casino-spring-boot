@@ -26,5 +26,5 @@ public class CreditCardObject {
     private String CCV;
     @NotNull
     @NotEmpty
-    private int depositAmount;
+    private String depositAmount;
 }

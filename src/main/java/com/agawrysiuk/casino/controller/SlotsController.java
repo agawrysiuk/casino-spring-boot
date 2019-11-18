@@ -41,13 +41,13 @@ public class SlotsController {
     @RequestMapping(value="/slots", params = "roll", method = RequestMethod.POST)
     public String newRoll(Model model, Principal principal) {
         slotsService.roll();
-        CasinoUser user = userService.findCasinoUserByUsername(principal.getName());
+        double userBalance = userService.findCasinoUserByUsername(principal.getName()).getBalance();
         double moneyResult = 1*slotsService.getMultiplier();
-        user.setBalance(user.getBalance() - 1 + moneyResult);
-        userService.updateCasinoUserBalance(user.getBalance(),user.getNickname());
+        userBalance = userBalance - 1 + moneyResult;
+        userService.updateCasinoUserBalance(userBalance,principal.getName());
         //todo change that to user service
         model.addAttribute("moneyMessage",
-                "You bet 1 $. You got " + String.format("%1$,.2f", moneyResult) + " $. Your balance is now " + String.format("%1$,.2f", user.getBalance()) + " $.");
+                "You bet 1 $. You got " + String.format("%1$,.2f", moneyResult) + " $. Your balance is now " + String.format("%1$,.2f", userBalance) + " $.");
         model.addAttribute(AttributeNames.SLOTS_MAIN_MESSAGE, slotsService.getMessage());
         model.addAttribute("slotResults",slotsService.getResults());
         log.info("model = {}",model);
