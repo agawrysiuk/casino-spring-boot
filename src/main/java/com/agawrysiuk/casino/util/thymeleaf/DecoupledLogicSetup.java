@@ -17,7 +17,7 @@ public class DecoupledLogicSetup {
     }
 
     @PostConstruct
-    public void init(){
+    public void init() {
         templateResolver.setUseDecoupledLogic(true);
         log.info("Decoupled logic template enabled");
     }

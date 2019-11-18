@@ -2,4 +2,13 @@
     <attr sel="#headId" th:replace="~{fragments/head :: headFragment}"/>
     <attr sel="#footerId" th:replace="~{fragments/footer :: footerFragment}"/>
     <attr sel="#headerId" th:replace="~{fragments/header :: headerFragment}"/>
+    <attr sel="#paymentCss" th:href="@{/static/css/payment.css}"/>
+    <attr sel="#depositForm" th:object="${card}"/>
+    <attr sel="#firstNameInput" th:field="*{firstName}"/>
+    <attr sel="#surnameInput" th:field="*{surname}"/>
+    <attr sel="#cardNumberInput" th:field="*{cardNumber}"/>
+    <attr sel="#expiryInput" th:field="*{expiryDate}"/>
+    <attr sel="#CCVInput" th:field="*{CCV}"/>
+    <attr sel="#amountInput" th:field="*{depositAmount}"/>
+    <attr sel="#errorParagraph" th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
 </thlogic>

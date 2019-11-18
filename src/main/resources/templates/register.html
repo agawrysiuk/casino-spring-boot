@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 
 <head id="headId">
 </head>
@@ -8,22 +8,22 @@
 <div id="login-box">
     <div class="registrationForm">
         <h1>Register</h1>
-        <form id="registerForm" action="" th:object="${userdto}" method="POST" enctype="utf8">
+        <form id="registerForm" action="" method="POST" enctype="utf8">
 
             <div>
-                <input type="text" th:field="*{username}" placeholder="Username"/>
+                <input id="usernameInput" type="text" placeholder="Username"/>
             </div>
             <div>
-                <input type="email" th:field="*{email}" placeholder="Email"/>
+                <input id="emailInput" type="email" placeholder="Email"/>
             </div>
             <div>
-                <input type="password" th:field="*{password}" placeholder="Password"/>
+                <input id="passwordInput" type="password" placeholder="Password"/>
             </div>
             <div>
-                <input type="password" th:field="*{matchingPassword}" placeholder="Retype password"/>
+                <input id="matchingPasswordInput" type="password" placeholder="Retype password"/>
             </div>
             <input value="Register" name="register" type="submit" form="registerForm"/>
-            <p th:each="err : ${#fields.errors('*')}" th:text="${err}">Error</p>
+            <p id="errorParagraph">Error</p>
         </form>
         <p>Have an account? <a href="/login">Log in now!</a></p>
     </div>

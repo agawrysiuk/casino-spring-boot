@@ -2,6 +2,7 @@ package com.agawrysiuk.casino.controller;
 
 import com.agawrysiuk.casino.model.database.UserDto;
 import com.agawrysiuk.casino.service.UserService;
+import com.agawrysiuk.casino.util.ViewNames;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,14 +29,14 @@ public class RegisterController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    @RequestMapping(value = ViewNames.REGISTER, method = RequestMethod.GET)
     public String showRegistrationForm(WebRequest request, Model model) {
         UserDto userDto = new UserDto();
         model.addAttribute("userdto", userDto);
         return "register";
     }
 
-    @RequestMapping(value = "/register", params="register", method = RequestMethod.POST)
+    @RequestMapping(value = ViewNames.REGISTER, params = "register", method = RequestMethod.POST)
     public ModelAndView registerUserAccount(
             @ModelAttribute("userdto") @Valid UserDto userDto,
             BindingResult result,
@@ -46,22 +47,22 @@ public class RegisterController {
         if (!result.hasErrors()) {
             log.info("showRegistrationForm() ---- NO ERRORS");
             if (userService.findUserByEmail(userDto.getEmail()) != null) {
-                result.addError(new FieldError("userDto","email","Email already exists."));
+                result.addError(new FieldError("userDto", "email", "Email already exists."));
                 log.info("showRegistrationForm() ---- EMAIL EXISTS");
             }
-            if(userService.findUserByUsername(userDto.getUsername()) != null) {
-                result.addError(new FieldError("userDto","username","Username already exists."));
+            if (userService.findUserByUsername(userDto.getUsername()) != null) {
+                result.addError(new FieldError("userDto", "username", "Username already exists."));
                 log.info("showRegistrationForm() ---- USERNAME EXISTS");
             }
         }
         if (result.hasErrors()) {
-            log.info("showRegistrationForm() ---- ERROR {}",userDto);
+            log.info("showRegistrationForm() ---- ERROR {}", userDto);
             log.info("result = {}", result);
-            return new ModelAndView("register", "userdto", userDto);
+            return new ModelAndView(ViewNames.REGISTER, "userdto", userDto);
         } else {
-            log.info("showRegistrationForm() ---- NO ERRORS {}",userDto);
+            log.info("showRegistrationForm() ---- NO ERRORS {}", userDto);
             userService.registerNewUserAccount(userDto);
-            return new ModelAndView("successRegister", "userdto", userDto);
+            return new ModelAndView(ViewNames.REGISTER_SUCCESS, "userdto", userDto);
         }
     }
 

@@ -20,11 +20,4 @@ public class CasinoUser {
     private String secondname;
     private Date birthdate;
     private String country;
-
-
-//    ALTER TABLE casinouser ADD COLUMN isActive boolean;
-//    ALTER TABLE casinouser ADD COLUMN firstname varchar(255);
-//    ALTER TABLE casinouser ADD COLUMN secondname varchar(255);
-//    ALTER TABLE casinouser ADD COLUMN dateOfBirth DATE;
-//    ALTER TABLE casinouser ADD COLUMN country varchar(100);
 }

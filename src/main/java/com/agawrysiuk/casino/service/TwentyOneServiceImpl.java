@@ -33,7 +33,7 @@ public class TwentyOneServiceImpl implements TwentyOneService {
     }
 
     @Override
-    public List<Card> getDealersCards(){
+    public List<Card> getDealersCards() {
         return twentyOneGame.getDealersHand();
     }
 
@@ -49,9 +49,9 @@ public class TwentyOneServiceImpl implements TwentyOneService {
 
     @Override
     public String getMainMessage() {
-        if(twentyOneGame.getYourSum()==0 && !twentyOneGame.getGameState()) {
+        if (twentyOneGame.getYourSum() == 0 && !twentyOneGame.getGameState()) {
             return "Click \"Hit Me\" to play the game.";
-        } else if(!twentyOneGame.getGameState()) {
+        } else if (!twentyOneGame.getGameState()) {
             return "Do you want another card or stay with your hand?";
         } else {
             return "Game Over.";
@@ -60,12 +60,12 @@ public class TwentyOneServiceImpl implements TwentyOneService {
 
     @Override
     public String getResultMessage() {
-        if(twentyOneGame.getYourSum()==0 && !twentyOneGame.getGameState()) {
+        if (twentyOneGame.getYourSum() == 0 && !twentyOneGame.getGameState()) {
             return "";
-        } else if(twentyOneGame.getYourSum()!=0 && !twentyOneGame.getGameState()) {
+        } else if (twentyOneGame.getYourSum() != 0 && !twentyOneGame.getGameState()) {
             return "Your sum is now " + twentyOneGame.getYourSum() + ".";
         } else {
-            return twentyOneGame.getGameResult()?
+            return twentyOneGame.getGameResult() ?
                     "You won." : "You lost.";
         }
     }

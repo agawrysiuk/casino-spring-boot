@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(email);
     }
 
-    public User findUserByUsername(String username){
+    public User findUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
         user.setEmail(accountDto.getEmail());
         user.setEnabled(true);
         user.setAuthority("ROLE_USER");
-        log.info("user = {}",user);
+        log.info("user = {}", user);
         userRepository.save(user);
 
         return user;

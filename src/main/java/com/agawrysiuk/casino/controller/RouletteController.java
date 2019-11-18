@@ -34,13 +34,13 @@ public class RouletteController {
         rouletteService.reset();
         double userBalance = userService.findCasinoUserByUsername(principal.getName()).getBalance();
         String message = "Your balance is " + String.format("%1$,.2f", userBalance) + " $.";
-        model.addAttribute(AttributeNames.ROULETTE_MAIN_MESSAGE,rouletteService.getMainMessage());
-        model.addAttribute(AttributeNames.ROULETTE_RESULT_MESSAGE,message);
-        log.info("model = {}",model);
+        model.addAttribute(AttributeNames.ROULETTE_MAIN_MESSAGE, rouletteService.getMainMessage());
+        model.addAttribute(AttributeNames.ROULETTE_RESULT_MESSAGE, message);
+        log.info("model = {}", model);
         return ViewNames.ROULETTE;
     }
 
-    @RequestMapping(value="/roulette", params = "singleFormSubmit", method = RequestMethod.POST)
+    @RequestMapping(value = ViewNames.ROULETTE, params = "singleFormSubmit", method = RequestMethod.POST)
     public String rouletteSingle(HttpServletRequest request, Model model, @RequestParam int guessSingle, Principal principal) {
         rouletteService.roll();
         double userBalance = userService.findCasinoUserByUsername(principal.getName()).getBalance();
@@ -48,24 +48,17 @@ public class RouletteController {
         resultMessage.append("You bet 1 $. ");
         String message = rouletteService.getResultMessageSingle(guessSingle);
         double moneyResult;
-        if(message.equals("You lost")) {
+        if (message.equals("You lost")) {
             resultMessage.append(message);
             moneyResult = -1;
         } else {
             resultMessage.append("You won 35 $");
             moneyResult = 34;
         }
-        userBalance += moneyResult;
-        resultMessage.append(". ");
-        resultMessage.append("Your balance is now ").append(String.format("%1$,.2f", userBalance)).append(" $.");
-        model.addAttribute(AttributeNames.ROULETTE_MAIN_MESSAGE,rouletteService.getMainMessage());
-        model.addAttribute(AttributeNames.ROULETTE_RESULT_MESSAGE,resultMessage.toString());
-        log.info("model = {}",model);
-        userService.updateCasinoUserBalance(userBalance,principal.getName());
-        return ViewNames.ROULETTE;
+        return getRouletteString(model, principal, userBalance, resultMessage, moneyResult);
     }
 
-    @RequestMapping(value="/roulette", params = "redOrBlackFormSubmit", method = RequestMethod.POST)
+    @RequestMapping(value = ViewNames.ROULETTE, params = "redOrBlackFormSubmit", method = RequestMethod.POST)
     public String rouletteRedOrBlackBet(HttpServletRequest request, Model model, @RequestParam String guessRedOrBlack, Principal principal) {
         rouletteService.roll();
         double userBalance = userService.findCasinoUserByUsername(principal.getName()).getBalance();
@@ -73,24 +66,17 @@ public class RouletteController {
         resultMessage.append("You bet 1 $. ");
         String message = rouletteService.getResultMessageRedOrBlack(guessRedOrBlack);
         double moneyResult;
-        if(message.equals("You lost")) {
+        if (message.equals("You lost")) {
             resultMessage.append(message);
             moneyResult = -1;
         } else {
             resultMessage.append("You won 2 $");
             moneyResult = 1;
         }
-        userBalance += moneyResult;
-        resultMessage.append(". ");
-        resultMessage.append("Your balance is now ").append(String.format("%1$,.2f", userBalance)).append(" $.");
-        model.addAttribute(AttributeNames.ROULETTE_MAIN_MESSAGE,rouletteService.getMainMessage());
-        model.addAttribute(AttributeNames.ROULETTE_RESULT_MESSAGE,resultMessage.toString());
-        log.info("model = {}",model);
-        userService.updateCasinoUserBalance(userBalance,principal.getName());
-        return ViewNames.ROULETTE;
+        return getRouletteString(model, principal, userBalance, resultMessage, moneyResult);
     }
 
-    @RequestMapping(value="/roulette", params = "evenOrOddFormSubmit", method = RequestMethod.POST)
+    @RequestMapping(value = ViewNames.ROULETTE, params = "evenOrOddFormSubmit", method = RequestMethod.POST)
     public String rouletteEvenOrOddBet(HttpServletRequest request, Model model, @RequestParam String guessEvenOrOdd, Principal principal) {
         rouletteService.roll();
         double userBalance = userService.findCasinoUserByUsername(principal.getName()).getBalance();
@@ -98,20 +84,24 @@ public class RouletteController {
         resultMessage.append("You bet 1 $. ");
         String message = rouletteService.getResultMessageEvenOrOdd(guessEvenOrOdd);
         double moneyResult;
-        if(message.equals("You lost")) {
+        if (message.equals("You lost")) {
             resultMessage.append(message);
             moneyResult = -1;
         } else {
             resultMessage.append("You won 1 $");
             moneyResult = 1;
         }
+        return getRouletteString(model, principal, userBalance, resultMessage, moneyResult);
+    }
+
+    private String getRouletteString(Model model, Principal principal, double userBalance, StringBuilder resultMessage, double moneyResult) {
         userBalance += moneyResult;
         resultMessage.append(". ");
         resultMessage.append("Your balance is now ").append(String.format("%1$,.2f", userBalance)).append(" $.");
-        model.addAttribute(AttributeNames.ROULETTE_MAIN_MESSAGE,rouletteService.getMainMessage());
-        model.addAttribute(AttributeNames.ROULETTE_RESULT_MESSAGE,resultMessage.toString());
-        log.info("model = {}",model);
-        userService.updateCasinoUserBalance(userBalance,principal.getName());
+        model.addAttribute(AttributeNames.ROULETTE_MAIN_MESSAGE, rouletteService.getMainMessage());
+        model.addAttribute(AttributeNames.ROULETTE_RESULT_MESSAGE, resultMessage.toString());
+        log.info("model = {}", model);
+        userService.updateCasinoUserBalance(userBalance, principal.getName());
         return ViewNames.ROULETTE;
     }
 }

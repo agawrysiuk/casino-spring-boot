@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
+
 *:focus {
     outline: none;
 }
@@ -18,23 +19,26 @@ footer {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 100px;
+    height: 120px;
     margin: auto;
     background-color: #1e2127;
     color: #ffffff;
-    text-align:center; //to align the text in center
+    text-align: center;
+/ / to align the text in center
 }
 
-table,th,td {
-    margin-left:auto;
-    margin-right:auto;
+table, th, td {
+    margin-left: auto;
+    margin-right: auto;
     text-align: center;
     padding: 5px;
     border-spacing: 50px 0;
 }
+
 div.centerContainer {
     text-align: center;
 }
+
 table.slotsTable {
     border-collapse: collapse;
     border-style: hidden;
@@ -166,6 +170,7 @@ input[type="submit"]:active {
     border-radius: 2px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
+
 .errorShow {
     position: absolute;
     top: 0;
@@ -225,8 +230,8 @@ input[type="submit"]:active {
 }
 
 table.tableAccount {
-    margin-left:auto;
-    margin-right:auto;
+    margin-left: auto;
+    margin-right: auto;
     padding: 5px;
     border-spacing: 50px 0;
 }
@@ -282,14 +287,14 @@ button.deposit {
 button.redirect:hover,
 button.redirect:focus,
 button.deposit:hover,
-button.deposit:focus{
+button.deposit:focus {
     opacity: 0.8;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     transition: 0.1s ease;
 }
 
 button.redirect:active,
-button.deposit:active{
+button.deposit:active {
     opacity: 1;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
     transition: 0.1s ease;

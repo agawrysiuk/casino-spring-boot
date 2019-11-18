@@ -57,7 +57,7 @@ public class RouletteGameImpl implements RouletteGame {
 
     @Override
     public boolean getResultSingle(int guess) throws Exception {
-        if(!isBetween(guess,0,36)) {
+        if (!isBetween(guess, 0, 36)) {
             throw new Exception("Incorrect number range.");
         }
         return guess == this.number;
@@ -65,7 +65,7 @@ public class RouletteGameImpl implements RouletteGame {
 
     @Override
     public boolean getResultRedOrBlack(String guess) throws Exception {
-        if(!guess.toLowerCase().startsWith("r") && !guess.toLowerCase().startsWith("b")) {
+        if (!guess.toLowerCase().startsWith("r") && !guess.toLowerCase().startsWith("b")) {
             throw new Exception("Incorrect string entered.");
         }
         String firstLetter = this.color.toLowerCase().split("")[0];
@@ -74,16 +74,16 @@ public class RouletteGameImpl implements RouletteGame {
 
     @Override
     public boolean getResultEvenOrOdd(String guess) throws Exception {
-        if(!guess.toLowerCase().startsWith("e") && !guess.toLowerCase().startsWith("o")) {
+        if (!guess.toLowerCase().startsWith("e") && !guess.toLowerCase().startsWith("o")) {
             throw new Exception("Incorrect string entered.");
         }
-        if(number==0) {
+        if (number == 0) {
             return false;
         }
-        if(guess.toLowerCase().startsWith("e")) {
-            return this.number%2==0;
+        if (guess.toLowerCase().startsWith("e")) {
+            return this.number % 2 == 0;
         } else {
-            return this.number%2!=0;
+            return this.number % 2 != 0;
         }
     }
 

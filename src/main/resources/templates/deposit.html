@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Web Casino</title>
     <!--    credit card styles created using existing code @ https://codepen.io/quinlo/pen/YONMEa-->
-    <link rel="stylesheet" type="text/css" media="all"
-          href="../../css/gtvg.css" th:href="@{/static/css/payment.css}"/>
+    <link id="paymentCss" rel="stylesheet" type="text/css" media="all"
+          href="/static/css/payment.css"/>
 
 </head>
 <body id="errorBody">
-<form id="depositForm" action="" th:object="${card}" method="POST">
+<form id="depositForm" action="" method="POST">
     <div class="form-container">
         <div class="personal-information">
             <h1>Payment Information</h1><img src="http://i76.imgup.net/accepted_c22e0.png"/>
@@ -17,29 +17,34 @@
 
         <div class="box">
             <div class="smallbox">
-                <input th:field="*{firstName}" type="text" name="first-name" placeholder="First Name" onkeyup="lettersOnly(this);"/>
+                <input id="firstNameInput" type="text" name="first-name" placeholder="First Name"
+                       onkeyup="lettersOnly(this);"/>
             </div>
             <div class="smallbox">
-                <input th:field="*{surname}" type="text" name="last-name" placeholder="Surname" onkeyup="lettersOnly(this);"/>
+                <input id="surnameInput" type="text" name="last-name" placeholder="Surname"
+                       onkeyup="lettersOnly(this);"/>
             </div>
         </div>
-        <input th:field="*{cardNumber}" type="text" name="number" placeholder="Card Number" onkeyup="numbersOnly(this);"/>
+        <input id="cardNumberInput" type="text" name="number" placeholder="Card Number" onkeyup="numbersOnly(this);"/>
         <div class="box">
             <div class="smallbox">
-                <input th:field="*{expiryDate}" type="text" name="expiry" placeholder="MM / YY" maxlength="5" onkeyup="formatString(this);"/>
+                <input id="expiryInput" type="text" name="expiry" placeholder="MM / YY" maxlength="5"
+                       onkeyup="formatString(this);"/>
             </div>
             <div class="smallbox">
-                <input th:field="*{CCV}" type="text" name="cvc" placeholder="CCV" maxlength="3" onkeyup="numbersOnly(this);"/>
+                <input id="CCVInput" type="text" name="cvc" placeholder="CCV" maxlength="3"
+                       onkeyup="numbersOnly(this);"/>
             </div>
         </div>
-        <input th:field="*{depositAmount}" type="text" name="amount" placeholder="Deposit amount (USD)" onkeyup="numbersOnly(this);" min="1"/>
+        <input id="amountInput" type="text" name="amount" placeholder="Deposit amount (USD)"
+               onkeyup="numbersOnly(this);" min="1"/>
 
         <input class="input-button" type="submit" value="Deposit now" name="deposit" form="depositForm"/>
         <br/>
     </div>
 </form>
 </div>
-<p style="color: #a00001" th:each="err : ${#fields.errors('*')}" th:text="${err}">Error</p>
+<p id="errorParagraph" style="color: #a00001">Error</p>
 <script>
     function numbersOnly(input) {
         var regex = /[^0-9]/gi;

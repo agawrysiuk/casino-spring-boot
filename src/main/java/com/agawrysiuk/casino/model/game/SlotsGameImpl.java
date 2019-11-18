@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Component
-public class SlotsGameImpl implements SlotsGame{
+public class SlotsGameImpl implements SlotsGame {
     //to simplify it, there is only one win line, one row and five columns
     @Getter
     private double multiplier;
@@ -31,7 +31,7 @@ public class SlotsGameImpl implements SlotsGame{
     public void roll() {
         SlotsValue[] slots = SlotsValue.values();
         Random random = new Random();
-        for (int i = 0; i<5; i++) {
+        for (int i = 0; i < 5; i++) {
             results[i] = slots[random.nextInt(slots.length)];
         }
         setMultiplier();
@@ -39,16 +39,16 @@ public class SlotsGameImpl implements SlotsGame{
 
     private void setMultiplier() {
         this.multiplier = 0;
-        if(Arrays.stream(this.results).distinct().count()==this.results.length) {
+        if (Arrays.stream(this.results).distinct().count() == this.results.length) {
             this.multiplier = 0;
             return;
         }
-        Map<SlotsValue, Long> valueMap = Arrays.stream(this.results).collect(Collectors.groupingBy(Function.identity(),Collectors.counting()));
-        for(Map.Entry<SlotsValue,Long> entry: valueMap.entrySet()) {
-            if(entry.getValue()==1) {
+        Map<SlotsValue, Long> valueMap = Arrays.stream(this.results).collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        for (Map.Entry<SlotsValue, Long> entry : valueMap.entrySet()) {
+            if (entry.getValue() == 1) {
                 continue;
             }
-            this.multiplier += Math.pow(entry.getKey().intValue * entry.getValue(),entry.getValue()-1);
+            this.multiplier += Math.pow(entry.getKey().intValue * entry.getValue(), entry.getValue() - 1);
         }
         this.multiplier = this.multiplier / 100;
     }

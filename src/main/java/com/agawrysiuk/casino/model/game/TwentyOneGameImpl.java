@@ -96,10 +96,10 @@ public class TwentyOneGameImpl implements TwentyOneGame {
 
     @Override
     public boolean getGameResult() {
-        if(gameLost) {
+        if (gameLost) {
             return false;
         }
-        if(gameWon) {
+        if (gameWon) {
             return true;
         }
         if (gameFinished) {

@@ -4,6 +4,7 @@ import com.agawrysiuk.casino.model.database.CasinoUser;
 import com.agawrysiuk.casino.model.database.CreditCardObject;
 import com.agawrysiuk.casino.model.database.PasswordDto;
 import com.agawrysiuk.casino.service.UserService;
+import com.agawrysiuk.casino.util.ViewNames;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -30,49 +31,43 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping(path = "/admin")
-    public @ResponseBody
-    CasinoUser getAdmin() {
-        return userService.findCasinoUserByUsername("admin");
-    }
-
-    @GetMapping("/")
+    @GetMapping(ViewNames.MAIN)
     public String index() {
-        return "home";
+        return ViewNames.HOME;
     }
 
     // Login form
-    @RequestMapping("/login")
+    @RequestMapping(ViewNames.LOGIN)
     public String login() {
-        return "login";
+        return ViewNames.LOGIN;
     }
 
     // Login form with error
-    @RequestMapping("/login-error")
+    @RequestMapping(ViewNames.LOGIN_ERROR)
     public String loginError(Model model) {
         model.addAttribute("loginError", true);
-        return "login";
+        return ViewNames.LOGIN;
     }
 
     // Account page
-    @GetMapping("/account")
+    @GetMapping(ViewNames.ACCOUNT)
     public String yourAccount(Model model, Principal principal) {
         CasinoUser casinoUser = userService.findCasinoUserByUsername(principal.getName());
         log.info("casinoUser = {}", casinoUser);
         model.addAttribute("balance", String.format("%1$,.2f", casinoUser.getBalance()) + " $");
         model.addAttribute("casinoUser", casinoUser);
         model.addAttribute("message", "You are logged in as " + principal.getName());
-        return "account";
+        return ViewNames.ACCOUNT;
     }
 
-    @RequestMapping(value = "/password", method = RequestMethod.GET)
+    @RequestMapping(value = ViewNames.PASSWORD, method = RequestMethod.GET)
     public String showRegistrationForm(WebRequest request, Model model) {
         PasswordDto passwordDto = new PasswordDto();
         model.addAttribute("passwordDto", passwordDto);
-        return "password";
+        return ViewNames.PASSWORD;
     }
 
-    @RequestMapping(value = "/password", params = "updatePassword", method = RequestMethod.POST)
+    @RequestMapping(value = ViewNames.PASSWORD, params = "updatePassword", method = RequestMethod.POST)
     public ModelAndView changePassword(
             @ModelAttribute("passwordDto") @Valid PasswordDto passwordDto,
             BindingResult result,
@@ -90,41 +85,41 @@ public class UserController {
         }
         if (result.hasErrors()) {
             log.info("result = {}", result);
-            return new ModelAndView("password", "passwordDto", passwordDto);
+            return new ModelAndView(ViewNames.PASSWORD, "passwordDto", passwordDto);
         } else {
             passwordDto.setUsername(principal.getName());
             log.info("changePassword() ---- NO ERRORS {}", passwordDto);
             userService.changePassword(passwordDto);
-            return new ModelAndView("successPassword", "passwordDto", passwordDto);
+            return new ModelAndView(ViewNames.PASSWORD_SUCCESS, "passwordDto", passwordDto);
         }
     }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    @RequestMapping(value = ViewNames.EDIT, method = RequestMethod.GET)
     public String editForm(WebRequest request, Model model, Principal principal) {
         CasinoUser casinoUser = userService.findCasinoUserByUsername(principal.getName());
         model.addAttribute("casinoUser", casinoUser);
         model.addAttribute("confirmationMessage", null);
-        return "edit";
+        return ViewNames.EDIT;
     }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    @RequestMapping(value = ViewNames.EDIT, method = RequestMethod.POST)
     public String editInformation(
             @ModelAttribute("casinoUser") CasinoUser casinoUser, Model model, Principal principal) {
         casinoUser.setNickname(principal.getName());
         userService.updateCasinoUserInformation(casinoUser);
         model.addAttribute("casinoUser", casinoUser);
         model.addAttribute("confirmationMessage", "Information updated");
-        return "edit";
+        return ViewNames.EDIT;
     }
 
-    @GetMapping("/deposit")
+    @GetMapping(ViewNames.DEPOSIT)
     public String depositPage(Model model, Principal principal) {
         CreditCardObject creditCard = new CreditCardObject();
         model.addAttribute("card", creditCard);
-        return "deposit";
+        return ViewNames.DEPOSIT;
     }
 
-    @RequestMapping(value = "/deposit", params = "deposit", method = RequestMethod.POST)
+    @RequestMapping(value = ViewNames.DEPOSIT, params = "deposit", method = RequestMethod.POST)
     public ModelAndView depositMoney(
             @ModelAttribute("card") @Valid CreditCardObject creditCard,
             BindingResult result,
@@ -138,14 +133,14 @@ public class UserController {
             return new ModelAndView("deposit", "card", creditCard);
         } else {
             log.info("depositMoney() ---- NO ERRORS {}", creditCard);
-            log.info("principal = {}",principal);
+            log.info("principal = {}", principal);
             userService.depositToCasinoUser(Integer.parseInt(creditCard.getDepositAmount()), principal.getName());
-            return new ModelAndView("successDeposit");
+            return new ModelAndView(ViewNames.DEPOSIT_SUCCESS);
         }
     }
 
-    @RequestMapping("successDeposit")
+    @RequestMapping(ViewNames.DEPOSIT_SUCCESS)
     public String successDeposit() {
-        return "successDeposit";
+        return ViewNames.DEPOSIT_SUCCESS;
     }
 }

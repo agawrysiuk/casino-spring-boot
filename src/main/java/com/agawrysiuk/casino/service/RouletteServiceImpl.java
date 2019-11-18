@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RouletteServiceImpl implements RouletteService{
+public class RouletteServiceImpl implements RouletteService {
     private final RouletteGame rouletteGame;
 
     @Autowired
@@ -15,7 +15,7 @@ public class RouletteServiceImpl implements RouletteService{
 
     @Override
     public String getMainMessage() {
-        if(rouletteGame.getNumber()==-1) {
+        if (rouletteGame.getNumber() == -1) {
             return "Place your bet";
         } else {
             return "It's " + rouletteGame.getNumber() + " " + rouletteGame.getColor();
@@ -25,7 +25,7 @@ public class RouletteServiceImpl implements RouletteService{
     @Override
     public String getResultMessageRedOrBlack(String guess) {
         try {
-            return (rouletteGame.getResultRedOrBlack(guess))?
+            return (rouletteGame.getResultRedOrBlack(guess)) ?
                     "You won" :
                     "You lost";
         } catch (Exception e) {
@@ -36,7 +36,7 @@ public class RouletteServiceImpl implements RouletteService{
     @Override
     public String getResultMessageEvenOrOdd(String guess) {
         try {
-            return (rouletteGame.getResultEvenOrOdd(guess))?
+            return (rouletteGame.getResultEvenOrOdd(guess)) ?
                     "You won" :
                     "You lost";
         } catch (Exception e) {
@@ -47,7 +47,7 @@ public class RouletteServiceImpl implements RouletteService{
     @Override
     public String getResultMessageSingle(int guess) {
         try {
-            return (rouletteGame.getResultSingle(guess))?
+            return (rouletteGame.getResultSingle(guess)) ?
                     "You won" :
                     "You lost";
         } catch (Exception e) {

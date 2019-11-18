@@ -16,13 +16,17 @@
             <td valign="top">
                 <p style="font-weight: bold">Your hand:</p>
                 <table>
-                    <tr><td id="yourHandList"><img id="yourCard"/></td></tr>
+                    <tr>
+                        <td id="yourHandList"><img id="yourCard"/></td>
+                    </tr>
                 </table>
             </td>
-            <td  valign="top">
+            <td valign="top">
                 <p style="font-weight: bold">Dealer's hand:</p>
                 <table>
-                    <tr><td id="dealersHandList"><img id="dealersCard"/></td></tr>
+                    <tr>
+                        <td id="dealersHandList"><img id="dealersCard"/></td>
+                    </tr>
                 </table>
             </td>
         </tr>
@@ -33,14 +37,14 @@
         <tr>
             <td>
                 <form method="post">
-                    <input type="hidden" name="_method" value="hitMe" />
+                    <input type="hidden" name="_method" value="hitMe"/>
                     <input value="Hit me!" name="hitMe" type="submit"/>
                 </form>
             </td>
             <td>
                 <form method="post">
-                    <input type="hidden" name="_method" value="hold" />
-                    <input value="Hold" name="hold" type="submit" />
+                    <input type="hidden" name="_method" value="hold"/>
+                    <input value="Hold" name="hold" type="submit"/>
                 </form>
             </td>
         </tr>
@@ -48,8 +52,8 @@
 </div>
 <div class="centerContainer" id="divGameFinished">
     <form method="post">
-        <input type="hidden" name="_method" value="again" />
-        <input value="Play again" name="again" type="submit" />
+        <input type="hidden" name="_method" value="again"/>
+        <input value="Play again" name="again" type="submit"/>
     </form>
 </div>
 <footer id="footerId"></footer>

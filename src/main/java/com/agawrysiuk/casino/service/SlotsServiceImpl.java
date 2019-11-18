@@ -20,12 +20,12 @@ public class SlotsServiceImpl implements SlotsService {
     }
 
     public int[] getResults() {
-        if(slotsGame.getMultiplier()==-1) {
+        if (slotsGame.getMultiplier() == -1) {
             return new int[5];
         }
         SlotsValue[] slotsResults = slotsGame.getResults();
         int[] results = new int[slotsResults.length];
-        for(int i = 0; i<slotsResults.length; i++) {
+        for (int i = 0; i < slotsResults.length; i++) {
             results[i] = slotsResults[i].intValue;
         }
         return results;
@@ -36,7 +36,7 @@ public class SlotsServiceImpl implements SlotsService {
     }
 
     public String getMessage() {
-        return slotsGame.getMultiplier()==-1?
+        return slotsGame.getMultiplier() == -1 ?
                 "Roll the game." :
                 "You got " + slotsGame.getMultiplier() + " multiplier.";
     }

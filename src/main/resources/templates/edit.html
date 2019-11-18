@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head id="headId">
 </head>
 <body>
@@ -7,45 +7,44 @@
 <div id="account-page">
     <div class="account-box">
         <h2 style="font-weight: bold;text-align:left">Change your information:</h2>
-        <form id="updateInformationForm" action="" th:object="${casinoUser}" method="POST" enctype="utf8">
+        <form id="updateInformationForm" action="" method="POST" enctype="utf8">
             <div>
                 <label>Name: </label>
-                <input id="firstname" type="text" th:field="*{firstname}" placeholder="Name"/>
+                <input id="firstname" type="text" placeholder="Name"/>
             </div>
             <div>
                 <label>Surname: </label>
-                <input id="secondname" type="text" th:field="*{secondname}" placeholder="Surname"/>
+                <input id="secondname" type="text" placeholder="Surname"/>
             </div>
             <div>
                 <label>Date of birth:</label>
-                <input id="dateOfBirth" type="date" th:field="*{birthdate}" placeholder="Date of birth"/>
+                <input id="dateOfBirth" type="date" placeholder="Date of birth"/>
             </div>
             <div>
                 <label>Country of living:</label>
-                <input id="country" type="text" th:field="*{country}" placeholder="Country of living"/>
+                <input id="country" type="text" placeholder="Country of living"/>
             </div>
             <button class="redirect" onclick="validateForm()" type="button">Edit</button>
         </form>
-        <p th:if="${confirmationMessage!=null}"><span th:text="${confirmationMessage}">Confirmation message</span> </p>
+        <p id="confirmationMessageParagraph"><span id="confirmationMessageS">Confirmation message</span></p>
     </div>
 </div>
 <footer id="footerId"></footer>
 <script type="text/javascript">
-    function validateForm(){
+    function validateForm() {
         var isValid = true;
 
         var elements = document.getElementById('updateInformationForm').getElementsByTagName('input');
 
-        for(var i=0; i < elements.length; i++){
-            if(elements[i].value.length < 1){
+        for (var i = 0; i < elements.length; i++) {
+            if (elements[i].value.length < 1) {
                 isValid = false;
             }
         }
 
-        if(isValid){
+        if (isValid) {
             document.getElementById('updateInformationForm').submit();
-        }
-        else {
+        } else {
             alert('Please fill all required fields');
         }
     }
