@@ -5,7 +5,6 @@ import com.agawrysiuk.casino.service.UserService;
 import com.agawrysiuk.casino.util.AttributeNames;
 import com.agawrysiuk.casino.util.ViewNames;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +20,6 @@ public class TwentyOneController {
     private final TwentyOneService twentyOneService;
     private final UserService userService;
 
-    @Autowired
     public TwentyOneController(TwentyOneService twentyOneService, UserService userService) {
         this.twentyOneService = twentyOneService;
         this.userService = userService;

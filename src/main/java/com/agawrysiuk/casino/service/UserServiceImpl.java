@@ -2,7 +2,6 @@ package com.agawrysiuk.casino.service;
 
 import com.agawrysiuk.casino.model.database.*;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +14,6 @@ public class UserServiceImpl implements UserService {
     private final CasinoUserRepository casinoUserRepository;
     private final UserRepository userRepository;
 
-    @Autowired
     public UserServiceImpl(CasinoUserRepository casinoUserRepository, UserRepository userRepository) {
         this.casinoUserRepository = casinoUserRepository;
         this.userRepository = userRepository;

@@ -1,14 +1,12 @@
 package com.agawrysiuk.casino.service;
 
 import com.agawrysiuk.casino.model.game.RouletteGame;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RouletteServiceImpl implements RouletteService {
     private final RouletteGame rouletteGame;
 
-    @Autowired
     public RouletteServiceImpl(RouletteGame rouletteGame) {
         this.rouletteGame = rouletteGame;
     }

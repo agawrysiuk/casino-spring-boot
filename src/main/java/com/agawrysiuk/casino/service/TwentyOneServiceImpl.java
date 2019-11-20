@@ -2,7 +2,6 @@ package com.agawrysiuk.casino.service;
 
 import com.agawrysiuk.casino.model.game.Card;
 import com.agawrysiuk.casino.model.game.TwentyOneGame;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +11,6 @@ public class TwentyOneServiceImpl implements TwentyOneService {
 
     private final TwentyOneGame twentyOneGame;
 
-    @Autowired
     public TwentyOneServiceImpl(TwentyOneGame twentyOneGame) {
         this.twentyOneGame = twentyOneGame;
     }

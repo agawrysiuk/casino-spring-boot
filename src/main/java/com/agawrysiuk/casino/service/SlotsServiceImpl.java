@@ -2,7 +2,6 @@ package com.agawrysiuk.casino.service;
 
 import com.agawrysiuk.casino.model.game.SlotsGame;
 import com.agawrysiuk.casino.util.game.SlotsValue;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -10,7 +9,6 @@ public class SlotsServiceImpl implements SlotsService {
 
     private final SlotsGame slotsGame;
 
-    @Autowired
     public SlotsServiceImpl(SlotsGame slotsGame) {
         this.slotsGame = slotsGame;
     }
