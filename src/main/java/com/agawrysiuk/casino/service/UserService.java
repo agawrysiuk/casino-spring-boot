@@ -16,4 +16,5 @@ public interface UserService {
     void updateCasinoUserInformation(CasinoUser casinoUser);
     void depositToCasinoUser(double balance, String nickname);
     boolean isEnoughMoney(String nickname, double minNeeded);
+    boolean doPasswordsMatch(String oldPassword,String userName);
 }

@@ -2,6 +2,7 @@ package com.agawrysiuk.casino.service;
 
 import com.agawrysiuk.casino.model.database.*;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +30,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional
+    //used when we want to commit after executing all queries
+    // (software breaking in the middle of the code will not make one query be saved into db while the other is not)
     @Override
     public User registerNewUserAccount(UserDto accountDto) {
 
@@ -91,5 +94,9 @@ public class UserServiceImpl implements UserService {
     public boolean isEnoughMoney(String nickname, double minNeeded) {
         CasinoUser user = casinoUserRepository.findByNickname(nickname);
         return user.getBalance()>=minNeeded;
+    }
+
+    public boolean doPasswordsMatch(String oldPassword,String userName) {
+        return BCrypt.checkpw(oldPassword, userRepository.findByUsername(userName).getPassword());
     }
 }

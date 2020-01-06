@@ -6,7 +6,6 @@ import com.agawrysiuk.casino.model.database.PasswordDto;
 import com.agawrysiuk.casino.service.UserService;
 import com.agawrysiuk.casino.util.ViewNames;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -79,7 +78,7 @@ public class UserController {
         log.info("changePassword() started");
         if (!result.hasErrors()) {
             log.info("changePassword() ---- NO ERRORS");
-            if (!BCrypt.checkpw(passwordDto.getOldPassword(), userService.findUserByUsername(principal.getName()).getPassword())) {
+            if (!userService.doPasswordsMatch(passwordDto.getOldPassword(),principal.getName())) {
                 result.addError(new FieldError("passwordDto", "oldPassword", "Incorrect old password."));
                 log.info("changePassword() ---- OLD PASSWORD WRONG");
             }
@@ -134,7 +133,6 @@ public class UserController {
             return new ModelAndView("deposit", "card", creditCard);
         } else {
             log.info("depositMoney() ---- NO ERRORS {}", creditCard);
-            log.info("principal = {}", principal);
             userService.depositToCasinoUser(Integer.parseInt(creditCard.getDepositAmount()), principal.getName());
             return new ModelAndView(ViewNames.DEPOSIT_SUCCESS);
         }
