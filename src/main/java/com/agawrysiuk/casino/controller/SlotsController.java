@@ -28,7 +28,7 @@ public class SlotsController {
 
     @GetMapping(ViewNames.SLOTS)
     public String slots(Model model, Principal principal) {
-        if (!userService.checkBalance(principal.getName(), 1)) {
+        if (!userService.isEnoughMoney(principal.getName(), 1)) {
             return "redirect:/"+ViewNames.NO_MONEY_PAGE;
         }
         CasinoUser user = userService.findCasinoUserByUsername(principal.getName());
@@ -41,7 +41,7 @@ public class SlotsController {
 
     @RequestMapping(value = ViewNames.SLOTS, params = "roll", method = RequestMethod.POST)
     public String newRoll(Model model, Principal principal) {
-        if (!userService.checkBalance(principal.getName(), 1)) {
+        if (!userService.isEnoughMoney(principal.getName(), 1)) {
             return "redirect:/"+ViewNames.NO_MONEY_PAGE;
         }
         slotsService.roll();

@@ -27,7 +27,7 @@ public class TwentyOneController {
 
     @GetMapping(ViewNames.TWENTYONE)
     public String twentyone(Model model, Principal principal) {
-        if (!userService.checkBalance(principal.getName(), 10)) {
+        if (!userService.isEnoughMoney(principal.getName(), 10)) {
             return "redirect:/"+ViewNames.NO_MONEY_PAGE;
         }
         twentyOneService.resetGame();

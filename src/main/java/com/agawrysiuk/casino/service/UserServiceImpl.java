@@ -88,7 +88,7 @@ public class UserServiceImpl implements UserService {
         casinoUserRepository.save(existingUser);
     }
 
-    public boolean checkBalance(String nickname, double minNeeded) {
+    public boolean isEnoughMoney(String nickname, double minNeeded) {
         CasinoUser user = casinoUserRepository.findByNickname(nickname);
         return user.getBalance()>=minNeeded;
     }

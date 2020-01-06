@@ -29,7 +29,7 @@ public class RouletteController {
 
     @GetMapping(ViewNames.ROULETTE)
     public String roulette(Model model, Principal principal) {
-        if (!userService.checkBalance(principal.getName(), 1)) {
+        if (!userService.isEnoughMoney(principal.getName(), 1)) {
             return "redirect:/"+ViewNames.NO_MONEY_PAGE;
         }
         rouletteService.reset();
@@ -43,7 +43,7 @@ public class RouletteController {
 
     @RequestMapping(value = ViewNames.ROULETTE, params = "singleFormSubmit", method = RequestMethod.POST)
     public String rouletteSingle(HttpServletRequest request, Model model, @RequestParam int guessSingle, Principal principal) {
-        if (!userService.checkBalance(principal.getName(), 1)) {
+        if (!userService.isEnoughMoney(principal.getName(), 1)) {
             return "redirect:/"+ViewNames.NO_MONEY_PAGE;
         }
         rouletteService.roll();
@@ -64,7 +64,7 @@ public class RouletteController {
 
     @RequestMapping(value = ViewNames.ROULETTE, params = "redOrBlackFormSubmit", method = RequestMethod.POST)
     public String rouletteRedOrBlackBet(HttpServletRequest request, Model model, @RequestParam String guessRedOrBlack, Principal principal) {
-        if (!userService.checkBalance(principal.getName(), 1)) {
+        if (!userService.isEnoughMoney(principal.getName(), 1)) {
             return "redirect:/"+ViewNames.NO_MONEY_PAGE;
         }
         rouletteService.roll();
@@ -85,7 +85,7 @@ public class RouletteController {
 
     @RequestMapping(value = ViewNames.ROULETTE, params = "evenOrOddFormSubmit", method = RequestMethod.POST)
     public String rouletteEvenOrOddBet(HttpServletRequest request, Model model, @RequestParam String guessEvenOrOdd, Principal principal) {
-        if (!userService.checkBalance(principal.getName(), 1)) {
+        if (!userService.isEnoughMoney(principal.getName(), 1)) {
             return "redirect:/"+ViewNames.NO_MONEY_PAGE;
         }
         rouletteService.roll();
