@@ -76,22 +76,20 @@ public class UserController {
             Principal principal) {
 
         log.info("changePassword() started");
-        if (!result.hasErrors()) {
-            log.info("changePassword() ---- NO ERRORS");
-            if (!userService.doPasswordsMatch(passwordDto.getOldPassword(),principal.getName())) {
-                result.addError(new FieldError("passwordDto", "oldPassword", "Incorrect old password."));
-                log.info("changePassword() ---- OLD PASSWORD WRONG");
-            }
-        }
         if (result.hasErrors()) {
             log.info("result = {}", result);
             return new ModelAndView(ViewNames.PASSWORD, "passwordDto", passwordDto);
-        } else {
-            passwordDto.setUsername(principal.getName());
-            log.info("changePassword() ---- NO ERRORS {}", passwordDto);
-            userService.changePassword(passwordDto);
-            return new ModelAndView(ViewNames.PASSWORD_SUCCESS, "passwordDto", passwordDto);
         }
+        if (!userService.doPasswordsMatch(passwordDto.getOldPassword(), principal.getName())) {
+            result.addError(new FieldError("passwordDto", "oldPassword", "Incorrect old password."));
+            log.info("changePassword() ---- OLD PASSWORD WRONG");
+            return new ModelAndView(ViewNames.PASSWORD, "passwordDto", passwordDto);
+        }
+        passwordDto.setUsername(principal.getName());
+        log.info("changePassword() ---- NO ERRORS {}", passwordDto);
+        userService.changePassword(passwordDto);
+        return new ModelAndView(ViewNames.PASSWORD_SUCCESS, "passwordDto", passwordDto);
+
     }
 
     @RequestMapping(value = ViewNames.EDIT, method = RequestMethod.GET)
