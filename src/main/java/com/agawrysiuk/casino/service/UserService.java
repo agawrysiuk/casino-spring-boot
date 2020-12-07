@@ -8,7 +8,7 @@ import com.agawrysiuk.casino.model.database.UserDto;
 public interface UserService {
     User findUserByEmail(String email);
     User findUserByUsername(String username);
-    User registerNewUserAccount(UserDto accountDto);
+    User registerNewUserAccount(UserDto accountDto, boolean admin);
     void changePassword(PasswordDto user);
 
     CasinoUser findCasinoUserByUsername(String nickname);

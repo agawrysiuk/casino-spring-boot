@@ -33,14 +33,14 @@ public class UserServiceImpl implements UserService {
     //used when we want to commit after executing all queries
     // (software breaking in the middle of the code will not make one query be saved into db while the other is not)
     @Override
-    public User registerNewUserAccount(UserDto accountDto) {
+    public User registerNewUserAccount(UserDto accountDto, boolean admin) {
 
         log.info("registerNewUserAccount() started");
 
         CasinoUser casinoUser = new CasinoUser();
         casinoUser.setBalance(0.00);
         casinoUser.setNickname(accountDto.getUsername());
-        casinoUser.setIsactive(false);
+        casinoUser.setIsactive(admin);
         casinoUserRepository.save(casinoUser);
 
         User user = new User();
@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
         user.setPassword(new BCryptPasswordEncoder().encode(accountDto.getPassword()));
         user.setEmail(accountDto.getEmail());
         user.setEnabled(true);
-        user.setAuthority("ROLE_USER");
+        user.setAuthority(admin? "ROLE_ADMIN" : "ROLE_USER");
         log.info("user = {}", user);
         userRepository.save(user);
 

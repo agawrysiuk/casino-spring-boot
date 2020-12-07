@@ -1,5 +1,6 @@
 package com.agawrysiuk.casino.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +15,7 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 
 import javax.sql.DataSource;
 
+@Slf4j
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -26,9 +28,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         auth.jdbcAuthentication().dataSource(dataSource)
                 .usersByUsernameQuery("select username, password, enabled"
-                        + " from users where username=?")
+                        + " from user where username=?")
                 .authoritiesByUsernameQuery("select username, authority "
-                        + "from users where username=?")
+                        + "from user where username=?")
                 .passwordEncoder(new BCryptPasswordEncoder());
     }
 

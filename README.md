@@ -5,6 +5,9 @@ If you'd like to know more about it, I invite to you to watch the YouTube presen
 
 https://youtu.be/-FW9obNZ-BA
 
+### Updates on December 2012
+- Added Flyway migrations
+
 ### Project statistics
 
 **Work time**: 2 weeks

@@ -59,7 +59,7 @@ public class RegisterController {
             return new ModelAndView(ViewNames.REGISTER, "userdto", userDto);
         }
         log.info("showRegistrationForm() ---- NO ERRORS {}", userDto);
-        userService.registerNewUserAccount(userDto);
+        userService.registerNewUserAccount(userDto, false);
         return new ModelAndView(ViewNames.REGISTER_SUCCESS, "userdto", userDto);
 
     }
