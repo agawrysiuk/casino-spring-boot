@@ -5,10 +5,10 @@ If you'd like to know more about it, I invite to you to watch the YouTube presen
 
 https://youtu.be/-FW9obNZ-BA
 
-### Updates on December 2012
+### Updates on December 2020
 - Added Flyway migrations
 
-### Project statistics
+### Project statistics on October 2019
 
 **Work time**: 2 weeks
 

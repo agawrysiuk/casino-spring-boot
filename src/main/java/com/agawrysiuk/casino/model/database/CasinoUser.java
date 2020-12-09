@@ -12,7 +12,7 @@ public class CasinoUser {
 
     @Id
     @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "CE0AOFQ")
     private Integer id;
     @Column(name = "NICKNAME")
     private String nickname;
