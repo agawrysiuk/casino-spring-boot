@@ -1,6 +1,9 @@
-package com.agawrysiuk.casino.model.database;
+package com.agawrysiuk.casino.user;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +12,9 @@ import javax.persistence.Table;
 
 @Entity
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "USER")
 public class User {
 

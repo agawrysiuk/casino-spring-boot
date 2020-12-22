@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {UserDto} from "../../model/userDto";
 
 @Component({
   selector: 'app-register',
@@ -9,13 +10,14 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class RegisterComponent implements OnInit {
 
   form: FormGroup;
+  userDto: UserDto = {} as UserDto;
 
   constructor(private fb: FormBuilder) {
     this.form = fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
-      retypedPassword: ['', Validators.required],
-      email: ['', Validators.required, Validators.email]
+      username: [this.userDto.username, Validators.required],
+      password: [this.userDto.password, Validators.required],
+      matchingPassword: [this.userDto.matchingPassword, Validators.required],
+      email: [this.userDto.email, Validators.required, Validators.email]
     });
   }
 
@@ -23,14 +25,16 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
+    if(this.form.valid) {
 
+    }
   }
 
   checkRetypedPassword() {
     if(this.form.controls.password.value !== this.form.controls.retypedPassword.value) {
-      this.form.controls.retypedPassword.setErrors({'invalid': true});
+      this.form.controls.matchingPassword.setErrors({'invalid': true});
     } else {
-      this.form.controls.retypedPassword.setErrors(null);
+      this.form.controls.matchingPassword.setErrors(null);
     }
   }
 

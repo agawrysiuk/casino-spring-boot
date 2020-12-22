@@ -1,6 +1,9 @@
-package com.agawrysiuk.casino.service;
+package com.agawrysiuk.casino.user;
 
+import com.agawrysiuk.casino.casinouser.CasinoUser;
+import com.agawrysiuk.casino.casinouser.CasinoUserRepository;
 import com.agawrysiuk.casino.model.database.*;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -10,19 +13,18 @@ import javax.transaction.Transactional;
 
 @Slf4j
 @Service
-public class UserServiceImpl implements UserService {
+@RequiredArgsConstructor
+public class UserService {
 
-    private CasinoUserRepository casinoUserRepository;
-    private UserRepository userRepository;
-
-    public UserServiceImpl(CasinoUserRepository casinoUserRepository, UserRepository userRepository) {
-        this.casinoUserRepository = casinoUserRepository;
-        this.userRepository = userRepository;
-    }
+    private final CasinoUserRepository casinoUserRepository;
+    private final UserRepository userRepository;
 
     // == Registration ==
-    public User findUserByEmail(String email) {
-        return userRepository.findByEmail(email);
+    public Boolean existsByUsername(String username) {
+        return userRepository.existsByUsername(username);
+    }
+    public Boolean existsByEmail(String email) {
+        return userRepository.existsByEmail(email);
     }
 
     public User findUserByUsername(String username) {
@@ -32,25 +34,27 @@ public class UserServiceImpl implements UserService {
     @Transactional
     //used when we want to commit after executing all queries
     // (software breaking in the middle of the code will not make one query be saved into db while the other is not)
-    @Override
-    public User registerNewUserAccount(UserDto accountDto, boolean admin) {
+    public User registerNewUserAccount(UserDto userDto, boolean admin) {
 
-        log.info("registerNewUserAccount() started");
+        log.info("User registration for {} started", userDto.getUsername());
 
-        CasinoUser casinoUser = new CasinoUser();
-        casinoUser.setBalance(0.00);
-        casinoUser.setNickname(accountDto.getUsername());
-        casinoUser.setIsactive(admin);
+        User user = User.builder()
+                .username(userDto.getUsername())
+                .password(new BCryptPasswordEncoder().encode(userDto.getPassword()))
+                .email(userDto.getEmail())
+                .enabled(true)
+                .authority(admin? "ROLE_ADMIN" : "ROLE_USER")
+                .build();
+        userRepository.save(user);
+
+        CasinoUser casinoUser = CasinoUser.builder()
+                .balance(0.00)
+                .nickname(userDto.getUsername())
+                .isactive(true)
+                .build();
         casinoUserRepository.save(casinoUser);
 
-        User user = new User();
-        user.setUsername(accountDto.getUsername());
-        user.setPassword(new BCryptPasswordEncoder().encode(accountDto.getPassword()));
-        user.setEmail(accountDto.getEmail());
-        user.setEnabled(true);
-        user.setAuthority(admin? "ROLE_ADMIN" : "ROLE_USER");
-        log.info("user = {}", user);
-        userRepository.save(user);
+        log.info("User registration completed! User = {}", user);
 
         return user;
     }

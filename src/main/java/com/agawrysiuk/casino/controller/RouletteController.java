@@ -1,7 +1,7 @@
 package com.agawrysiuk.casino.controller;
 
 import com.agawrysiuk.casino.service.RouletteService;
-import com.agawrysiuk.casino.service.UserService;
+import com.agawrysiuk.casino.user.UserService;
 import com.agawrysiuk.casino.util.AttributeNames;
 import com.agawrysiuk.casino.util.ViewNames;
 import lombok.extern.slf4j.Slf4j;

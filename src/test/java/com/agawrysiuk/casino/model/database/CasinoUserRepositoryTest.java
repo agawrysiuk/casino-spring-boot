@@ -1,5 +1,9 @@
 package com.agawrysiuk.casino.model.database;
 
+import com.agawrysiuk.casino.casinouser.CasinoUser;
+import com.agawrysiuk.casino.casinouser.CasinoUserRepository;
+import com.agawrysiuk.casino.user.User;
+import com.agawrysiuk.casino.user.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

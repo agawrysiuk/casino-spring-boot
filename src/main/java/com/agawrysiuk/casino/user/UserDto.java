@@ -1,4 +1,4 @@
-package com.agawrysiuk.casino.model.database;
+package com.agawrysiuk.casino.user;
 
 import com.agawrysiuk.casino.model.database.validator.PasswordMatches;
 import com.agawrysiuk.casino.model.database.validator.ValidEmail;

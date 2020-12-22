@@ -1,9 +1,10 @@
 package com.agawrysiuk.casino.service;
 
-import com.agawrysiuk.casino.model.database.CasinoUser;
-import com.agawrysiuk.casino.model.database.CasinoUserRepository;
-import com.agawrysiuk.casino.model.database.User;
-import com.agawrysiuk.casino.model.database.UserRepository;
+import com.agawrysiuk.casino.casinouser.CasinoUser;
+import com.agawrysiuk.casino.casinouser.CasinoUserRepository;
+import com.agawrysiuk.casino.user.User;
+import com.agawrysiuk.casino.user.UserRepository;
+import com.agawrysiuk.casino.user.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest
-class UserServiceImplTest {
+class UserServiceTest {
 
     @MockBean
     private CasinoUserRepository casinoUserRepository;

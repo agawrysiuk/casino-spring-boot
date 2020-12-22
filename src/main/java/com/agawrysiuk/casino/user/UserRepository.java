@@ -1,8 +1,9 @@
-package com.agawrysiuk.casino.model.database;
+package com.agawrysiuk.casino.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User,String> {
-    User findByEmail(String email);
     User findByUsername(String username);
+    Boolean existsByUsername(String username);
+    Boolean existsByEmail(String email);
 }

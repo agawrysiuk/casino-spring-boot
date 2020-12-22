@@ -1,12 +1,18 @@
-package com.agawrysiuk.casino.model.database;
+package com.agawrysiuk.casino.casinouser;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Date;
 
 @Data
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "CASINO_USER")
 public class CasinoUser {
 
