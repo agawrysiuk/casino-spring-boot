@@ -103,10 +103,7 @@ h1 {
   font-size: 28px;
 }
 
-input[type="text"],
-input[type="date"],
-input[type="email"],
-input[type="password"] {
+.input {
   display: block;
   box-sizing: border-box;
   margin-bottom: 20px;
@@ -121,10 +118,12 @@ input[type="password"] {
   transition: 0.2s ease;
 }
 
-input[type="text"]:focus,
-input[type="date"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus {
+.input.ng-dirty.ng-invalid {
+  border-bottom: 1px solid #a00000 !important;
+  color: #a00000;
+}
+
+.input:focus {
   border-bottom: 2px solid #16a085;
   color: #16a085;
   transition: 0.2s ease;

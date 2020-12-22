@@ -1,0 +1,22 @@
+<div id="login-box">
+  <div class="registrationForm">
+    <h1>Register</h1>
+    <form [formGroup]="form" id="registerForm" action="" method="POST" enctype="utf8" (submit)="register()">
+      <div>
+        <input class="input" formControlName="username" id="usernameInput" type="text" placeholder="Username"/>
+      </div>
+      <div>
+        <input class="input" formControlName="email" id="emailInput" type="email" placeholder="Email"/>
+      </div>
+      <div>
+        <input class="input" formControlName="password" id="passwordInput" type="password" placeholder="Password" (blur)="checkRetypedPassword()"/>
+      </div>
+      <div>
+        <input class="input" formControlName="retypedPassword" id="matchingPasswordInput" type="password" placeholder="Retype password" (keyup)="checkRetypedPassword()"/>
+      </div>
+      <input value="Register" name="register" type="submit" form="registerForm"/>
+      <p id="errorParagraph">Error</p>
+    </form>
+    <p>Have an account? <a routerLink="/login">Log in now!</a></p>
+  </div>
+</div>
