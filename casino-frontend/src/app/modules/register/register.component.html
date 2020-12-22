@@ -15,7 +15,7 @@
         <input class="input" formControlName="matchingPassword" id="matchingPasswordInput" type="password" placeholder="Retype password" (keyup)="checkRetypedPassword()"/>
       </div>
       <input value="Register" name="register" type="submit" form="registerForm"/>
-      <p id="errorParagraph">Error</p>
+      <p *ngIf="errorMessage">{{errorMessage}}</p>
     </form>
     <p>Have an account? <a routerLink="/login">Log in now!</a></p>
   </div>

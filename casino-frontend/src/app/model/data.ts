@@ -4,3 +4,8 @@ export interface UserDto {
   matchingPassword: string;
   email: string;
 }
+
+export interface LoginRequest {
+  username: string;
+  password: string;
+}

@@ -1,7 +1,7 @@
 <div id="login-box">
   <div class="registrationForm">
     <h1>Login page</h1>
-    <p *ngIf="loginFailed" id="loginPrintError" class="error">Wrong user or password</p>
+    <p *ngIf="loginFailed" id="loginPrintError" class="error">Wrong username or password</p>
     <form [formGroup]="form" id="loginForm" method="post" (submit)="login()">
       <label for="username">Username</label>:
       <input class="input" type="text" formControlName="username" id="username" name="username" autofocus="autofocus"/> <br/>

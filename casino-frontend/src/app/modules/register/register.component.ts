@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {UserDto} from "../../model/userDto";
+import {UserDto} from "../../model/data";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-register',
@@ -11,8 +12,10 @@ export class RegisterComponent implements OnInit {
 
   form: FormGroup;
   userDto: UserDto = {} as UserDto;
+  errorMessage: string | undefined;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private auth: AuthService) {
     this.form = fb.group({
       username: [this.userDto.username, Validators.required],
       password: [this.userDto.password, Validators.required],
@@ -26,7 +29,9 @@ export class RegisterComponent implements OnInit {
 
   register() {
     if(this.form.valid) {
-
+      this.auth.register(this.userDto)
+        .then()
+        .catch(error => this.errorMessage = error.error.message);
     }
   }
 
