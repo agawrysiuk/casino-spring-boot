@@ -52,7 +52,7 @@ class UserServiceTest {
         user.setPassword(password);
         user.setEnabled(enabled);
         user.setAuthority(authority);
-        Mockito.when(userRepository.findByUsername(name))
+        Mockito.when(userService.findUserByUsername(name))
                 .thenReturn(user);
     }
 

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {LoginRequest, UserDto} from "../model/data";
-import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +15,7 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   public login(loginRequest: LoginRequest): Promise<any> {
-    return this.http.post(this.API + '/register', loginRequest, this.httpOptions).toPromise();
+    return this.http.post(this.API + '/login', loginRequest, this.httpOptions).toPromise();
   }
 
   public register(userDto: UserDto): Promise<any> {

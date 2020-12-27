@@ -23,6 +23,12 @@ public class UserControllerAdvice {
         return returnBadRequest(ex);
     }
 
+    @ExceptionHandler(UserDoesntExistException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<?> userDoesntExistException(Exception ex) {
+        return returnBadRequest(ex);
+    }
+
     public ResponseEntity<?> returnBadRequest(Exception ex) {
         log.info(ex.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());

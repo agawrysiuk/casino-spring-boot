@@ -11,7 +11,7 @@
 <router-outlet></router-outlet>
 
 <footer id="footerId">
-  <form action="/logout" method="post">
+  <form (submit)="logout()" *ngIf="isLoggedIn()">
     <input value="Logout" type="submit">
   </form>
   <p>Created by Arkadiusz Gawrysiuk</p>

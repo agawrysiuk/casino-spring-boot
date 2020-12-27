@@ -7,7 +7,7 @@ import { HomeComponent } from './modules/home/home.component';
 import { LoginComponent } from './modules/login/login.component';
 import {FormBuilder, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { RegisterComponent } from './modules/register/register.component';
-import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthInterceptor} from "./services/auth-interceptor";
 
 @NgModule({
@@ -21,7 +21,8 @@ import {AuthInterceptor} from "./services/auth-interceptor";
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

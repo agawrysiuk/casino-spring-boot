@@ -3,8 +3,10 @@ package com.agawrysiuk.casino.user;
 import com.agawrysiuk.casino.casinouser.CasinoUser;
 import com.agawrysiuk.casino.casinouser.CasinoUserRepository;
 import com.agawrysiuk.casino.model.database.*;
+import com.agawrysiuk.casino.user.exception.UserDoesntExistException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -28,7 +30,7 @@ public class UserService {
     }
 
     public User findUserByUsername(String username) {
-        return userRepository.findByUsername(username);
+        return userRepository.findByUsername(username).orElseThrow(UserDoesntExistException::new);
     }
 
     @Transactional
@@ -61,7 +63,7 @@ public class UserService {
 
     public void changePassword(PasswordDto passwordDto) {
         log.info("changePassword() in service started");
-        User user = userRepository.findByUsername(passwordDto.getUsername());
+        User user = userRepository.findByUsername(passwordDto.getUsername()).orElseThrow(UserDoesntExistException::new);
         user.setPassword(new BCryptPasswordEncoder().encode(passwordDto.getPassword()));
         userRepository.save(user);
         log.info("changePassword() in service finished");
@@ -101,6 +103,6 @@ public class UserService {
     }
 
     public boolean doPasswordsMatch(String oldPassword,String userName) {
-        return BCrypt.checkpw(oldPassword, userRepository.findByUsername(userName).getPassword());
+        return BCrypt.checkpw(oldPassword, userRepository.findByUsername(userName).orElseThrow(UserDoesntExistException::new).getPassword());
     }
 }

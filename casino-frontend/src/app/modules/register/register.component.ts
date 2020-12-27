@@ -11,16 +11,15 @@ import {AuthService} from "../../services/auth.service";
 export class RegisterComponent implements OnInit {
 
   form: FormGroup;
-  userDto: UserDto = {} as UserDto;
   errorMessage: string | undefined;
 
   constructor(private fb: FormBuilder,
               private auth: AuthService) {
     this.form = fb.group({
-      username: [this.userDto.username, Validators.required],
-      password: [this.userDto.password, Validators.required],
-      matchingPassword: [this.userDto.matchingPassword, Validators.required],
-      email: [this.userDto.email, Validators.required, Validators.email]
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+      matchingPassword: ['', Validators.required],
+      email: ['', Validators.required, Validators.email]
     });
   }
 
@@ -29,7 +28,7 @@ export class RegisterComponent implements OnInit {
 
   register() {
     if(this.form.valid) {
-      this.auth.register(this.userDto)
+      this.auth.register(this.form.value)
         .then()
         .catch(error => this.errorMessage = error.error.message);
     }

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {TokenStorageService} from "./services/token-storage.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'casino-frontend';
+
+  constructor(private tokenStorage: TokenStorageService,
+              private router: Router) {}
+
+  isLoggedIn(): boolean {
+    return !!this.tokenStorage.getToken();
+  }
+
+  logout() {
+    this.tokenStorage.signOut();
+    this.router.navigate(['login']);
+  }
 }

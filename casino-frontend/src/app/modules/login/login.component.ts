@@ -13,7 +13,6 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class LoginComponent implements OnInit {
 
   form: FormGroup;
-  loginRequest: LoginRequest = {} as LoginRequest;
   loginFailed: boolean = false;
 
   constructor(private fb: FormBuilder,
@@ -21,8 +20,8 @@ export class LoginComponent implements OnInit {
               private tokenStorage: TokenStorageService,
               private router: Router) {
     this.form = fb.group({
-      username: [this.loginRequest.username, Validators.required],
-      password: [this.loginRequest.password, Validators.required]
+      username: ['', Validators.required],
+      password: ['', Validators.required]
     })
   }
 
@@ -31,9 +30,9 @@ export class LoginComponent implements OnInit {
 
   login() {
     if(this.form.valid) {
-      this.auth.login(this.loginRequest)
+      this.auth.login(this.form.value)
         .then(data => {
-          this.tokenStorage.saveToken(data.accessToken);
+          this.tokenStorage.saveToken(data.token);
           this.tokenStorage.saveUser(data);
           this.router.navigate(['home']);
         })

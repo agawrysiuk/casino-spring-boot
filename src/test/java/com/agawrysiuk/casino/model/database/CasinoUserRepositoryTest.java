@@ -54,7 +54,7 @@ public class CasinoUserRepositoryTest {
         entityManager.persist(user);
         entityManager.flush();
 
-        User found = userRepository.findByUsername(user.getUsername());
+        User found = userRepository.findByUsername(user.getUsername()).get();
 
         assertThat(found.getUsername())
                 .isEqualTo(user.getUsername());

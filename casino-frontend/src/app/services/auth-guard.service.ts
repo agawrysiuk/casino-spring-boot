@@ -3,13 +3,14 @@ import {CanActivate, Router} from "@angular/router";
 import {JwtHelperService} from "@auth0/angular-jwt";
 import {TokenStorageService} from "./token-storage.service";
 
+const jwtHelper = new JwtHelperService();
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuardService implements CanActivate{
 
-  constructor(private jwtHelper: JwtHelperService,
-              private tokenStorage: TokenStorageService,
+  constructor(private tokenStorage: TokenStorageService,
               private router: Router) { }
 
   canActivate(): boolean {
@@ -22,6 +23,6 @@ export class AuthGuardService implements CanActivate{
 
   private isAuthenticated() {
     const token = this.tokenStorage.getToken();
-    return token ? !this.jwtHelper.isTokenExpired(token) : false;
+    return token ? !jwtHelper.isTokenExpired(token) : false;
   }
 }
