@@ -9,3 +9,12 @@ export interface LoginRequest {
   username: string;
   password: string;
 }
+
+export interface CasinoUserDto {
+  nickname: string;
+  balance: number;
+  firstName: string;
+  secondName: string;
+  birthDate: Date;
+  country: string;
+}
