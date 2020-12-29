@@ -21,4 +21,12 @@ public class CasinoUserController {
         return casinoUserService.get(nickname);
     }
 
+    @PostMapping("/casino-user")
+    public CasinoUserDto update(@RequestBody CasinoUserDto casinoUserDto, HttpServletRequest request) {
+        if(!request.getUserPrincipal().getName().equals(casinoUserDto.getNickname())) {
+            throw new IncorrectRequestException("Incorrect POST request!");
+        }
+        return casinoUserService.update(casinoUserDto);
+    }
+
 }

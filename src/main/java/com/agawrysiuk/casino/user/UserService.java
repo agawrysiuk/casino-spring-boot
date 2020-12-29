@@ -71,25 +71,29 @@ public class UserService {
 
     // == Game ==
     public CasinoUser findCasinoUserByUsername(String nickname) {
-        return casinoUserRepository.findByNickname(nickname);
+        return casinoUserRepository.findByNickname(nickname)
+                .orElseThrow(UserDoesntExistException::new);
     }
 
     public void updateCasinoUserBalance(double balance, String nickname) {
         log.info("updateCasinoUserBalance() started");
-        CasinoUser user = casinoUserRepository.findByNickname(nickname);
+        CasinoUser user = casinoUserRepository.findByNickname(nickname)
+                .orElseThrow(UserDoesntExistException::new);
         user.setBalance(balance);
         casinoUserRepository.save(user);
     }
 
     public void depositToCasinoUser(double balance, String nickname) {
         log.info("depositToCasinoUser() started");
-        CasinoUser user = casinoUserRepository.findByNickname(nickname);
+        CasinoUser user = casinoUserRepository.findByNickname(nickname)
+                .orElseThrow(UserDoesntExistException::new);
         user.setBalance(user.getBalance() + balance);
         casinoUserRepository.save(user);
     }
 
     public void updateCasinoUserInformation(CasinoUser casinoUser) {
-        CasinoUser existingUser = casinoUserRepository.findByNickname(casinoUser.getNickname());
+        CasinoUser existingUser = casinoUserRepository.findByNickname(casinoUser.getNickname())
+                .orElseThrow(UserDoesntExistException::new);
         existingUser.setFirstname(casinoUser.getFirstname());
         existingUser.setSecondname(casinoUser.getSecondname());
         existingUser.setBirthdate(casinoUser.getBirthdate());
@@ -98,7 +102,8 @@ public class UserService {
     }
 
     public boolean isEnoughMoney(String nickname, double minNeeded) {
-        CasinoUser user = casinoUserRepository.findByNickname(nickname);
+        CasinoUser user = casinoUserRepository.findByNickname(nickname)
+                .orElseThrow(UserDoesntExistException::new);
         return user.getBalance()>=minNeeded;
     }
 

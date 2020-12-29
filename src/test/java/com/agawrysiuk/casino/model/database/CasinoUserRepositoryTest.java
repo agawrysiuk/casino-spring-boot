@@ -4,6 +4,7 @@ import com.agawrysiuk.casino.casinouser.CasinoUser;
 import com.agawrysiuk.casino.casinouser.CasinoUserRepository;
 import com.agawrysiuk.casino.user.User;
 import com.agawrysiuk.casino.user.UserRepository;
+import com.agawrysiuk.casino.user.exception.UserDoesntExistException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,8 @@ public class CasinoUserRepositoryTest {
         entityManager.persist(casinoUser);
         entityManager.flush();
 
-        CasinoUser found = casinoUserRepository.findByNickname(casinoUser.getNickname());
+        CasinoUser found = casinoUserRepository.findByNickname(casinoUser.getNickname())
+                .orElseThrow(UserDoesntExistException::new);
 
         assertThat(found.getNickname())
                 .isEqualTo(casinoUser.getNickname());

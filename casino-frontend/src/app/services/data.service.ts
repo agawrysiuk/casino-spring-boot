@@ -14,4 +14,8 @@ export class DataService {
     return this.http.get(API + "/casino-user?name=" + username).toPromise() as Promise<CasinoUserDto>;
   }
 
+  public editCasinoUser(editedUser: CasinoUserDto): Promise<CasinoUserDto> {
+    return this.http.post(API + "/casino-user", editedUser).toPromise() as Promise<CasinoUserDto>;
+  }
+
 }

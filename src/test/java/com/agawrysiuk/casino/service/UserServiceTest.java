@@ -5,6 +5,7 @@ import com.agawrysiuk.casino.casinouser.CasinoUserRepository;
 import com.agawrysiuk.casino.user.User;
 import com.agawrysiuk.casino.user.UserRepository;
 import com.agawrysiuk.casino.user.UserService;
+import com.agawrysiuk.casino.user.exception.UserDoesntExistException;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,7 +44,8 @@ class UserServiceTest {
         CasinoUser casinoUser = new CasinoUser();
         casinoUser.setNickname(name);
         casinoUser.setBalance(balance);
-        Mockito.when(casinoUserRepository.findByNickname(name))
+        Mockito.when(casinoUserRepository.findByNickname(name)
+                .orElseThrow(UserDoesntExistException::new))
                 .thenReturn(casinoUser);
 
         User user = new User();

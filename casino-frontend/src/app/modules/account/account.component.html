@@ -1,6 +1,6 @@
 <div id="account-page">
-  <div class="account-box">
-    <h2 style="font-weight: bold;text-align:left" id="messageText">You are logged in as  {{getNickname()}}</h2>
+  <div class="account-box" *ngIf="!editingInfo">
+    <h2 style="font-weight: bold;text-align:left">You are logged in as {{getNickname()}}</h2>
     <p>Here is information about your account:</p>
     <table class="tableAccount">
       <tr>
@@ -28,10 +28,33 @@
         <td class="accountBold">{{casinoUser?.country}}</td>
       </tr>
     </table>
-    <button class="redirect" onclick="location.href='/edit'" type="button">Edit information</button>
+    <button class="redirect" (click)="createEditForm()" type="button">Edit information</button>
     <button class="redirect" onclick="location.href='/password'" type="button">Change password</button>
   </div>
-
+  <div class="account-box" *ngIf="editingInfo">
+    <h2 style="font-weight: bold;text-align:left">You are logged in as {{getNickname()}}</h2>
+    <p>Edit yor information:</p>
+    <form [formGroup]="editForm!">
+      <div>
+        <label>Name: </label>
+        <input formControlName="firstName" type="text" placeholder="Name"/>
+      </div>
+      <div>
+        <label>Surname: </label>
+        <input formControlName="secondName" type="text" placeholder="Surname"/>
+      </div>
+      <div>
+        <label>Date of birth:</label>
+        <input formControlName="birthDate" type="date" placeholder="Date of birth"/>
+      </div>
+      <div>
+        <label>Country of living:</label>
+        <input formControlName="country" type="text" placeholder="Country of living"/>
+      </div>
+    </form>
+    <p *ngIf="showError">Save information failed!</p>
+    <button class="redirect" (click)="saveEditForm()" type="button" [disabled]="editForm!.invalid">Save information</button>
+  </div>
 </div>
 <div id="account-page2">
   <div class="account-box2">
