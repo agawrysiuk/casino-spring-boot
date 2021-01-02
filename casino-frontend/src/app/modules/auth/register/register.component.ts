@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {UserDto} from "../../model/data";
-import {AuthService} from "../../services/auth/auth.service";
+import {UserDto} from "../../../model/data";
+import {AuthService} from "../../../services/auth/auth.service";
+import {checkPasswordMatch} from "../../../utils/form-utils";
 
 @Component({
   selector: 'app-register',
@@ -35,11 +36,7 @@ export class RegisterComponent implements OnInit {
   }
 
   checkRetypedPassword() {
-    if(this.form.controls.password.value !== this.form.controls.retypedPassword.value) {
-      this.form.controls.matchingPassword.setErrors({'invalid': true});
-    } else {
-      this.form.controls.matchingPassword.setErrors(null);
-    }
+    checkPasswordMatch(this.form);
   }
 
 }

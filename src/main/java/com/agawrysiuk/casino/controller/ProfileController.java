@@ -1,8 +1,8 @@
 package com.agawrysiuk.casino.controller;
 
 import com.agawrysiuk.casino.casinouser.CasinoUser;
-import com.agawrysiuk.casino.model.database.CreditCardObject;
-import com.agawrysiuk.casino.model.database.PasswordDto;
+import com.agawrysiuk.casino.model.database.validator.CreditCardObject;
+import com.agawrysiuk.casino.model.database.validator.PasswordDto;
 import com.agawrysiuk.casino.user.UserService;
 import com.agawrysiuk.casino.util.ViewNames;
 import lombok.extern.slf4j.Slf4j;

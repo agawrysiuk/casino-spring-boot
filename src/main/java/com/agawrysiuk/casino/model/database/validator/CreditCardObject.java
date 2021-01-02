@@ -1,4 +1,4 @@
-package com.agawrysiuk.casino.model.database;
+package com.agawrysiuk.casino.model.database.validator;
 
 import com.agawrysiuk.casino.model.database.validator.ValidCreditCard;
 import lombok.Data;

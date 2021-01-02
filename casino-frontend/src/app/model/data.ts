@@ -18,3 +18,10 @@ export interface CasinoUserDto {
   birthDate: Date;
   country: string;
 }
+
+export interface PasswordDto {
+  username: string;
+  oldPassword: string;
+  password: string;
+  matchingPassword: string;
+}

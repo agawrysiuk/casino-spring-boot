@@ -3,14 +3,15 @@ import {LOCALE_ID, NgModule} from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './modules/home/home.component';
-import { LoginComponent } from './modules/login/login.component';
+import { LoginComponent } from './modules/auth/login/login.component';
 import {FormBuilder, FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { RegisterComponent } from './modules/register/register.component';
+import { RegisterComponent } from './modules/auth/register/register.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthInterceptor} from "./services/auth/auth-interceptor";
 import { AccountComponent } from './modules/account/account.component';
 import {registerLocaleData} from "@angular/common";
 import localePL from '@angular/common/locales/pl';
+import { EditPasswordComponent } from './modules/account/edit-password/edit-password.component';
 registerLocaleData(localePL);
 
 @NgModule({
@@ -19,7 +20,8 @@ registerLocaleData(localePL);
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    AccountComponent
+    AccountComponent,
+    EditPasswordComponent
   ],
   imports: [
     BrowserModule,

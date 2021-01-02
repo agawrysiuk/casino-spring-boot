@@ -1,11 +1,14 @@
 package com.agawrysiuk.casino.user;
 
+import com.agawrysiuk.casino.casinouser.exception.IncorrectRequestException;
 import com.agawrysiuk.casino.config.jwt.JwtUtils;
 import com.agawrysiuk.casino.config.security.userdetails.UserDetailsImpl;
+import com.agawrysiuk.casino.model.database.validator.PasswordDto;
 import com.agawrysiuk.casino.user.exception.EmailExistsException;
 import com.agawrysiuk.casino.user.exception.UsernameExistsException;
 import com.agawrysiuk.casino.user.request.LoginRequest;
 import com.agawrysiuk.casino.user.response.JwtResponse;
+import com.agawrysiuk.casino.util.ViewNames;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +17,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.FieldError;
+import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -59,5 +65,12 @@ public class UserFacade {
                 userDetails.getUsername(),
                 userDetails.getEmail(),
                 roles));
+    }
+
+    public ResponseEntity<?> editPassword(PasswordDto passwordDto, Principal principal) {
+        if (!userService.doPasswordsMatch(passwordDto.getOldPassword(), principal.getName())) {
+            throw new IncorrectRequestException("Incorrect POST request!");
+        }
+        return userService.changePassword(passwordDto);
     }
 }

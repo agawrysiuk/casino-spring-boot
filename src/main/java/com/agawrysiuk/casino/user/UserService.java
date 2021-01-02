@@ -2,11 +2,11 @@ package com.agawrysiuk.casino.user;
 
 import com.agawrysiuk.casino.casinouser.CasinoUser;
 import com.agawrysiuk.casino.casinouser.CasinoUserRepository;
-import com.agawrysiuk.casino.model.database.*;
+import com.agawrysiuk.casino.model.database.validator.PasswordDto;
 import com.agawrysiuk.casino.user.exception.UserDoesntExistException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -61,12 +61,13 @@ public class UserService {
         return user;
     }
 
-    public void changePassword(PasswordDto passwordDto) {
-        log.info("changePassword() in service started");
+    public ResponseEntity<?> changePassword(PasswordDto passwordDto) {
+        log.info("changePassword() in service started for user {}", passwordDto.getUsername());
         User user = userRepository.findByUsername(passwordDto.getUsername()).orElseThrow(UserDoesntExistException::new);
         user.setPassword(new BCryptPasswordEncoder().encode(passwordDto.getPassword()));
         userRepository.save(user);
-        log.info("changePassword() in service finished");
+        log.info("changePassword() in service completed for user {}", passwordDto.getUsername());
+        return ResponseEntity.ok().build();
     }
 
     // == Game ==

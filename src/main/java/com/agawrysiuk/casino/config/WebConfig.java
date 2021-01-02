@@ -46,15 +46,4 @@ public class WebConfig implements WebMvcConfigurer {
     public LocaleResolver localeResolver() {
         return new SessionLocaleResolver();
     }
-
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName(ViewNames.HOME);
-        registry.addViewController("/account").setViewName("account");
-    }
-
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
-    }
 }
