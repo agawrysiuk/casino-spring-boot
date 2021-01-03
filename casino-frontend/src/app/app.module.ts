@@ -2,16 +2,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import {LOCALE_ID, NgModule} from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './modules/home/home.component';
-import { LoginComponent } from './modules/auth/login/login.component';
+import { HomeComponent } from './pages/home/home.component';
+import { LoginComponent } from './pages/auth/login/login.component';
 import {FormBuilder, FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { RegisterComponent } from './modules/auth/register/register.component';
+import { RegisterComponent } from './pages/auth/register/register.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthInterceptor} from "./services/auth/auth-interceptor";
-import { AccountComponent } from './modules/account/account.component';
+import { AccountComponent } from './pages/account/account.component';
 import {registerLocaleData} from "@angular/common";
 import localePL from '@angular/common/locales/pl';
-import { EditPasswordComponent } from './modules/account/edit-password/edit-password.component';
+import { EditPasswordComponent } from './pages/account/edit-password/edit-password.component';
+import { DepositComponent } from './pages/account/deposit/deposit.component';
 registerLocaleData(localePL);
 
 @NgModule({
@@ -21,7 +22,8 @@ registerLocaleData(localePL);
     LoginComponent,
     RegisterComponent,
     AccountComponent,
-    EditPasswordComponent
+    EditPasswordComponent,
+    DepositComponent
   ],
   imports: [
     BrowserModule,

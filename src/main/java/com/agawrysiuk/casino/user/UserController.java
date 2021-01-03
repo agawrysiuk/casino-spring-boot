@@ -1,6 +1,7 @@
 package com.agawrysiuk.casino.user;
 
 import com.agawrysiuk.casino.casinouser.exception.IncorrectRequestException;
+import com.agawrysiuk.casino.model.database.validator.CreditCardObject;
 import com.agawrysiuk.casino.model.database.validator.PasswordDto;
 import com.agawrysiuk.casino.user.request.LoginRequest;
 import com.agawrysiuk.casino.util.ViewNames;
@@ -40,6 +41,11 @@ public class UserController {
             throw new IncorrectRequestException("Incorrect POST request!");
         }
         return userFacade.editPassword(passwordDto, request.getUserPrincipal());
+    }
+
+    @PostMapping("/deposit")
+    public ResponseEntity<?> deposit(@RequestBody @Valid CreditCardObject creditCardObject, HttpServletRequest request) {
+        return userFacade.deposit(request.getUserPrincipal(), creditCardObject);
     }
 
 }

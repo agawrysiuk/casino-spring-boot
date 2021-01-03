@@ -17,6 +17,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.math.BigDecimal;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
@@ -32,7 +34,7 @@ class UserServiceTest {
     private UserService userService;
 
     private final String name = "admin";
-    private final double balance = 100.00;
+    private final BigDecimal balance = new BigDecimal("100.00");
     private final String mail = "admin@mail.com";
     private final String password = new BCryptPasswordEncoder().encode("myPassword569");
     private final String authority = "ROLE_ADMIN";

@@ -8,7 +8,7 @@
       <label for="password">Password</label>:
       <input class="input" type="password" formControlName="password" id="password" name="password"/> <br/>
       <input type="submit" name="login" value="Log in" form="loginForm"/><br/>
-      <p>Don't have an account? <a routerLink="/register">Register one now!</a></p>
+      <p>Don't have an account? <a [routerLink]="['/register']">Register one now!</a></p>
     </form>
   </div>
 </div>

@@ -17,6 +17,6 @@
       <input value="Register" name="register" type="submit" form="registerForm"/>
       <p *ngIf="errorMessage">{{errorMessage}}</p>
     </form>
-    <p>Have an account? <a routerLink="/login">Log in now!</a></p>
+    <p>Have an account? <a [routerLink]="['/login']">Log in now!</a></p>
   </div>
 </div>

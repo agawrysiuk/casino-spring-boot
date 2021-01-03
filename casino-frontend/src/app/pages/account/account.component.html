@@ -29,7 +29,7 @@
       </tr>
     </table>
     <button class="redirect" (click)="createEditForm()" type="button">Edit information</button>
-    <button class="redirect" routerLink="/edit-password" type="button">Change password</button>
+    <button class="redirect" [routerLink]="['/edit-password']" type="button">Change password</button>
   </div>
   <div class="account-box" *ngIf="editingInfo">
     <h2 style="font-weight: bold;text-align:left">You are logged in as {{getNickname()}}</h2>
@@ -67,7 +67,8 @@
       </tr>
       <tr>
         <td>
-          <button class="deposit" onclick="location.href='/deposit'" type="button">Deposit now</button>
+          <button class="deposit" [routerLink]="['/deposit']" type="button" [disabled]="isDepositDisabled()">Deposit now</button>
+          <p *ngIf="isDepositDisabled()">Fill in your information to deposit</p>
         </td>
       </tr>
     </table>

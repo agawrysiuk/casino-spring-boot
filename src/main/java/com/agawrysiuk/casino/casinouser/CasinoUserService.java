@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+public
 class CasinoUserService {
 
     private final CasinoUserRepository casinoUserRepository;

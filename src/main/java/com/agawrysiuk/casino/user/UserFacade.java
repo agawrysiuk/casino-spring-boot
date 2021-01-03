@@ -3,6 +3,7 @@ package com.agawrysiuk.casino.user;
 import com.agawrysiuk.casino.casinouser.exception.IncorrectRequestException;
 import com.agawrysiuk.casino.config.jwt.JwtUtils;
 import com.agawrysiuk.casino.config.security.userdetails.UserDetailsImpl;
+import com.agawrysiuk.casino.model.database.validator.CreditCardObject;
 import com.agawrysiuk.casino.model.database.validator.PasswordDto;
 import com.agawrysiuk.casino.user.exception.EmailExistsException;
 import com.agawrysiuk.casino.user.exception.UsernameExistsException;
@@ -72,5 +73,9 @@ public class UserFacade {
             throw new IncorrectRequestException("Incorrect POST request!");
         }
         return userService.changePassword(passwordDto);
+    }
+
+    public ResponseEntity<?> deposit(Principal userPrincipal, CreditCardObject creditCardObject) {
+        return userService.depositToCasinoUser(userPrincipal, creditCardObject);
     }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {API, httpOptions} from "./connection-utils";
-import {CasinoUserDto, PasswordDto} from "../model/data";
+import {CasinoUserDto, CreditCardObject, PasswordDto} from "../model/data";
 
 @Injectable({
   providedIn: 'root'
@@ -22,4 +22,7 @@ export class DataService {
     return this.http.post(API + "/edit-password", editedPassword, httpOptions).toPromise();
   }
 
+  public deposit(deposit: CreditCardObject): Promise<any> {
+    return this.http.post(API + "/deposit", deposit, httpOptions).toPromise();
+  }
 }

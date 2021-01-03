@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
+import java.math.BigDecimal;
 import java.sql.Date;
 
 @Data
@@ -22,8 +24,9 @@ public class CasinoUser {
     private Integer id;
     @Column(name = "NICKNAME")
     private String nickname;
+    @Digits(integer=12, fraction=2)
     @Column(name = "BALANCE")
-    private double balance;
+    private BigDecimal balance;
     @Column(name = "IS_ACTIVE")
     private boolean isactive;
     @Column(name = "FIRST_NAME")

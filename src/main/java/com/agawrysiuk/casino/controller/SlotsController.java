@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.math.BigDecimal;
 import java.security.Principal;
 
 @Slf4j
@@ -28,7 +29,7 @@ public class SlotsController {
 
     @GetMapping(ViewNames.SLOTS)
     public String slots(Model model, Principal principal) {
-        if (!userService.isEnoughMoney(principal.getName(), 1)) {
+        if (!userService.isEnoughMoney(principal.getName(), BigDecimal.valueOf(1))) {
             return "redirect:/"+ViewNames.NO_MONEY_PAGE;
         }
         CasinoUser user = userService.findCasinoUserByUsername(principal.getName());
@@ -41,13 +42,13 @@ public class SlotsController {
 
     @RequestMapping(value = ViewNames.SLOTS, params = "roll", method = RequestMethod.POST)
     public String newRoll(Model model, Principal principal) {
-        if (!userService.isEnoughMoney(principal.getName(), 1)) {
+        if (!userService.isEnoughMoney(principal.getName(), BigDecimal.valueOf(1))) {
             return "redirect:/"+ViewNames.NO_MONEY_PAGE;
         }
         slotsService.roll();
-        double userBalance = userService.findCasinoUserByUsername(principal.getName()).getBalance();
+        BigDecimal userBalance = userService.findCasinoUserByUsername(principal.getName()).getBalance();
         double moneyResult = 1 * slotsService.getMultiplier();
-        userBalance = userBalance - 1 + moneyResult;
+        userBalance = userBalance.add(BigDecimal.valueOf(-1)).add(BigDecimal.valueOf(moneyResult));
         userService.updateCasinoUserBalance(userBalance, principal.getName());
         model.addAttribute(AttributeNames.SLOTS_MONEY_MESSAGE,
                 "You bet 1 $. You got " + String.format("%1$,.2f", moneyResult) + " $. Your balance is now " + String.format("%1$,.2f", userBalance) + " $.");

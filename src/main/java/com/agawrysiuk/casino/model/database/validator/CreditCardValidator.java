@@ -18,17 +18,16 @@ public class CreditCardValidator implements ConstraintValidator<ValidCreditCard,
         //since everything else is dynamically checked by javascript
         //or by annotations inside the CreditCardObject class
         int expiryMonth = Integer.parseInt(
-                creditCard.getExpiryDate().split("/")[0]);
+                creditCard.getExpiryDate().split("-")[0]);
         int expiryYear = Integer.parseInt(
-                creditCard.getExpiryDate().split("/")[1]);
+                creditCard.getExpiryDate().split("-")[1]);
 
         LocalDate date = LocalDate.now();
 
         if ((date.getYear() - 2000) > expiryYear) {
-            return false;
-        }
-        if (date.getYear() - 2000 == expiryYear && date.getMonthValue() > expiryMonth) {
-            return false;
+            if (date.getYear() - 2000 == expiryYear && date.getMonthValue() > expiryMonth) {
+                return false;
+            }
         }
 
         return true;

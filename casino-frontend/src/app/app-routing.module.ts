@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {HomeComponent} from "./modules/home/home.component";
-import {LoginComponent} from "./modules/auth/login/login.component";
-import {RegisterComponent} from "./modules/auth/register/register.component";
+import {HomeComponent} from "./pages/home/home.component";
+import {LoginComponent} from "./pages/auth/login/login.component";
+import {RegisterComponent} from "./pages/auth/register/register.component";
 import {AuthGuardService} from "./services/auth/auth-guard.service";
-import {AccountComponent} from "./modules/account/account.component";
-import {EditPasswordComponent} from "./modules/account/edit-password/edit-password.component";
+import {AccountComponent} from "./pages/account/account.component";
+import {EditPasswordComponent} from "./pages/account/edit-password/edit-password.component";
+import {DepositComponent} from "./pages/account/deposit/deposit.component";
 
 const routes: Routes = [
   {
@@ -21,6 +22,11 @@ const routes: Routes = [
   {
     path: 'edit-password',
     component: EditPasswordComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'deposit',
+    component: DepositComponent,
     canActivate: [AuthGuardService]
   },
   {

@@ -25,3 +25,12 @@ export interface PasswordDto {
   password: string;
   matchingPassword: string;
 }
+
+export interface CreditCardObject {
+  firstName: string;
+  surname: string;
+  cardNumber: string;
+  expiryDate: string;
+  ccv: string;
+  depositAmount: number;
+}

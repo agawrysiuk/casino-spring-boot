@@ -56,4 +56,8 @@ export class AccountComponent implements OnInit {
       })
       .catch(() => this.showError = true);
   }
+
+    isDepositDisabled() {
+        return !this.casinoUser?.firstName && !this.casinoUser?.secondName;
+    }
 }

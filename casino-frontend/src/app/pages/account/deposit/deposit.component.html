@@ -1,0 +1,30 @@
+<form [formGroup]="depositForm" (submit)="deposit()">
+  <div class="form-container">
+    <div class="personal-information">
+      <h1>Payment Information</h1><img src="http://i76.imgup.net/accepted_c22e0.png"/>
+    </div>
+
+    <div class="box">
+      <div class="smallbox">
+        <input formControlName="firstName" type="text" name="first-name" placeholder="First Name"/>
+      </div>
+      <div class="smallbox">
+        <input formControlName="surname" type="text" name="last-name" placeholder="Surname"/>
+      </div>
+    </div>
+    <input formControlName="cardNumber" type="number" name="number" placeholder="Card Number"/>
+    <div class="box">
+      <div class="smallbox">
+        <input formControlName="expiryDate" type="date" name="expiry" placeholder="MM / YY"/>
+      </div>
+      <div class="smallbox">
+        <input formControlName="ccv" type="text" name="cvc" placeholder="CCV" maxlength="3"/>
+      </div>
+    </div>
+    <input formControlName="depositAmount" type="number" name="amount" placeholder="Deposit amount (USD)"/>
+
+    <input class="input-button" type="submit" value="Deposit now" name="deposit"/>
+    <br/>
+  </div>
+</form>
+<p *ngIf="error" style="color: #a00001">{{error}}</p>

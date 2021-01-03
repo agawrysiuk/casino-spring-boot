@@ -2,6 +2,7 @@ package com.agawrysiuk.casino.casinouser;
 
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 
 @Getter
@@ -11,7 +12,7 @@ import java.sql.Date;
 @NoArgsConstructor
 public class CasinoUserDto {
     private String nickname;
-    private double balance;
+    private BigDecimal balance;
     private String firstName;
     private String secondName;
     private Date birthDate;

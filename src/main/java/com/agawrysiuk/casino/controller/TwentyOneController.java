@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.math.BigDecimal;
 import java.security.Principal;
 
 @Slf4j
@@ -27,11 +28,11 @@ public class TwentyOneController {
 
     @GetMapping(ViewNames.TWENTYONE)
     public String twentyone(Model model, Principal principal) {
-        if (!userService.isEnoughMoney(principal.getName(), 10)) {
+        if (!userService.isEnoughMoney(principal.getName(), BigDecimal.valueOf(10))) {
             return "redirect:/"+ViewNames.NO_MONEY_PAGE;
         }
         twentyOneService.resetGame();
-        double userBalance = userService.findCasinoUserByUsername(principal.getName()).getBalance();
+        BigDecimal userBalance = userService.findCasinoUserByUsername(principal.getName()).getBalance();
         String resultMessage = "Your balance is " + String.format("%1$,.2f", userBalance) + " $. Bet is 10 $.";
         model.addAttribute(AttributeNames.TWENTYONE_MAIN_MESSAGE, twentyOneService.getMainMessage());
         model.addAttribute(AttributeNames.TWENTYONE_RESULT_MESSAGE, resultMessage);
@@ -61,14 +62,14 @@ public class TwentyOneController {
 
     private String getGameString(Model model, Principal principal) {
         boolean gameState = twentyOneService.getGameState();
-        double userBalance = userService.findCasinoUserByUsername(principal.getName()).getBalance();
+        BigDecimal userBalance = userService.findCasinoUserByUsername(principal.getName()).getBalance();
         String moneyMessage = "";
         if (gameState) {
             if (twentyOneService.getGameResult()) {
-                userBalance += 10;
+                userBalance = userBalance.add(BigDecimal.valueOf(10));
                 moneyMessage = "You won 10 $. ";
             } else {
-                userBalance -= 10;
+                userBalance = userBalance.add(BigDecimal.valueOf(-10));
                 moneyMessage = "You lost 10 $. ";
             }
             moneyMessage += "Your balance is " + String.format("%1$,.2f", userBalance) + " $.";

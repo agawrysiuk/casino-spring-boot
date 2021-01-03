@@ -2,8 +2,10 @@ package com.agawrysiuk.casino.user;
 
 import com.agawrysiuk.casino.casinouser.CasinoUser;
 import com.agawrysiuk.casino.casinouser.CasinoUserRepository;
+import com.agawrysiuk.casino.model.database.validator.CreditCardObject;
 import com.agawrysiuk.casino.model.database.validator.PasswordDto;
 import com.agawrysiuk.casino.user.exception.UserDoesntExistException;
+import com.agawrysiuk.casino.user.exception.WrongCreditCardException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
+import java.security.Principal;
 
 @Slf4j
 @Service
@@ -34,8 +38,6 @@ public class UserService {
     }
 
     @Transactional
-    //used when we want to commit after executing all queries
-    // (software breaking in the middle of the code will not make one query be saved into db while the other is not)
     public User registerNewUserAccount(UserDto userDto, boolean admin) {
 
         log.info("User registration for {} started", userDto.getUsername());
@@ -50,7 +52,7 @@ public class UserService {
         userRepository.save(user);
 
         CasinoUser casinoUser = CasinoUser.builder()
-                .balance(0.00)
+                .balance(BigDecimal.valueOf(0))
                 .nickname(userDto.getUsername())
                 .isactive(true)
                 .build();
@@ -76,7 +78,7 @@ public class UserService {
                 .orElseThrow(UserDoesntExistException::new);
     }
 
-    public void updateCasinoUserBalance(double balance, String nickname) {
+    public void updateCasinoUserBalance(BigDecimal balance, String nickname) {
         log.info("updateCasinoUserBalance() started");
         CasinoUser user = casinoUserRepository.findByNickname(nickname)
                 .orElseThrow(UserDoesntExistException::new);
@@ -84,28 +86,24 @@ public class UserService {
         casinoUserRepository.save(user);
     }
 
-    public void depositToCasinoUser(double balance, String nickname) {
-        log.info("depositToCasinoUser() started");
-        CasinoUser user = casinoUserRepository.findByNickname(nickname)
+    @Transactional
+    public ResponseEntity<?> depositToCasinoUser(Principal principal, CreditCardObject card) {
+        log.info("depositToCasinoUser() started, details = {}", card);
+        CasinoUser user = casinoUserRepository.findByNickname(principal.getName())
                 .orElseThrow(UserDoesntExistException::new);
-        user.setBalance(user.getBalance() + balance);
+        if(!user.getFirstname().equals(card.getFirstName()) || !user.getSecondname().equals(card.getSurname())) {
+            throw new WrongCreditCardException();
+        }
+        user.setBalance(user.getBalance().add(card.getDepositAmount()));
         casinoUserRepository.save(user);
+        log.info("depositToCasinoUser() finished, deposited = {}", card.getDepositAmount());
+        return ResponseEntity.ok().build();
     }
 
-    public void updateCasinoUserInformation(CasinoUser casinoUser) {
-        CasinoUser existingUser = casinoUserRepository.findByNickname(casinoUser.getNickname())
-                .orElseThrow(UserDoesntExistException::new);
-        existingUser.setFirstname(casinoUser.getFirstname());
-        existingUser.setSecondname(casinoUser.getSecondname());
-        existingUser.setBirthdate(casinoUser.getBirthdate());
-        existingUser.setCountry(casinoUser.getCountry());
-        casinoUserRepository.save(existingUser);
-    }
-
-    public boolean isEnoughMoney(String nickname, double minNeeded) {
+    public boolean isEnoughMoney(String nickname, BigDecimal minNeeded) {
         CasinoUser user = casinoUserRepository.findByNickname(nickname)
                 .orElseThrow(UserDoesntExistException::new);
-        return user.getBalance()>=minNeeded;
+        return user.getBalance().compareTo(minNeeded) >= 0;
     }
 
     public boolean doPasswordsMatch(String oldPassword,String userName) {

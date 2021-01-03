@@ -30,6 +30,12 @@ public class UserControllerAdvice {
         return returnBadRequest(ex);
     }
 
+    @ExceptionHandler(WrongCreditCardException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<?> wrongCreditCardException(Exception ex) {
+        return returnBadRequest(ex);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<?> methodArgumentNotValidException(MethodArgumentNotValidException ex) {
