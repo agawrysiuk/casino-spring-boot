@@ -1,4 +1,6 @@
-package com.agawrysiuk.casino.model.database.validator;
+package com.agawrysiuk.casino.util.validator;
+
+import com.agawrysiuk.casino.user.dto.PasswordDto;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

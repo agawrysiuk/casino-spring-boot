@@ -1,15 +1,12 @@
 package com.agawrysiuk.casino.user;
 
 import com.agawrysiuk.casino.casinouser.exception.IncorrectRequestException;
-import com.agawrysiuk.casino.model.database.validator.CreditCardObject;
-import com.agawrysiuk.casino.model.database.validator.PasswordDto;
+import com.agawrysiuk.casino.user.dto.CreditCardObjectDto;
+import com.agawrysiuk.casino.user.dto.PasswordDto;
+import com.agawrysiuk.casino.user.dto.UserDto;
 import com.agawrysiuk.casino.user.request.LoginRequest;
-import com.agawrysiuk.casino.util.ViewNames;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -44,8 +41,8 @@ public class UserController {
     }
 
     @PostMapping("/deposit")
-    public ResponseEntity<?> deposit(@RequestBody @Valid CreditCardObject creditCardObject, HttpServletRequest request) {
-        return userFacade.deposit(request.getUserPrincipal(), creditCardObject);
+    public ResponseEntity<?> deposit(@RequestBody @Valid CreditCardObjectDto creditCardObjectDto, HttpServletRequest request) {
+        return userFacade.deposit(request.getUserPrincipal(), creditCardObjectDto);
     }
 
 }

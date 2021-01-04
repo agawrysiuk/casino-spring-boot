@@ -1,4 +1,4 @@
-package com.agawrysiuk.casino.model.database.validator;
+package com.agawrysiuk.casino.util.validator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

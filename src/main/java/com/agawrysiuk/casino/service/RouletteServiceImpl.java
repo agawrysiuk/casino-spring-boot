@@ -1,6 +1,6 @@
 package com.agawrysiuk.casino.service;
 
-import com.agawrysiuk.casino.model.game.RouletteGame;
+import com.agawrysiuk.casino.game.RouletteGame;
 import org.springframework.stereotype.Service;
 
 @Service

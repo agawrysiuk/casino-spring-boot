@@ -1,4 +1,6 @@
-package com.agawrysiuk.casino.model.database.validator;
+package com.agawrysiuk.casino.util.validator;
+
+import com.agawrysiuk.casino.user.dto.CreditCardObjectDto;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -12,7 +14,7 @@ public class CreditCardValidator implements ConstraintValidator<ValidCreditCard,
 
     @Override
     public boolean isValid(Object obj, ConstraintValidatorContext constraintValidatorContext) {
-        CreditCardObject creditCard = (CreditCardObject) obj;
+        CreditCardObjectDto creditCard = (CreditCardObjectDto) obj;
         //here we can add some more validations,
         //but for now, we will only check expiry date
         //since everything else is dynamically checked by javascript

@@ -3,13 +3,13 @@ package com.agawrysiuk.casino.user;
 import com.agawrysiuk.casino.casinouser.exception.IncorrectRequestException;
 import com.agawrysiuk.casino.config.jwt.JwtUtils;
 import com.agawrysiuk.casino.config.security.userdetails.UserDetailsImpl;
-import com.agawrysiuk.casino.model.database.validator.CreditCardObject;
-import com.agawrysiuk.casino.model.database.validator.PasswordDto;
+import com.agawrysiuk.casino.user.dto.CreditCardObjectDto;
+import com.agawrysiuk.casino.user.dto.PasswordDto;
+import com.agawrysiuk.casino.user.dto.UserDto;
 import com.agawrysiuk.casino.user.exception.EmailExistsException;
 import com.agawrysiuk.casino.user.exception.UsernameExistsException;
 import com.agawrysiuk.casino.user.request.LoginRequest;
 import com.agawrysiuk.casino.user.response.JwtResponse;
-import com.agawrysiuk.casino.util.ViewNames;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +18,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-import org.springframework.validation.FieldError;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
 import java.util.List;
@@ -75,7 +73,7 @@ public class UserFacade {
         return userService.changePassword(passwordDto);
     }
 
-    public ResponseEntity<?> deposit(Principal userPrincipal, CreditCardObject creditCardObject) {
-        return userService.depositToCasinoUser(userPrincipal, creditCardObject);
+    public ResponseEntity<?> deposit(Principal userPrincipal, CreditCardObjectDto creditCardObjectDto) {
+        return userService.depositToCasinoUser(userPrincipal, creditCardObjectDto);
     }
 }

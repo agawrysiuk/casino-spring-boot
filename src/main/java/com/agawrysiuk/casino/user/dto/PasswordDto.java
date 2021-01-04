@@ -1,5 +1,7 @@
-package com.agawrysiuk.casino.model.database.validator;
+package com.agawrysiuk.casino.user.dto;
 
+import com.agawrysiuk.casino.util.validator.PasswordMatchesReset;
+import com.agawrysiuk.casino.util.validator.ValidPassword;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;

@@ -1,6 +1,6 @@
 package com.agawrysiuk.casino.service;
 
-import com.agawrysiuk.casino.model.game.Card;
+import com.agawrysiuk.casino.util.game.Card;
 
 import java.util.List;
 

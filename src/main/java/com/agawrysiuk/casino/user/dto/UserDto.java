@@ -1,8 +1,8 @@
-package com.agawrysiuk.casino.user;
+package com.agawrysiuk.casino.user.dto;
 
-import com.agawrysiuk.casino.model.database.validator.PasswordMatches;
-import com.agawrysiuk.casino.model.database.validator.ValidEmail;
-import com.agawrysiuk.casino.model.database.validator.ValidPassword;
+import com.agawrysiuk.casino.util.validator.PasswordMatches;
+import com.agawrysiuk.casino.util.validator.ValidEmail;
+import com.agawrysiuk.casino.util.validator.ValidPassword;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

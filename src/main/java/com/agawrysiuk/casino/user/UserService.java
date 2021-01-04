@@ -2,8 +2,9 @@ package com.agawrysiuk.casino.user;
 
 import com.agawrysiuk.casino.casinouser.CasinoUser;
 import com.agawrysiuk.casino.casinouser.CasinoUserRepository;
-import com.agawrysiuk.casino.model.database.validator.CreditCardObject;
-import com.agawrysiuk.casino.model.database.validator.PasswordDto;
+import com.agawrysiuk.casino.user.dto.CreditCardObjectDto;
+import com.agawrysiuk.casino.user.dto.PasswordDto;
+import com.agawrysiuk.casino.user.dto.UserDto;
 import com.agawrysiuk.casino.user.exception.UserDoesntExistException;
 import com.agawrysiuk.casino.user.exception.WrongCreditCardException;
 import lombok.RequiredArgsConstructor;
@@ -87,7 +88,7 @@ public class UserService {
     }
 
     @Transactional
-    public ResponseEntity<?> depositToCasinoUser(Principal principal, CreditCardObject card) {
+    public ResponseEntity<?> depositToCasinoUser(Principal principal, CreditCardObjectDto card) {
         log.info("depositToCasinoUser() started, details = {}", card);
         CasinoUser user = casinoUserRepository.findByNickname(principal.getName())
                 .orElseThrow(UserDoesntExistException::new);

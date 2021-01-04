@@ -1,5 +1,6 @@
-package com.agawrysiuk.casino.model.game;
+package com.agawrysiuk.casino.game;
 
+import com.agawrysiuk.casino.util.game.Card;
 import com.agawrysiuk.casino.util.game.CardColor;
 import com.agawrysiuk.casino.util.game.CardStrength;
 import org.junit.jupiter.api.Test;

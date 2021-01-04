@@ -1,6 +1,6 @@
-package com.agawrysiuk.casino.model.database.validator;
+package com.agawrysiuk.casino.user.dto;
 
-import com.agawrysiuk.casino.model.database.validator.ValidCreditCard;
+import com.agawrysiuk.casino.util.validator.ValidCreditCard;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 
 @Data
 @ValidCreditCard
-public class CreditCardObject {
+public class CreditCardObjectDto {
     @NotNull
     @NotEmpty
     private String firstName;

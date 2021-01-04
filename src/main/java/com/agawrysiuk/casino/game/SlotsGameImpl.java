@@ -1,4 +1,4 @@
-package com.agawrysiuk.casino.model.game;
+package com.agawrysiuk.casino.game;
 
 import com.agawrysiuk.casino.util.game.SlotsValue;
 import lombok.Getter;

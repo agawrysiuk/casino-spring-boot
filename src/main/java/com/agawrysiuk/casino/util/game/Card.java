@@ -1,4 +1,4 @@
-package com.agawrysiuk.casino.model.game;
+package com.agawrysiuk.casino.util.game;
 
 import com.agawrysiuk.casino.util.game.CardColor;
 import com.agawrysiuk.casino.util.game.CardStrength;

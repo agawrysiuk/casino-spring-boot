@@ -2,7 +2,7 @@ package com.agawrysiuk.casino;
 
 import com.agawrysiuk.casino.casinouser.CasinoUserDto;
 import com.agawrysiuk.casino.casinouser.CasinoUserService;
-import com.agawrysiuk.casino.user.UserDto;
+import com.agawrysiuk.casino.user.dto.UserDto;
 import com.agawrysiuk.casino.user.UserService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
