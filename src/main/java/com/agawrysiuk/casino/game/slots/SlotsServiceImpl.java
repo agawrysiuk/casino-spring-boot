@@ -1,6 +1,5 @@
-package com.agawrysiuk.casino.service;
+package com.agawrysiuk.casino.game.slots;
 
-import com.agawrysiuk.casino.game.SlotsGame;
 import com.agawrysiuk.casino.util.game.SlotsValue;
 import org.springframework.stereotype.Service;
 

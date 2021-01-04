@@ -1,7 +1,6 @@
-package com.agawrysiuk.casino.controller;
+package com.agawrysiuk.casino.game.slots;
 
 import com.agawrysiuk.casino.casinouser.CasinoUser;
-import com.agawrysiuk.casino.service.SlotsService;
 import com.agawrysiuk.casino.user.UserService;
 import com.agawrysiuk.casino.util.AttributeNames;
 import com.agawrysiuk.casino.util.ViewNames;

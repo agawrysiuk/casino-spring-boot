@@ -1,4 +1,4 @@
-package com.agawrysiuk.casino.game;
+package com.agawrysiuk.casino.game.roulette;
 
 import com.agawrysiuk.casino.util.game.RouletteColor;
 import lombok.Getter;

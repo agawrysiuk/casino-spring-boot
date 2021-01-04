@@ -1,4 +1,4 @@
-package com.agawrysiuk.casino.game;
+package com.agawrysiuk.casino.game.slots;
 
 import com.agawrysiuk.casino.util.game.SlotsValue;
 

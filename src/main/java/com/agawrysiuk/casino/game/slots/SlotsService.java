@@ -1,4 +1,4 @@
-package com.agawrysiuk.casino.service;
+package com.agawrysiuk.casino.game.slots;
 
 public interface SlotsService {
     void roll();

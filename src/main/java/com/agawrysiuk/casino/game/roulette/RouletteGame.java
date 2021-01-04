@@ -1,4 +1,4 @@
-package com.agawrysiuk.casino.game;
+package com.agawrysiuk.casino.game.roulette;
 
 public interface RouletteGame {
     int roll();

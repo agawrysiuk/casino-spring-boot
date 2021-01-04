@@ -1,6 +1,6 @@
-package com.agawrysiuk.casino.controller;
+package com.agawrysiuk.casino.game.twentyone.controller;
 
-import com.agawrysiuk.casino.service.TwentyOneService;
+import com.agawrysiuk.casino.game.twentyone.TwentyOneService;
 import com.agawrysiuk.casino.user.UserService;
 import com.agawrysiuk.casino.util.AttributeNames;
 import com.agawrysiuk.casino.util.ViewNames;
