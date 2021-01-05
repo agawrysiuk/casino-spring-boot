@@ -1,28 +1,29 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {API, httpOptions} from "./connection-utils";
-import {CasinoUserDto, CreditCardObject, PasswordDto} from "../model/data";
+import {CasinoUserDto} from "../model/data";
+import {ConnectionService} from "./connection/connection.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  constructor(private http: HttpClient) { }
+  private user: CasinoUserDto;
 
-  public getCasinoUser(username: string): Promise<CasinoUserDto> {
-    return this.http.get(API + "/casino-user?name=" + username).toPromise() as Promise<CasinoUserDto>;
+  constructor(private connection: ConnectionService) { }
+
+  public downloadCasinoUser(username: string) {
+    this.connection.getCasinoUser(username)
+      .then(response => this.user = response as CasinoUserDto);
   }
 
-  public editCasinoUser(editedUser: CasinoUserDto): Promise<CasinoUserDto> {
-    return this.http.post(API + "/casino-user", editedUser).toPromise() as Promise<CasinoUserDto>;
+  public getCasinoUser(): CasinoUserDto {
+    return this.user;
   }
 
-  public editPassword(editedPassword: PasswordDto): Promise<any> {
-    return this.http.post(API + "/edit-password", editedPassword, httpOptions).toPromise();
-  }
-
-  public deposit(deposit: CreditCardObject): Promise<any> {
-    return this.http.post(API + "/deposit", deposit, httpOptions).toPromise();
+  public setCasinoUser(editedUser: CasinoUserDto) {
+    return this.connection.editCasinoUser(editedUser)
+      .then(response => {
+        this.user = response;
+      });
   }
 }

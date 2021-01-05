@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import {TokenStorageService} from "./services/auth/token-storage.service";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -9,8 +8,7 @@ import {Router} from "@angular/router";
 })
 export class AppComponent {
 
-  constructor(private tokenStorage: TokenStorageService,
-              private router: Router) {}
+  constructor(private tokenStorage: TokenStorageService) {}
 
   isLoggedIn(): boolean {
     return !!this.tokenStorage.getToken();

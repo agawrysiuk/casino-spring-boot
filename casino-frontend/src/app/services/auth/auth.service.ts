@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {LoginRequest, UserDto} from "../../model/data";
-import {API, httpOptions} from "../connection-utils";
+import {API, httpOptions} from "../connection/connection-utils";
 
 @Injectable({
   providedIn: 'root'

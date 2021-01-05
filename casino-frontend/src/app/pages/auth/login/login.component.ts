@@ -5,6 +5,7 @@ import {AuthService} from "../../../services/auth/auth.service";
 import {TokenStorageService} from "../../../services/auth/token-storage.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {InactivityService} from "../../../services/inactivity.service";
+import {DataService} from "../../../services/data.service";
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
               private auth: AuthService,
               private tokenStorage: TokenStorageService,
               private router: Router,
-              private inactivityService: InactivityService) {
+              private inactivityService: InactivityService,
+              private data: DataService) {
     this.form = fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -34,13 +36,18 @@ export class LoginComponent implements OnInit {
     if(this.form.valid) {
       this.auth.login(this.form.value)
         .then(data => {
-          this.tokenStorage.saveToken(data.token);
-          this.tokenStorage.saveUser(data);
+          this.saveData(data);
           this.inactivityService.start();
           this.router.navigate(['home']);
         })
         .catch(err => this.loginFailed = true);
     }
+  }
+
+  private saveData(data) {
+    this.tokenStorage.saveToken(data.token);
+    this.tokenStorage.saveUser(data);
+    this.data.downloadCasinoUser(data.username);
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {TokenStorageService} from "../../../services/auth/token-storage.service";
-import {DataService} from "../../../services/data.service";
+import {ConnectionService} from "../../../services/connection/connection.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CasinoUserDto} from "../../../model/data";
@@ -16,7 +16,7 @@ export class DepositComponent implements OnInit {
   depositForm: FormGroup;
 
   constructor(private tokenStorage: TokenStorageService,
-              private data: DataService,
+              private data: ConnectionService,
               private fb: FormBuilder,
               private route: Router) {
 

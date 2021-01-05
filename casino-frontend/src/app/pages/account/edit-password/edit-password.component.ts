@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {TokenStorageService} from "../../../services/auth/token-storage.service";
-import {DataService} from "../../../services/data.service";
+import {ConnectionService} from "../../../services/connection/connection.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {checkPasswordMatch} from "../../../utils/form-utils";
@@ -20,7 +20,7 @@ export class EditPasswordComponent implements OnInit {
   buttonClickable: boolean = true;
 
   constructor(private tokenStorage: TokenStorageService,
-              private data: DataService,
+              private data: ConnectionService,
               private fb: FormBuilder,
               private route: Router) {
     this.passwordForm = this.fb.group({

@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {TokenStorageService} from "../../services/auth/token-storage.service";
-import {CasinoUserDto} from "../../model/data";
-import {DataService} from "../../services/data.service";
+import {TokenStorageService} from "../../../services/auth/token-storage.service";
+import {CasinoUserDto} from "../../../model/data";
+import {ConnectionService} from "../../../services/connection/connection.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {DataService} from "../../../services/data.service";
 
 @Component({
   selector: 'app-account',
@@ -17,13 +18,13 @@ export class AccountComponent implements OnInit {
   showError: boolean = false;
 
   constructor(private tokenStorage: TokenStorageService,
-              private data: DataService,
-              private fb: FormBuilder) {
+              private connection: ConnectionService,
+              private fb: FormBuilder,
+              private data: DataService) {
   }
 
   ngOnInit(): void {
-    this.data.getCasinoUser(this.tokenStorage.getUser().username)
-      .then(response => this.casinoUser = response as CasinoUserDto);
+    this.casinoUser = this.data.getCasinoUser();
   }
 
   getNickname() {
@@ -41,7 +42,7 @@ export class AccountComponent implements OnInit {
   }
 
   saveEditForm() {
-    this.data.editCasinoUser({
+    this.data.setCasinoUser({
       balance: null,
       birthDate: this.editForm.value.birthDate,
       country: this.editForm.value.country,
@@ -50,7 +51,7 @@ export class AccountComponent implements OnInit {
       secondName: this.editForm.value.secondName
     })
       .then(response => {
-        this.casinoUser = response;
+        this.casinoUser = this.data.getCasinoUser();
         this.editingInfo = false;
         this.showError = false;
       })

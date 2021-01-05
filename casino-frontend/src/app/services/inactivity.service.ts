@@ -13,15 +13,19 @@ export class InactivityService {
   definedInactivityPeriod = 10000;
 
   constructor(private rendererFactory2: RendererFactory2,
-    private tokenStorage: TokenStorageService,
-    private router: Router) {
+    private tokenStorage: TokenStorageService) {
     const renderer = this.rendererFactory2.createRenderer(null, null);
     renderer.listen('document', 'mousemove', () => {
       this.lastInteraction = new Date();
     });
   }
 
-  inactivityCheck() {
+  public start(): void {
+    console.log('Starting inactivity check!');
+    this.inactivityCheck().subscribe();
+  }
+
+  private inactivityCheck() {
     return interval(1000)
       .pipe(
         takeWhile(() => {
@@ -33,10 +37,5 @@ export class InactivityService {
           return (now.getTime() - this.lastInteraction.getTime()) < this.definedInactivityPeriod;
         })
       );
-  }
-
-  start(): void {
-    console.log('Starting inactivity check!');
-    this.inactivityCheck().subscribe();
   }
 }
