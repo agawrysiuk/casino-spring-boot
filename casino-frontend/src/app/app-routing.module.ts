@@ -4,9 +4,11 @@ import {HomeComponent} from "./pages/home/home.component";
 import {LoginComponent} from "./pages/auth/login/login.component";
 import {RegisterComponent} from "./pages/auth/register/register.component";
 import {AuthGuardService} from "./services/auth/auth-guard.service";
-import {AccountComponent} from "./pages/account/account.component";
+import {AccountComponent} from "./pages/account/account/account.component";
 import {EditPasswordComponent} from "./pages/account/edit-password/edit-password.component";
 import {DepositComponent} from "./pages/account/deposit/deposit.component";
+import {SlotsComponent} from "./pages/game/slots/slots.component";
+import {NoMoneyComponent} from "./pages/account/no-money/no-money.component";
 
 const routes: Routes = [
   {
@@ -27,6 +29,16 @@ const routes: Routes = [
   {
     path: 'deposit',
     component: DepositComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'slots',
+    component: SlotsComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'no-money',
+    component: NoMoneyComponent,
     canActivate: [AuthGuardService]
   },
   {

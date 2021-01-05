@@ -8,11 +8,13 @@ import {FormBuilder, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { RegisterComponent } from './pages/auth/register/register.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthInterceptor} from "./services/auth/auth-interceptor";
-import { AccountComponent } from './pages/account/account.component';
+import { AccountComponent } from './pages/account/account/account.component';
 import {registerLocaleData} from "@angular/common";
 import localePL from '@angular/common/locales/pl';
 import { EditPasswordComponent } from './pages/account/edit-password/edit-password.component';
 import { DepositComponent } from './pages/account/deposit/deposit.component';
+import { SlotsComponent } from './pages/game/slots/slots.component';
+import { NoMoneyComponent } from './pages/account/no-money/no-money.component';
 registerLocaleData(localePL);
 
 @NgModule({
@@ -23,7 +25,9 @@ registerLocaleData(localePL);
     RegisterComponent,
     AccountComponent,
     EditPasswordComponent,
-    DepositComponent
+    DepositComponent,
+    SlotsComponent,
+    NoMoneyComponent
   ],
   imports: [
     BrowserModule,
