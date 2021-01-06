@@ -28,7 +28,7 @@ public class TwentyOneController {
 
     @GetMapping(ViewNames.TWENTYONE)
     public String twentyone(Model model, Principal principal) {
-        if (!userService.isEnoughMoney(principal.getName(), BigDecimal.valueOf(10))) {
+        if (!userService.isEnoughMoney(principal.getName(), new BigDecimal("10"))) {
             return "redirect:/"+ViewNames.NO_MONEY_PAGE;
         }
         twentyOneService.resetGame();
@@ -66,10 +66,10 @@ public class TwentyOneController {
         String moneyMessage = "";
         if (gameState) {
             if (twentyOneService.getGameResult()) {
-                userBalance = userBalance.add(BigDecimal.valueOf(10));
+                userBalance = userBalance.add(new BigDecimal("10"));
                 moneyMessage = "You won 10 $. ";
             } else {
-                userBalance = userBalance.add(BigDecimal.valueOf(-10));
+                userBalance = userBalance.add(new BigDecimal("-10"));
                 moneyMessage = "You lost 10 $. ";
             }
             moneyMessage += "Your balance is " + String.format("%1$,.2f", userBalance) + " $.";

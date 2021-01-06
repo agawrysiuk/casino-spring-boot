@@ -1,7 +1,5 @@
-package com.agawrysiuk.casino.util.game;
+package com.agawrysiuk.casino.game.utils;
 
-import com.agawrysiuk.casino.util.game.CardColor;
-import com.agawrysiuk.casino.util.game.CardStrength;
 import lombok.Getter;
 
 @Getter

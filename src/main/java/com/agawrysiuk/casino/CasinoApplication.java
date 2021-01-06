@@ -34,6 +34,13 @@ public class CasinoApplication {
                 .build()
         );
 
+        context.getBean(UserService.class).depositToCasinoUser(null, new CreditCardObjectDto() {{
+                    setFirstName("Adam");
+                    setSurname("Miałczyński");
+                    setDepositAmount(new BigDecimal("50"));
+                }}
+        );
+
     }
 
 }

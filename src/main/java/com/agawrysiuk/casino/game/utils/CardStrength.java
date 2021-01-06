@@ -1,4 +1,4 @@
-package com.agawrysiuk.casino.util.game;
+package com.agawrysiuk.casino.game.utils;
 
 public enum CardStrength {
     SEVEN(7, "Seven"),

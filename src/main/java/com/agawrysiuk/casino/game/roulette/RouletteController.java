@@ -3,115 +3,32 @@ package com.agawrysiuk.casino.game.roulette;
 import com.agawrysiuk.casino.user.UserService;
 import com.agawrysiuk.casino.util.AttributeNames;
 import com.agawrysiuk.casino.util.ViewNames;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.security.Principal;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @Slf4j
-@Controller
+@RequiredArgsConstructor
+@RestController
 public class RouletteController {
 
-    private final RouletteService rouletteService;
-    private final UserService userService;
+    private final RouletteFacade rouletteFacade;
 
-    public RouletteController(RouletteService rouletteService, UserService userService) {
-        this.rouletteService = rouletteService;
-        this.userService = userService;
+    @GetMapping("/roulette")
+    public RouletteResponseDto getInitial(HttpServletRequest request) {
+        return rouletteFacade.roulette(request.getUserPrincipal().getName());
     }
 
-    @GetMapping(ViewNames.ROULETTE)
-    public String roulette(Model model, Principal principal) {
-        if (!userService.isEnoughMoney(principal.getName(), BigDecimal.valueOf(1))) {
-            return "redirect:/"+ViewNames.NO_MONEY_PAGE;
-        }
-        rouletteService.reset();
-        BigDecimal userBalance = userService.findCasinoUserByUsername(principal.getName()).getBalance();
-        String message = "Your balance is " + String.format("%1$,.2f", userBalance) + " $.";
-        model.addAttribute(AttributeNames.ROULETTE_MAIN_MESSAGE, rouletteService.getMainMessage());
-        model.addAttribute(AttributeNames.ROULETTE_RESULT_MESSAGE, message);
-        log.info("model = {}", model);
-        return ViewNames.ROULETTE;
-    }
-
-    @RequestMapping(value = ViewNames.ROULETTE, params = "singleFormSubmit", method = RequestMethod.POST)
-    public String rouletteSingle(HttpServletRequest request, Model model, @RequestParam int guessSingle, Principal principal) {
-        if (!userService.isEnoughMoney(principal.getName(), BigDecimal.valueOf(1))) {
-            return "redirect:/"+ViewNames.NO_MONEY_PAGE;
-        }
-        rouletteService.roll();
-        BigDecimal userBalance = userService.findCasinoUserByUsername(principal.getName()).getBalance();
-        StringBuilder resultMessage = new StringBuilder();
-        resultMessage.append("You bet 1 $. ");
-        String message = rouletteService.getResultMessageSingle(guessSingle);
-        BigDecimal moneyResult;
-        if (message.equals("You lost")) {
-            resultMessage.append(message);
-            moneyResult = BigDecimal.valueOf(-1);
-        } else {
-            resultMessage.append("You won 35 $");
-            moneyResult = BigDecimal.valueOf(34);
-        }
-        return getRouletteString(model, principal, userBalance, resultMessage, moneyResult);
-    }
-
-    @RequestMapping(value = ViewNames.ROULETTE, params = "redOrBlackFormSubmit", method = RequestMethod.POST)
-    public String rouletteRedOrBlackBet(HttpServletRequest request, Model model, @RequestParam String guessRedOrBlack, Principal principal) {
-        if (!userService.isEnoughMoney(principal.getName(), BigDecimal.valueOf(1))) {
-            return "redirect:/"+ViewNames.NO_MONEY_PAGE;
-        }
-        rouletteService.roll();
-        BigDecimal userBalance = userService.findCasinoUserByUsername(principal.getName()).getBalance();
-        StringBuilder resultMessage = new StringBuilder();
-        resultMessage.append("You bet 1 $. ");
-        String message = rouletteService.getResultMessageRedOrBlack(guessRedOrBlack);
-        BigDecimal moneyResult;
-        if (message.contains("You lost")) {
-            resultMessage.append(message);
-            moneyResult = BigDecimal.valueOf(-1);
-        } else {
-            resultMessage.append("You won 2 $");
-            moneyResult = BigDecimal.valueOf(2);
-        }
-        return getRouletteString(model, principal, userBalance, resultMessage, moneyResult);
-    }
-
-    @RequestMapping(value = ViewNames.ROULETTE, params = "evenOrOddFormSubmit", method = RequestMethod.POST)
-    public String rouletteEvenOrOddBet(HttpServletRequest request, Model model, @RequestParam String guessEvenOrOdd, Principal principal) {
-        if (!userService.isEnoughMoney(principal.getName(), BigDecimal.valueOf(1))) {
-            return "redirect:/"+ViewNames.NO_MONEY_PAGE;
-        }
-        rouletteService.roll();
-        BigDecimal userBalance = userService.findCasinoUserByUsername(principal.getName()).getBalance();
-        StringBuilder resultMessage = new StringBuilder();
-        resultMessage.append("You bet 1 $. ");
-        String message = rouletteService.getResultMessageEvenOrOdd(guessEvenOrOdd);
-        BigDecimal moneyResult;
-        if (message.equals("You lost")) {
-            resultMessage.append(message);
-            moneyResult = BigDecimal.valueOf(-1);
-        } else {
-            resultMessage.append("You won 1 $");
-            moneyResult = BigDecimal.valueOf(1);
-        }
-        return getRouletteString(model, principal, userBalance, resultMessage, moneyResult);
-    }
-
-    private String getRouletteString(Model model, Principal principal, BigDecimal userBalance, StringBuilder resultMessage, BigDecimal moneyResult) {
-        userBalance = userBalance.add(moneyResult);
-        resultMessage.append(". ");
-        resultMessage.append("Your balance is now ").append(String.format("%1$,.2f", userBalance)).append(" $.");
-        model.addAttribute(AttributeNames.ROULETTE_MAIN_MESSAGE, rouletteService.getMainMessage());
-        model.addAttribute(AttributeNames.ROULETTE_RESULT_MESSAGE, resultMessage.toString());
-        log.info("model = {}", model);
-        userService.updateCasinoUserBalance(userBalance, principal.getName());
-        return ViewNames.ROULETTE;
+    @PostMapping("/roulette")
+    public RouletteResponseDto roll(HttpServletRequest request, @RequestBody @Valid RouletteRequestDto requestDto) {
+        return rouletteFacade.roll(request.getUserPrincipal().getName(), requestDto);
     }
 }

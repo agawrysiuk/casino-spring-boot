@@ -22,13 +22,13 @@ public class SlotsFacade {
         return slotsService.getInitial(userBalance);
     }
 
-    SlotsDto newRoll(String name) {
+    SlotsDto roll(String name) {
         BigDecimal userBalance = userService.findCasinoUserByUsername(name).getBalance();
         checkUserBalance(userBalance);
 
         BigDecimal moneyResult = slotsService.roll();
 
-        userBalance = userBalance.add(BigDecimal.valueOf(-1)).add(moneyResult);
+        userBalance = userBalance.add(new BigDecimal("-1")).add(moneyResult);
         userService.updateCasinoUserBalance(userBalance, name);
 
         return SlotsDto.builder()
@@ -40,8 +40,8 @@ public class SlotsFacade {
                 .build();
     }
 
-    void checkUserBalance(BigDecimal userBalance) {
-        if (!userService.isEnoughMoney(userBalance, BigDecimal.valueOf(1))) {
+    private void checkUserBalance(BigDecimal userBalance) {
+        if (!userService.isEnoughMoney(userBalance, new BigDecimal("1"))) {
             throw new NotEnoughMoneyException();
         }
     }

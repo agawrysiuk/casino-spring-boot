@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {API, httpOptions} from "./connection-utils";
 import {HttpClient} from "@angular/common/http";
-import {SlotsDto} from "../../model/game";
+import {RouletteRequestDto, RouletteResponseDto, SlotsDto} from "../../model/game";
 
 @Injectable({
   providedIn: 'root'
@@ -16,5 +16,13 @@ export class GameConnectionService {
 
   public postSlots():Promise<SlotsDto> {
     return this.http.post(API + "/slots", httpOptions).toPromise() as Promise<SlotsDto>;
+  }
+
+  public getInitialRoulette(): Promise<RouletteResponseDto> {
+    return this.http.get(API + "/roulette", httpOptions).toPromise() as Promise<RouletteResponseDto>;
+  }
+
+  public postRoulette(rouletteRequestDto: RouletteRequestDto): Promise<RouletteResponseDto> {
+    return this.http.post(API + "/roulette", rouletteRequestDto, httpOptions).toPromise() as Promise<RouletteResponseDto>;
   }
 }

@@ -26,4 +26,8 @@ export class DataService {
         this.user = response;
       });
   }
+
+  updateBalance(balance: number) {
+    this.user.balance = balance;
+  }
 }

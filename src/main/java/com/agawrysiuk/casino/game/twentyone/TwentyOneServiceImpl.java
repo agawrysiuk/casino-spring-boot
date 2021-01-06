@@ -1,6 +1,6 @@
 package com.agawrysiuk.casino.game.twentyone;
 
-import com.agawrysiuk.casino.util.game.Card;
+import com.agawrysiuk.casino.game.utils.Card;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

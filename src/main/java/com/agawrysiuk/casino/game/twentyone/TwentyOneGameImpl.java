@@ -1,8 +1,8 @@
 package com.agawrysiuk.casino.game.twentyone;
 
-import com.agawrysiuk.casino.util.game.Card;
-import com.agawrysiuk.casino.util.game.CardColor;
-import com.agawrysiuk.casino.util.game.CardStrength;
+import com.agawrysiuk.casino.game.utils.Card;
+import com.agawrysiuk.casino.game.utils.CardColor;
+import com.agawrysiuk.casino.game.utils.CardStrength;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

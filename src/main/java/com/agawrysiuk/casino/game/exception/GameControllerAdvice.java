@@ -20,4 +20,10 @@ public class GameControllerAdvice {
         log.info(ex.getMessage());
         return ResponseEntity.status(469).body(ex.getMessage());
     }
+
+    @ExceptionHandler(ServiceUnavailableException.class)
+    public ResponseEntity<?> serviceUnavailable(Exception ex) {
+        log.info(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(ex.getMessage());
+    }
 }

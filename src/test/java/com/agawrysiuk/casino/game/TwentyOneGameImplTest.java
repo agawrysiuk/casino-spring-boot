@@ -1,9 +1,9 @@
 package com.agawrysiuk.casino.game;
 
 import com.agawrysiuk.casino.game.twentyone.TwentyOneGameImpl;
-import com.agawrysiuk.casino.util.game.Card;
-import com.agawrysiuk.casino.util.game.CardColor;
-import com.agawrysiuk.casino.util.game.CardStrength;
+import com.agawrysiuk.casino.game.utils.Card;
+import com.agawrysiuk.casino.game.utils.CardColor;
+import com.agawrysiuk.casino.game.utils.CardStrength;
 import org.junit.jupiter.api.Test;
 import org.opentest4j.AssertionFailedError;
 

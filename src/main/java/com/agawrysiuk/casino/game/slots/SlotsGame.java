@@ -1,6 +1,6 @@
 package com.agawrysiuk.casino.game.slots;
 
-import com.agawrysiuk.casino.util.game.SlotsValue;
+import com.agawrysiuk.casino.game.utils.SlotsValue;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

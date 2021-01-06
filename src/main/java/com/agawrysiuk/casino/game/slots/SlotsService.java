@@ -1,7 +1,6 @@
 package com.agawrysiuk.casino.game.slots;
 
-import com.agawrysiuk.casino.user.UserService;
-import com.agawrysiuk.casino.util.game.SlotsValue;
+import com.agawrysiuk.casino.game.utils.SlotsValue;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +14,7 @@ public class SlotsService {
 
     public BigDecimal roll() {
         slotsGame.roll();
-        return BigDecimal.valueOf(1 * getMultiplier());
+        return new BigDecimal(1 * getMultiplier());
     }
 
     public int[] getResults() {

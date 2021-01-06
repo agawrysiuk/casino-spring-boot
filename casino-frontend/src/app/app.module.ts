@@ -17,6 +17,8 @@ import { SlotsComponent } from './pages/game/slots/slots.component';
 import { NoMoneyComponent } from './pages/account/no-money/no-money.component';
 import {AuthInterceptor} from "./services/auth/auth-interceptor.service";
 import {SlotsResolver} from "./pages/game/slots/slots-resolver";
+import { RouletteComponent } from './pages/game/roulette/roulette.component';
+import {RouletteResolver} from "./pages/game/roulette/roulette-resolver";
 registerLocaleData(localePL);
 
 @NgModule({
@@ -29,7 +31,8 @@ registerLocaleData(localePL);
     EditPasswordComponent,
     DepositComponent,
     SlotsComponent,
-    NoMoneyComponent
+    NoMoneyComponent,
+    RouletteComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,8 @@ registerLocaleData(localePL);
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ResponseInterceptor, multi: true },
     FormBuilder,
-    SlotsResolver
+    SlotsResolver,
+    RouletteResolver
   ],
   bootstrap: [AppComponent]
 })

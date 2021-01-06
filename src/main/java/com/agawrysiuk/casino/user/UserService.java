@@ -53,7 +53,7 @@ public class UserService {
         userRepository.save(user);
 
         CasinoUser casinoUser = CasinoUser.builder()
-                .balance(BigDecimal.valueOf(0))
+                .balance(new BigDecimal("0"))
                 .nickname(userDto.getUsername())
                 .isactive(true)
                 .build();
