@@ -1,60 +1,28 @@
 package com.agawrysiuk.casino.game.slots;
 
-import com.agawrysiuk.casino.casinouser.CasinoUser;
-import com.agawrysiuk.casino.user.UserService;
-import com.agawrysiuk.casino.util.AttributeNames;
-import com.agawrysiuk.casino.util.ViewNames;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @Slf4j
-@Controller
+@RestController
+@RequiredArgsConstructor
 public class SlotsController {
 
-    private final SlotsService slotsService;
-    private final UserService userService;
+    private final SlotsFacade slotsFacade;
 
-    public SlotsController(SlotsService slotsService, UserService userService) {
-        this.slotsService = slotsService;
-        this.userService = userService;
+    @GetMapping("/slots")
+    public SlotsDto slots(HttpServletRequest request) {
+        return slotsFacade.slots(request.getUserPrincipal().getName());
     }
 
-    @GetMapping(ViewNames.SLOTS)
-    public String slots(Model model, Principal principal) {
-        if (!userService.isEnoughMoney(principal.getName(), BigDecimal.valueOf(1))) {
-            return "redirect:/"+ViewNames.NO_MONEY_PAGE;
-        }
-        CasinoUser user = userService.findCasinoUserByUsername(principal.getName());
-        model.addAttribute(AttributeNames.SLOTS_MONEY_MESSAGE, "Your balance is " + String.format("%1$,.2f", user.getBalance()) + " $.");
-        model.addAttribute(AttributeNames.SLOTS_MAIN_MESSAGE, slotsService.getMessage());
-        model.addAttribute(AttributeNames.SLOT_RESULTS, slotsService.getResults());
-        log.info("model = {}", model);
-        return ViewNames.SLOTS;
-    }
-
-    @RequestMapping(value = ViewNames.SLOTS, params = "roll", method = RequestMethod.POST)
-    public String newRoll(Model model, Principal principal) {
-        if (!userService.isEnoughMoney(principal.getName(), BigDecimal.valueOf(1))) {
-            return "redirect:/"+ViewNames.NO_MONEY_PAGE;
-        }
-        slotsService.roll();
-        BigDecimal userBalance = userService.findCasinoUserByUsername(principal.getName()).getBalance();
-        double moneyResult = 1 * slotsService.getMultiplier();
-        userBalance = userBalance.add(BigDecimal.valueOf(-1)).add(BigDecimal.valueOf(moneyResult));
-        userService.updateCasinoUserBalance(userBalance, principal.getName());
-        model.addAttribute(AttributeNames.SLOTS_MONEY_MESSAGE,
-                "You bet 1 $. You got " + String.format("%1$,.2f", moneyResult) + " $. Your balance is now " + String.format("%1$,.2f", userBalance) + " $.");
-        model.addAttribute(AttributeNames.SLOTS_MAIN_MESSAGE, slotsService.getMessage());
-        model.addAttribute(AttributeNames.SLOT_RESULTS, slotsService.getResults());
-        log.info("model = {}", model);
-        return ViewNames.SLOTS;
+    @PostMapping("/slots")
+    public SlotsDto newRoll(HttpServletRequest request) {
+        return slotsFacade.newRoll(request.getUserPrincipal().getName());
     }
 
 }

@@ -1,20 +1,19 @@
 <div class="centerContainer">
   <img src="/assets/images/Casino_Slots.png" width="300" height="300"/>
-  <h1 id="mainMessage"></h1>
-  <h2 id="moneyMessage"></h2>
+  <h1>{{slots.mainMessage}}</h1>
+  <h2 *ngIf="slots.moneyResult; then initialBlock else resultBlock"></h2>
+  <ng-template #initialBlock>Your balance is {{slots.balance | number:'1.2-2':'pl-PL'}} $.</ng-template>
+  <ng-template #resultBlock>You bet 1 $. You got {{slots.moneyResult}} $. Your balance is now {{slots.balance}} $.</ng-template>
 </div>
 <div class="centerContainer">
   <table class="slotsTable">
     <tr>
-      <td id="tdId" class="slotsColumn">
-        <p id="pId" style="font-size:500%; font-weight: bold;"></p>
+      <td *ngFor="let result of slots.results" class="slotsColumn">
+        <p style="font-size:500%; font-weight: bold;">{{result}}</p>
       </td>
     </tr>
   </table>
 </div>
 <div class="centerContainer">
-  <form action="" method="post">
-    <input type="hidden" name="roll" value="roll"/>
-    <input type="submit" id="submitButton" value="Roll"/>
-  </form>
+  <input type="submit" id="submitButton" value="Roll" (click)="roll()"/>
 </div>

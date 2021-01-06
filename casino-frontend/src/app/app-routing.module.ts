@@ -9,6 +9,7 @@ import {EditPasswordComponent} from "./pages/account/edit-password/edit-password
 import {DepositComponent} from "./pages/account/deposit/deposit.component";
 import {SlotsComponent} from "./pages/game/slots/slots.component";
 import {NoMoneyComponent} from "./pages/account/no-money/no-money.component";
+import {SlotsResolver} from "./pages/game/slots/slots-resolver";
 
 const routes: Routes = [
   {
@@ -34,7 +35,8 @@ const routes: Routes = [
   {
     path: 'slots',
     component: SlotsComponent,
-    canActivate: [AuthGuardService]
+    canActivate: [AuthGuardService],
+    resolve: { slots : SlotsResolver }
   },
   {
     path: 'no-money',

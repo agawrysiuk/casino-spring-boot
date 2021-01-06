@@ -107,6 +107,10 @@ public class UserService {
         return user.getBalance().compareTo(minNeeded) >= 0;
     }
 
+    public boolean isEnoughMoney(BigDecimal balance, BigDecimal minNeeded) {
+        return balance.compareTo(minNeeded) >= 0;
+    }
+
     public boolean doPasswordsMatch(String oldPassword,String userName) {
         return BCrypt.checkpw(oldPassword, userRepository.findByUsername(userName).orElseThrow(UserDoesntExistException::new).getPassword());
     }

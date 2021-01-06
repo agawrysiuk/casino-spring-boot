@@ -10,7 +10,7 @@ import {takeWhile} from "rxjs/operators";
 export class InactivityService {
 
   lastInteraction: Date = new Date();
-  definedInactivityPeriod = 10000;
+  definedInactivityPeriod = 2 * 60 * 1000;
 
   constructor(private rendererFactory2: RendererFactory2,
     private tokenStorage: TokenStorageService) {

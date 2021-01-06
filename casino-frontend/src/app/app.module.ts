@@ -7,7 +7,7 @@ import { LoginComponent } from './pages/auth/login/login.component';
 import {FormBuilder, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { RegisterComponent } from './pages/auth/register/register.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {AuthInterceptor} from "./services/auth/auth-interceptor";
+import {ResponseInterceptor} from "./services/auth/response-interceptor.service";
 import { AccountComponent } from './pages/account/account/account.component';
 import {registerLocaleData} from "@angular/common";
 import localePL from '@angular/common/locales/pl';
@@ -15,6 +15,8 @@ import { EditPasswordComponent } from './pages/account/edit-password/edit-passwo
 import { DepositComponent } from './pages/account/deposit/deposit.component';
 import { SlotsComponent } from './pages/game/slots/slots.component';
 import { NoMoneyComponent } from './pages/account/no-money/no-money.component';
+import {AuthInterceptor} from "./services/auth/auth-interceptor.service";
+import {SlotsResolver} from "./pages/game/slots/slots-resolver";
 registerLocaleData(localePL);
 
 @NgModule({
@@ -39,7 +41,9 @@ registerLocaleData(localePL);
   providers: [
     { provide: LOCALE_ID, useValue: 'pl-PL'},
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    FormBuilder
+    { provide: HTTP_INTERCEPTORS, useClass: ResponseInterceptor, multi: true },
+    FormBuilder,
+    SlotsResolver
   ],
   bootstrap: [AppComponent]
 })
