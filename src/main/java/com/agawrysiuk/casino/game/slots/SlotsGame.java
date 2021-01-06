@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Random;
@@ -30,7 +31,7 @@ public class SlotsGame {
 
     public void roll() {
         SlotsValue[] slots = SlotsValue.values();
-        Random random = new Random();
+        SecureRandom random = new SecureRandom();
         for (int i = 0; i < 5; i++) {
             results[i] = slots[random.nextInt(slots.length)];
         }

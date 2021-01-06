@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.security.SecureRandom;
 import java.util.Random;
 
 @Slf4j
@@ -29,7 +30,7 @@ public class RouletteGame {
     }
 
     public int roll() {
-        this.number = new Random().nextInt(37);
+        this.number = new SecureRandom().nextInt(37);
         getColor();
         return this.number;
     }

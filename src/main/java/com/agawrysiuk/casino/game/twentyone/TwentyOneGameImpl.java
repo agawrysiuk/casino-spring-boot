@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -52,7 +53,7 @@ public class TwentyOneGameImpl implements TwentyOneGame {
         if (gameLost || gameWon) {
             return null;
         }
-        Card card = cardsInDeck.get(new Random().nextInt(cardsInDeck.size()));
+        Card card = cardsInDeck.get(new SecureRandom().nextInt(cardsInDeck.size()));
         yourHand.add(card);
         yourSum += card.getCardStrength().getCardValue();
         cardsInDeck.remove(card);
@@ -70,7 +71,7 @@ public class TwentyOneGameImpl implements TwentyOneGame {
         }
         gameFinished = true;
         while ((dealersSum <= 14 || dealersSum < yourSum) && !gameWon && !gameLost) {
-            Card card = cardsInDeck.get(new Random().nextInt(cardsInDeck.size()));
+            Card card = cardsInDeck.get(new SecureRandom().nextInt(cardsInDeck.size()));
             dealersHand.add(card);
             cardsInDeck.remove(card);
             dealersSum += card.getCardStrength().getCardValue();
