@@ -14,11 +14,11 @@ public class SlotsService {
 
     public BigDecimal roll() {
         slotsGame.roll();
-        return new BigDecimal(1 * getMultiplier());
+        return new BigDecimal("1").multiply(getMultiplier());
     }
 
     public int[] getResults() {
-        if (slotsGame.getMultiplier() == -1) {
+        if (slotsGame.getMultiplier().compareTo(new BigDecimal("-1")) == 0) {
             return new int[5];
         }
         SlotsValue[] slotsResults = slotsGame.getResults();
@@ -29,12 +29,12 @@ public class SlotsService {
         return results;
     }
 
-    public double getMultiplier() {
+    public BigDecimal getMultiplier() {
         return slotsGame.getMultiplier();
     }
 
     public String getMessage() {
-        return slotsGame.getMultiplier() == -1 ?
+        return slotsGame.getMultiplier().compareTo(new BigDecimal("-1")) == 0 ?
                 "Roll the game." :
                 "You got " + slotsGame.getMultiplier() + " multiplier.";
     }
