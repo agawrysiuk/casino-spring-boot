@@ -46,9 +46,8 @@ class UserServiceTest {
         CasinoUser casinoUser = new CasinoUser();
         casinoUser.setNickname(name);
         casinoUser.setBalance(balance);
-        Mockito.when(casinoUserRepository.findByNickname(name)
-                .orElseThrow(UserDoesntExistException::new))
-                .thenReturn(casinoUser);
+        Mockito.when(casinoUserRepository.findByNickname(name))
+                .thenReturn(java.util.Optional.of(casinoUser));
 
         User user = new User();
         user.setUsername(name);
@@ -56,8 +55,8 @@ class UserServiceTest {
         user.setPassword(password);
         user.setEnabled(enabled);
         user.setAuthority(authority);
-        Mockito.when(userService.findUserByUsername(name))
-                .thenReturn(user);
+        Mockito.when(userRepository.findByUsername(name))
+                .thenReturn(java.util.Optional.of(user));
     }
 
     @Test
