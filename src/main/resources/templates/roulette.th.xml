@@ -1,9 +1,0 @@
-<thlogic>
-    <attr sel="#headId" th:replace="~{fragments/head :: headFragment}"/>
-    <attr sel="#rouletteImg" th:src="@{images/Casino_Roulette.png}"/>
-    <attr sel="#mainMessage" th:text="${__${T(com.agawrysiuk.casino.util.AttributeNames).ROULETTE_MAIN_MESSAGE}__}"/>
-    <attr sel="#resultMessage" th:text="${__${T(com.agawrysiuk.casino.util.AttributeNames).ROULETTE_RESULT_MESSAGE}__}"/>
-    <attr sel="#optionIterate" th:each="n : ${#numbers.sequence(0,36)}" th:value="${n}" th:text="${n}"/>
-    <attr sel="#headerId" th:replace="~{fragments/header :: headerFragment}"/>
-    <attr sel="#footerId" th:replace="~{fragments/footer :: footerFragment}"/>
-</thlogic>

@@ -3,14 +3,10 @@ package com.agawrysiuk.casino.game.twentyone;
 import com.agawrysiuk.casino.game.exception.NotEnoughMoneyException;
 import com.agawrysiuk.casino.game.exception.ServiceUnavailableException;
 import com.agawrysiuk.casino.user.UserService;
-import com.agawrysiuk.casino.util.AttributeNames;
-import com.agawrysiuk.casino.util.ViewNames;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.ui.Model;
 
 import java.math.BigDecimal;
-import java.security.Principal;
 
 @Component
 @RequiredArgsConstructor
