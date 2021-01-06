@@ -2,8 +2,6 @@ package com.agawrysiuk.casino.game.slots;
 
 import com.agawrysiuk.casino.game.exception.NotEnoughMoneyException;
 import com.agawrysiuk.casino.user.UserService;
-import com.agawrysiuk.casino.util.AttributeNames;
-import com.agawrysiuk.casino.util.ViewNames;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

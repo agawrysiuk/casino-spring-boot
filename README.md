@@ -5,8 +5,16 @@ If you'd like to know more about it, I invite to you to watch the YouTube presen
 
 https://youtu.be/-FW9obNZ-BA
 
-### Updates on December 2020
+### Updates on December 2020 - January 2021
+'master' branch:
 - Added Flyway migrations
+
+'angular' branch:
+- Added JSON Web Token (JWT) Authorization
+- Deleted Thymeleaf's templates
+- Changed Spring Boot application to REST application
+- Added Angular 11 Front-End Application
+- Moved styles to SCSS
 
 ### Project statistics on October 2019
 

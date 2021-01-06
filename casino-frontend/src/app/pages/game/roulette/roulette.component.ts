@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {DataService} from "../../../services/data.service";
 import {ActivatedRoute} from "@angular/router";
 import {RouletteChoice, RouletteResponseDto} from "../../../model/game";
 import {GameService} from "../../../services/game.service";
@@ -20,8 +19,7 @@ export class RouletteComponent implements OnInit {
   guessEvenOrOdd: string;
 
 
-  constructor(private data: DataService,
-              private game: GameService,
+  constructor(private game: GameService,
               private route: ActivatedRoute) {
     this.roulette = this.route.snapshot.data.roulette;
   }

@@ -1,0 +1,43 @@
+<div class="centerContainer">
+  <img src="/assets/images/Casino_Blackjack.png" width="300" height="300"/>
+  <h1>{{twentyOne.mainMessage}}</h1>
+  <h2>Your balance is {{twentyOne.balance | number:'1.2-2':'pl-PL'}} $.</h2>
+  <h2>{{twentyOne.resultMessage}}</h2>
+</div>
+<div class="centerContainer">
+  <table>
+    <tr>
+      <td valign="top">
+        <p style="font-weight: bold">Your hand:</p>
+        <table>
+          <tr>
+            <td *ngFor="let card of twentyOne.yourCards; let i = index"><img src="{{getCardImage(false, i)}}"/></td>
+          </tr>
+        </table>
+      </td>
+      <td valign="top">
+        <p style="font-weight: bold">Dealer's hand:</p>
+        <table>
+          <tr>
+            <td *ngFor="let card of twentyOne.dealersCards; let i = index"><img src="{{getCardImage(true, i)}}"/></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+<div *ngIf="!twentyOne.gameFinished" class="centerContainer">
+  <table>
+    <tr>
+      <td>
+          <input value="Hit me!" name="hitMe" type="submit" (click)="sendRequest(requestCode.HIT_ME)"/>
+      </td>
+      <td>
+          <input value="Hold" name="hold" type="submit" (click)="sendRequest(requestCode.HOLD)"/>
+      </td>
+    </tr>
+  </table>
+</div>
+<div *ngIf="twentyOne.gameFinished" class="centerContainer">
+    <input value="Play again" name="again" type="submit" (click)="sendRequest(requestCode.AGAIN)"/>
+</div>

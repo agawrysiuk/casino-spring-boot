@@ -12,6 +12,8 @@ import {NoMoneyComponent} from "./pages/account/no-money/no-money.component";
 import {SlotsResolver} from "./pages/game/slots/slots-resolver";
 import {RouletteComponent} from "./pages/game/roulette/roulette.component";
 import {RouletteResolver} from "./pages/game/roulette/roulette-resolver";
+import {TwentyOneComponent} from "./pages/game/twenty-one/twenty-one.component";
+import {TwentyOneResolver} from "./pages/game/twenty-one/twenty-one.resolver";
 
 const routes: Routes = [
   {
@@ -45,6 +47,12 @@ const routes: Routes = [
     component: RouletteComponent,
     canActivate: [AuthGuardService],
     resolve: { roulette : RouletteResolver }
+  },
+  {
+    path: 'twenty-one',
+    component: TwentyOneComponent,
+    canActivate: [AuthGuardService],
+    resolve: { twentyOne : TwentyOneResolver }
   },
   {
     path: 'no-money',
