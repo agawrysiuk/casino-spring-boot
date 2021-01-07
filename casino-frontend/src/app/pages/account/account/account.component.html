@@ -1,77 +1,85 @@
-<div id="account-page">
-  <div class="account-box" *ngIf="!editingInfo">
-    <h2 style="font-weight: bold;text-align:left">You are logged in as {{getNickname()}}</h2>
-    <p>Here is information about your account:</p>
-    <table class="tableAccount">
-      <tr>
-        <td class="accountNormal">Username:</td>
-        <td class="accountBold">{{casinoUser?.nickname}}</td>
-      </tr>
-      <tr>
-        <td class="accountNormal">Balance:</td>
-        <td class="accountBold">{{casinoUser?.balance | number:'1.2-2':'pl-PL'}}</td>
-      </tr>
-      <tr>
-        <td class="accountNormal">Name:</td>
-        <td class="accountBold">{{casinoUser?.firstName}}</td>
-      </tr>
-      <tr>
-        <td class="accountNormal">Surname:</td>
-        <td class="accountBold">{{casinoUser?.secondName}}</td>
-      </tr>
-      <tr>
-        <td class="accountNormal">Date of birth:</td>
-        <td class="accountBold">{{casinoUser?.birthDate | date}}</td>
-      </tr>
-      <tr>
-        <td class="accountNormal">Country of residence:</td>
-        <td class="accountBold">{{casinoUser?.country}}</td>
-      </tr>
-    </table>
-    <button class="redirect" (click)="createEditForm()" type="button">Edit information</button>
-    <button class="redirect" [routerLink]="['/edit-password']" type="button">Change password</button>
-  </div>
-  <div class="account-box" *ngIf="editingInfo">
-    <h2 style="font-weight: bold;text-align:left">You are logged in as {{getNickname()}}</h2>
-    <p>Edit yor information:</p>
-    <form [formGroup]="editForm!">
-      <div>
-        <label>Name: </label>
-        <input formControlName="firstName" type="text" placeholder="Name"/>
-      </div>
-      <div>
-        <label>Surname: </label>
-        <input formControlName="secondName" type="text" placeholder="Surname"/>
-      </div>
-      <div>
-        <label>Date of birth:</label>
-        <input formControlName="birthDate" type="date" placeholder="Date of birth"/>
-      </div>
-      <div>
-        <label>Country of living:</label>
-        <input formControlName="country" type="text" placeholder="Country of living"/>
-      </div>
-    </form>
-    <p *ngIf="showError">Save information failed!</p>
-    <button class="redirect" (click)="saveEditForm()" type="button" [disabled]="editForm!.invalid">Save information</button>
-  </div>
-</div>
-<div id="account-page2">
-  <div class="account-box2">
-    <table>
-      <tr>
-        <td>Balance:</td>
-      </tr>
-      <tr>
-        <td><h1 style="font-weight: bolder; font-size: 75px">{{casinoUser?.balance | number:'1.2-2':'pl-PL'}}</h1></td>
-      </tr>
-      <tr>
-        <td>
-          <button class="deposit" [routerLink]="['/deposit']" type="button" [disabled]="isDepositDisabled()">Deposit now</button>
-          <p *ngIf="isDepositDisabled()">Fill in your information to deposit</p>
-        </td>
-      </tr>
-    </table>
+<div class="box-group">
 
+  <div class="main-box">
+    <div *ngIf="!editingInfo">
+      <h2 style="font-weight: bold;text-align:left">You are logged in as {{getNickname()}}</h2>
+      <p>Here is information about your account:</p>
+      <table class="tableAccount">
+        <tr>
+          <td class="accountNormal">Username:</td>
+          <td class="accountBold">{{casinoUser?.nickname}}</td>
+        </tr>
+        <tr>
+          <td class="accountNormal">Balance:</td>
+          <td class="accountBold">{{casinoUser?.balance | number:'1.2-2':'pl-PL'}}</td>
+        </tr>
+        <tr>
+          <td class="accountNormal">Name:</td>
+          <td class="accountBold">{{casinoUser?.firstName}}</td>
+        </tr>
+        <tr>
+          <td class="accountNormal">Surname:</td>
+          <td class="accountBold">{{casinoUser?.secondName}}</td>
+        </tr>
+        <tr>
+          <td class="accountNormal">Date of birth:</td>
+          <td class="accountBold">{{casinoUser?.birthDate | date}}</td>
+        </tr>
+        <tr>
+          <td class="accountNormal">Country of residence:</td>
+          <td class="accountBold">{{casinoUser?.country}}</td>
+        </tr>
+      </table>
+      <button class="green-button" (click)="createEditForm()" type="button">Edit information</button>
+      <button class="green-button" [routerLink]="['/edit-password']" type="button">Change password</button>
+    </div>
+    <div *ngIf="editingInfo">
+      <h2 style="font-weight: bold;text-align:left">You are logged in as {{getNickname()}}</h2>
+      <p>Edit yor information:</p>
+      <form [formGroup]="editForm!">
+        <div>
+          <label>Name: </label>
+          <input class="form-input" formControlName="firstName" type="text" placeholder="Name"/>
+        </div>
+        <div>
+          <label>Surname: </label>
+          <input class="form-input" formControlName="secondName" type="text" placeholder="Surname"/>
+        </div>
+        <div>
+          <label>Date of birth:</label>
+          <input class="form-input" formControlName="birthDate" type="date" placeholder="Date of birth"/>
+        </div>
+        <div>
+          <label>Country of living:</label>
+          <input class="form-input" formControlName="country" type="text" placeholder="Country of living"/>
+        </div>
+      </form>
+      <p *ngIf="showError">Save information failed!</p>
+      <button class="redirect" (click)="saveEditForm()" type="button" [disabled]="editForm!.invalid">Save information
+      </button>
+    </div>
   </div>
+
+  <div class="main-box">
+    <div>
+      <table>
+        <tr>
+          <td>Balance:</td>
+        </tr>
+        <tr>
+          <td><h1 style="font-weight: bolder; font-size: 75px">{{casinoUser?.balance | number:'1.2-2':'pl-PL'}}</h1>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button class="deposit" [routerLink]="['/deposit']" type="button" [disabled]="isDepositDisabled()">Deposit
+              now
+            </button>
+            <p *ngIf="isDepositDisabled()">Fill in your information to deposit</p>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
 </div>

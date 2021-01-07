@@ -1,5 +1,5 @@
 <div class="centerContainer">
-  <img src="/assets/images/Casino_Roulette.png" width="300" height="300"/>
+  <img class="game-image" src="/assets/images/Casino_Roulette.png"/>
   <h1>{{roulette.mainMessage}}</h1>
   <h2>{{roulette.resultMessage}}</h2>
 </div>
@@ -12,23 +12,23 @@
     </tr>
     <tr>
       <td>
-        <form id="singleForm" (submit)="roll(rouletteChoice.GUESS_SINGLE, guessSingle)">
-          <select [(ngModel)]="guessSingle" name="guessSingle">
+        <form #singleForm id="singleForm" (submit)="roll(rouletteChoice.GUESS_SINGLE, guessSingle)">
+          <select [(ngModel)]="guessSingle" name="guessSingle" required>
             <option *ngFor="let number of numbers; let i = index" [ngValue]="i">{{i}}</option>
           </select>
         </form>
       </td>
       <td>
-        <form id="redOrBlackForm" (submit)="roll(rouletteChoice.GUESS_RED_OR_BLACK, guessRedOrBlack)">
-          <select [(ngModel)]="guessRedOrBlack" name="guessRedOrBlack">
+        <form #redOrBlackForm id="redOrBlackForm" (submit)="roll(rouletteChoice.GUESS_RED_OR_BLACK, guessRedOrBlack)">
+          <select [(ngModel)]="guessRedOrBlack" name="guessRedOrBlack" required>
             <option value="red">Red</option>
             <option value="black">Black</option>
           </select>
         </form>
       </td>
       <td>
-        <form id="evenOrOddForm" (submit)="roll(rouletteChoice.GUESS_EVEN_OR_ODD, guessEvenOrOdd)">
-          <select [(ngModel)]="guessEvenOrOdd" name="guessEvenOrOdd">
+        <form #evenOrOddForm id="evenOrOddForm" (submit)="roll(rouletteChoice.GUESS_EVEN_OR_ODD, guessEvenOrOdd)">
+          <select [(ngModel)]="guessEvenOrOdd" name="guessEvenOrOdd" required>
             <option value="even">Even</option>
             <option value="odd">Odd</option>
           </select>
@@ -37,13 +37,13 @@
     </tr>
     <tr>
       <td>
-        <input value="Bet" name="singleFormSubmit" type="submit" form="singleForm"/>
+        <input class="green-button" value="Bet" name="singleFormSubmit" type="submit" form="singleForm" [disabled]="!singleForm.checkValidity()"/>
       </td>
       <td>
-        <input value="Bet" name="redOrBlackFormSubmit" type="submit" form="redOrBlackForm"/>
+        <input class="green-button" value="Bet" name="redOrBlackFormSubmit" type="submit" form="redOrBlackForm" [disabled]="!redOrBlackForm.checkValidity()"/>
       </td>
       <td>
-        <input value="Bet" name="evenOrOddFormSubmit" type="submit" form="evenOrOddForm"/>
+        <input class="green-button" value="Bet" name="evenOrOddFormSubmit" type="submit" form="evenOrOddForm" [disabled]="!evenOrOddForm.checkValidity()"/>
       </td>
     </tr>
   </table>

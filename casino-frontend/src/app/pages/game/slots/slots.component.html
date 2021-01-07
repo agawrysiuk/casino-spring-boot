@@ -1,5 +1,5 @@
 <div class="centerContainer">
-  <img src="/assets/images/Casino_Slots.png" width="300" height="300"/>
+  <img class="game-image" src="/assets/images/Casino_Slots.png"/>
   <h1>{{slots.mainMessage}}</h1>
   <h2 *ngIf="slots.moneyResult; then initialBlock else resultBlock"></h2>
   <ng-template #initialBlock>Your balance is {{slots.balance | number:'1.2-2':'pl-PL'}} $.</ng-template>
@@ -15,5 +15,5 @@
   </table>
 </div>
 <div class="centerContainer">
-  <input type="submit" id="submitButton" value="Roll" (click)="roll()"/>
+  <input class="green-button" type="submit" id="submitButton" value="Roll" (click)="roll()"/>
 </div>

@@ -1,7 +1,7 @@
 import {Injectable, RendererFactory2} from "@angular/core";
-import {TokenStorageService} from "./auth/token-storage.service";
 import {interval} from "rxjs";
 import {takeWhile} from "rxjs/operators";
+import {SessionService} from "./session.service";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class InactivityService {
   definedInactivityPeriod = 10 * 60 * 1000;
 
   constructor(private rendererFactory2: RendererFactory2,
-    private tokenStorage: TokenStorageService) {
+              private session: SessionService) {
     const renderer = this.rendererFactory2.createRenderer(null, null);
     renderer.listen('document', 'mousemove', () => {
       this.lastInteraction = new Date();
@@ -31,7 +31,7 @@ export class InactivityService {
           const now = new Date();
           if ((now.getTime() - this.lastInteraction.getTime()) > this.definedInactivityPeriod) {
             console.log('Inactive for ' + this.definedInactivityPeriod / 1000 + 's, logging out!');
-            this.tokenStorage.signOut();
+            this.session.logout();
           }
           return (now.getTime() - this.lastInteraction.getTime()) < this.definedInactivityPeriod;
         })

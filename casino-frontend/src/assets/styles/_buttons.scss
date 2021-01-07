@@ -1,0 +1,89 @@
+.green-button {
+  margin: 28px 5px 0 5px;
+  width: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 32px;
+  background: #16a085;
+  border: none;
+  border-radius: 2px;
+  color: #FFF;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: 0.1s ease;
+  cursor: pointer;
+}
+
+.green-button:hover:not(:disabled),
+.green-button:focus:not(:disabled) {
+  opacity: 0.8;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  transition: 0.1s ease;
+}
+
+.green-button:active {
+  opacity: 1;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  transition: 0.1s ease;
+}
+
+.green-button:disabled {
+  background: #FFF;
+  border: 1px solid #1e2127;
+  color: #AAAAAA;
+  cursor: default;
+}
+
+.redirect,
+.deposit {
+  margin: 28px 5px 0 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border: none;
+  border-radius: 2px;
+  color: #FFF;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  display: inline-block;
+  text-transform: uppercase;
+  transition: 0.1s ease;
+  cursor: pointer;
+}
+
+.redirect {
+  width: auto;
+  height: 32px;
+  background: #16a085;
+}
+
+.deposit {
+  width: 200px;
+  height: 80px;
+  background: #a00000;
+  font-size: 24px;
+}
+
+.redirect:hover:not(:disabled),
+.redirect:focus:not(:disabled),
+.deposit:hover:not(:disabled),
+.deposit:focus:not(:disabled), {
+  opacity: 0.8;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  transition: 0.1s ease;
+}
+
+.redirect:active,
+.deposit:active {
+  opacity: 1;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  transition: 0.1s ease;
+}
+
+.deposit:disabled,
+.redirect:disabled {
+  background: #ffffff;
+  border: 1px solid #a00000;
+  color: #a00000;
+  cursor: default;
+}

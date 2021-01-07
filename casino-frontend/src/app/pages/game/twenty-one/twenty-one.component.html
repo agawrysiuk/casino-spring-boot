@@ -1,5 +1,5 @@
 <div class="centerContainer">
-  <img src="/assets/images/Casino_Blackjack.png" width="300" height="300"/>
+  <img class="game-image" src="/assets/images/Casino_Blackjack.png"/>
   <h1>{{twentyOne.mainMessage}}</h1>
   <h2>Your balance is {{twentyOne.balance | number:'1.2-2':'pl-PL'}} $.</h2>
   <h2>{{twentyOne.resultMessage}}</h2>
@@ -30,14 +30,14 @@
   <table>
     <tr>
       <td>
-          <input value="Hit me!" name="hitMe" type="submit" (click)="sendRequest(requestCode.HIT_ME)"/>
+          <input class="green-button" value="Hit me!" name="hitMe" type="submit" (click)="sendRequest(requestCode.HIT_ME)"/>
       </td>
       <td>
-          <input value="Hold" name="hold" type="submit" (click)="sendRequest(requestCode.HOLD)"/>
+          <input class="green-button" value="Hold" name="hold" type="submit" (click)="sendRequest(requestCode.HOLD)"/>
       </td>
     </tr>
   </table>
 </div>
 <div *ngIf="twentyOne.gameFinished" class="centerContainer">
-    <input value="Play again" name="again" type="submit" (click)="sendRequest(requestCode.AGAIN)"/>
+    <input class="green-button" value="Play again" name="again" type="submit" (click)="sendRequest(requestCode.AGAIN)"/>
 </div>
