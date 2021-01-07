@@ -1,5 +1,4 @@
 import {Injectable, RendererFactory2} from "@angular/core";
-import {Router} from "@angular/router";
 import {TokenStorageService} from "./auth/token-storage.service";
 import {interval} from "rxjs";
 import {takeWhile} from "rxjs/operators";
@@ -10,7 +9,7 @@ import {takeWhile} from "rxjs/operators";
 export class InactivityService {
 
   lastInteraction: Date = new Date();
-  definedInactivityPeriod = 2 * 60 * 1000;
+  definedInactivityPeriod = 10 * 60 * 1000;
 
   constructor(private rendererFactory2: RendererFactory2,
     private tokenStorage: TokenStorageService) {

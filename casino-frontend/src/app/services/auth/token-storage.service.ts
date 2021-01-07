@@ -10,11 +10,10 @@ const USER_KEY = 'auth-user';
 })
 export class TokenStorageService {
 
-  constructor(private router: Router) { }
+  constructor() { }
 
   signOut(): void {
     window.sessionStorage.clear();
-    this.router.navigate(['login']);
   }
 
   public saveToken(token: string): void {

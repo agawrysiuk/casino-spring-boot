@@ -30,4 +30,8 @@ export class DataService {
   updateBalance(balance: number) {
     this.user.balance = balance;
   }
+
+  clear() {
+    this.user = null;
+  }
 }
