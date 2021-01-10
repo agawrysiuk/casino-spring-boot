@@ -15,6 +15,14 @@ https://youtu.be/-FW9obNZ-BA
 - Changed Spring Boot application to REST application
 - Added Angular 11 Front-End Application
 - Moved styles to SCSS
+- Improved styles (e.g. deleted all tables, deleted styles from the html,
+made the layout responsive on small/large devices)
+- Added several services and resolvers to Angular
+
+Possible future updates:
+- New database table with Login History
+- Improvements to the backend game services
+- New Database table with Betting History
 
 ### Project statistics on October 2019
 
