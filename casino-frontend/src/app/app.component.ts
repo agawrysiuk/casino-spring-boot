@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import {TokenStorageService} from "./services/auth/token-storage.service";
 import {SessionService} from "./services/session.service";
+import {ErrorBoxComponent} from "./standalone-components/error-box/error-box.component";
+import {ErrorBoxService} from "./standalone-components/error-box/error-box.service";
 
 @Component({
   selector: 'app-root',

@@ -1,0 +1,6 @@
+<div *ngIf="errorVisible" class="error-box">
+  <div class="error-row">
+    <p class="error-message">{{errorMessage}}</p>
+    <div class="error-close" (click)="closeError()"></div>
+  </div>
+</div>
