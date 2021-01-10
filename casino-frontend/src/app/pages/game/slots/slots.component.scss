@@ -1,0 +1,10 @@
+.slots-result {
+  padding: 30px;
+  border-right: 1px solid black;
+  font-size: 500%;
+  font-weight: bold;
+
+  &:last-child {
+    border-right: none;
+  }
+}

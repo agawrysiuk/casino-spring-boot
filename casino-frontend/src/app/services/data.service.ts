@@ -7,13 +7,16 @@ import {ConnectionService} from "./connection/connection.service";
 })
 export class DataService {
 
-  private user: CasinoUserDto;
+  private user: CasinoUserDto = {} as CasinoUserDto;
 
   constructor(private connection: ConnectionService) { }
 
-  public downloadCasinoUser(username: string) {
-    this.connection.getCasinoUser(username)
-      .then(response => this.user = response as CasinoUserDto);
+  public downloadCasinoUser(username: string): Promise<CasinoUserDto> {
+    return this.connection.getCasinoUser(username)
+      .then(response => {
+        this.user = response as CasinoUserDto;
+        return this.user;
+      });
   }
 
   public getCasinoUser(): CasinoUserDto {
@@ -29,6 +32,10 @@ export class DataService {
 
   updateBalance(balance: number) {
     this.user.balance = balance;
+  }
+
+  isDownloaded() {
+    return !!this.user.nickname;
   }
 
   clear() {

@@ -4,6 +4,7 @@ import {CasinoUserDto} from "../../../model/data";
 import {ConnectionService} from "../../../services/connection/connection.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DataService} from "../../../services/data.service";
+import {AccountResolver} from "./account-resolver";
 
 @Component({
   selector: 'app-account',

@@ -21,6 +21,7 @@ import { RouletteComponent } from './pages/game/roulette/roulette.component';
 import {RouletteResolver} from "./pages/game/roulette/roulette-resolver";
 import { TwentyOneComponent } from './pages/game/twenty-one/twenty-one.component';
 import {TwentyOneResolver} from "./pages/game/twenty-one/twenty-one.resolver";
+import {AccountResolver} from "./pages/account/account/account-resolver";
 registerLocaleData(localePL);
 
 @NgModule({
@@ -49,6 +50,7 @@ registerLocaleData(localePL);
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ResponseInterceptor, multi: true },
     FormBuilder,
+    AccountResolver,
     SlotsResolver,
     RouletteResolver,
     TwentyOneResolver

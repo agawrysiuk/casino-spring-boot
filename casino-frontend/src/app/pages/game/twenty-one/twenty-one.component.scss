@@ -1,0 +1,22 @@
+@import "src/assets/styles/mixins";
+
+.row {
+  @include small {
+    flex-direction: column;
+  }
+
+  @include large {
+    flex-direction: row;
+  }
+}
+
+.column {
+  flex: 0 0 auto;
+  @include small {
+    width: 100%;
+  }
+
+  @include large {
+    width: 50%;
+  }
+}

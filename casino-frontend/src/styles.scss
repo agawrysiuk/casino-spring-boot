@@ -30,32 +30,42 @@ body {
   flex: 1 0 auto;
 }
 
+.row, .row-center, .row-left, .row-right {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.row-center {
+  justify-content: center;
+}
+
+.row-right {
+  justify-content: right;
+}
+
+.row-left {
+  justify-content: left;
+}
+
+.col-4 {
+  flex: 0 0 auto;
+  width: 33.3333333333%;
+}
+
+.col-6 {
+  flex: 0 0 auto;
+  width: 50%;
+}
+
 h1 {
   margin: 0 0 20px 0;
   font-weight: 300;
   font-size: 28px;
 }
 
-table, th, td {
-  margin-left: auto;
-  margin-right: auto;
+.center-container {
   text-align: center;
-  padding: 5px;
-  border-spacing: 50px 0;
-}
-
-div.centerContainer {
-  text-align: center;
-}
-
-table.slotsTable {
-  border-collapse: collapse;
-  border-style: hidden;
-}
-
-table td.slotsColumn {
-  padding: 30px;
-  border: 1px solid black;
+  margin-bottom: 10px;
 }
 
 .box-group {
@@ -74,6 +84,7 @@ table td.slotsColumn {
   margin: 5% auto;
   padding: 40px;
   width: fit-content;
+  min-width: 450px;
   height: auto;
   background: #FFF;
   border-radius: 10px;
@@ -90,21 +101,34 @@ table td.slotsColumn {
   height: 300px;
 }
 
-table.tableAccount {
-  margin-left: auto;
-  margin-right: auto;
-  padding: 5px;
-  border-spacing: 50px 0;
+.box-line {
+  padding-bottom: 10px;
+  margin-left: 50px;
+
+  &:nth-last-child(3) {
+    padding-bottom: 0;
+  }
 }
 
-td.accountNormal {
-  width: 150px;
-  text-align: left;
+.input-title {
+  float: left;
+  width: 225px;
 }
 
-td.accountBold {
+.bold {
   width: auto;
-  text-align: left;
   font-weight: bold;
 }
 
+.bolder {
+  width: auto;
+  font-weight: bolder;
+}
+
+.center-box {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  padding: 5px;
+  border-spacing: 50px 0;
+}

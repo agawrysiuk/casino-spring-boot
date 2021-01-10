@@ -1,19 +1,13 @@
-<div class="centerContainer">
+<div class="center-container">
   <img class="game-image" src="/assets/images/Casino_Slots.png"/>
   <h1>{{slots.mainMessage}}</h1>
   <h2 *ngIf="slots.moneyResult; then initialBlock else resultBlock"></h2>
   <ng-template #initialBlock>Your balance is {{slots.balance | number:'1.2-2':'pl-PL'}} $.</ng-template>
   <ng-template #resultBlock>You bet 1 $. You got {{slots.moneyResult}} $. Your balance is now {{slots.balance}} $.</ng-template>
-</div>
-<div class="centerContainer">
-  <table class="slotsTable">
-    <tr>
-      <td *ngFor="let result of slots.results" class="slotsColumn">
-        <p style="font-size:500%; font-weight: bold;">{{result}}</p>
-      </td>
-    </tr>
-  </table>
-</div>
-<div class="centerContainer">
-  <input class="green-button" type="submit" id="submitButton" value="Roll" (click)="roll()"/>
+  <div class="row-center">
+    <p class="slots-result" *ngFor="let result of slots.results">{{result}}</p>
+  </div>
+  <div>
+    <input class="green-button" type="submit" id="submitButton" value="Roll" (click)="roll()"/>
+  </div>
 </div>
