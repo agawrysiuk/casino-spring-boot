@@ -1,0 +1,14 @@
+<div class="main-box">
+  <div class="main-box-container">
+    <h1>Login page</h1>
+    <p *ngIf="loginFailed" id="loginPrintError" class="error">Wrong username or password</p>
+    <form [formGroup]="form" id="loginForm" method="post" (submit)="login()">
+      <label for="username">Username</label>:
+      <input class="form-input" type="text" formControlName="username" id="username" name="username" autofocus="autofocus"/> <br/>
+      <label for="password">Password</label>:
+      <input class="form-input" type="password" formControlName="password" id="password" name="password"/> <br/>
+      <input class="green-button" type="submit" name="login" value="Log in" form="loginForm" [disabled]="form.invalid"/><br/>
+      <p>Don't have an account? <a [routerLink]="['/register']">Register one now!</a></p>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+.form-input {
+  display: block;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  padding: 4px;
+  width: 220px;
+  height: 32px;
+  border: none;
+  border-bottom: 1px solid #AAA;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  transition: 0.2s ease;
+}
+
+.form-input.ng-dirty.ng-invalid {
+  border-bottom: 1px solid #a00000 !important;
+  color: #a00000;
+}
+
+.form-input:focus,
+.form-input:hover {
+  border-bottom: 2px solid #16a085;
+  color: #16a085;
+  transition: 0.2s ease;
+}

@@ -1,0 +1,79 @@
+$top-placement: 80px;
+$bounce-placement: 70px;
+
+.error-row {
+  position: relative;
+  display: flex;
+}
+
+.error-box {
+  position: absolute;
+  top: #{$top-placement};
+  left: 20px;
+  z-index: 2;
+  opacity: 1;
+  min-width: 100px;
+  min-height: 50px;
+  max-width: 250px;
+  height: auto;
+  border-radius: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: #cb4a4a;
+  color: #ffffff;
+  box-shadow: 0 10px 10px -8px rgba(0,0,0,0.8);
+  animation-name: show-error;
+  animation-duration: 0.8s;
+}
+
+@keyframes show-error {
+  0% {
+    opacity: 0;
+    top: 0;
+  }
+
+  50% {
+    opacity: 1;
+    top: #{$top-placement};
+  }
+
+  65% {
+    top: #{$bounce-placement};
+  }
+
+  100% {
+    top: #{$top-placement};
+  }
+}
+
+.error-message {
+  flex-grow: 1;
+}
+
+.error-close {
+  margin-top: 15px;
+  margin-left: 15px;
+  width: 12px;
+  height: 12px;
+  opacity: 1;
+}
+
+.error-close:hover {
+  opacity: 0.5;
+}
+
+.error-close:before, .error-close:after {
+  position: absolute;
+  content: ' ';
+  height: 12px;
+  width: 1px;
+  background-color: #fff;
+}
+
+.error-close:before {
+  transform: rotate(45deg);
+}
+
+.error-close:after {
+  transform: rotate(-45deg);
+}

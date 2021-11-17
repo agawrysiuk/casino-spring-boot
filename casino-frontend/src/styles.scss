@@ -1,0 +1,134 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
+
+@import "src/assets/styles/buttons";
+@import "src/assets/styles/navigation";
+@import "src/assets/styles/footer";
+@import "src/assets/styles/inputs";
+@import "src/assets/styles/mixins";
+
+*:focus {
+  outline: none;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background: #DDD;
+  font-size: 16px;
+  color: #222;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
+.wrapper {
+  flex: 1 0 auto;
+}
+
+.row, .row-center, .row-left, .row-right {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.row-center {
+  justify-content: center;
+}
+
+.row-right {
+  justify-content: right;
+}
+
+.row-left {
+  justify-content: left;
+}
+
+.col-4 {
+  flex: 0 0 auto;
+  width: 33.3333333333%;
+}
+
+.col-6 {
+  flex: 0 0 auto;
+  width: 50%;
+}
+
+h1 {
+  margin: 0 0 20px 0;
+  font-weight: 300;
+  font-size: 28px;
+}
+
+.center-container {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.box-group {
+  display: flex;
+  @include small {
+    flex-direction: column;
+  }
+
+  @include large {
+    flex-direction: row;
+  }
+}
+
+.main-box {
+  position: relative;
+  margin: 5% auto;
+  padding: 40px;
+  width: fit-content;
+  min-width: 450px;
+  height: auto;
+  background: #FFF;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.main-box-container {
+  min-width: 400px;
+  height: auto;
+}
+
+.game-image {
+  width: 300px;
+  height: 300px;
+}
+
+.box-line {
+  padding-bottom: 10px;
+  margin-left: 50px;
+
+  &:nth-last-child(3) {
+    padding-bottom: 0;
+  }
+}
+
+.input-title {
+  float: left;
+  width: 225px;
+}
+
+.bold {
+  width: auto;
+  font-weight: bold;
+}
+
+.bolder {
+  width: auto;
+  font-weight: bolder;
+}
+
+.center-box {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  padding: 5px;
+  border-spacing: 50px 0;
+}
