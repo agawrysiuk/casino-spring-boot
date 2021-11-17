@@ -7,7 +7,9 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.security.SecureRandom;
-import java.util.Random;
+
+import static com.agawrysiuk.casino.game.utils.RouletteColor.BLACK;
+import static com.agawrysiuk.casino.game.utils.RouletteColor.RED;
 
 @Slf4j
 @Component
@@ -37,17 +39,9 @@ public class RouletteGame {
 
     public String getColor() {
         if (isBetween(number, 1, 10) || isBetween(number, 19, 28)) {
-            if (number % 2 == 0) {
-                this.color = RouletteColor.BLACK.toString();
-            } else {
-                this.color = RouletteColor.RED.toString();
-            }
+            this.color = (number % 2 == 0 ? BLACK : RED).toString();
         } else if (isBetween(number, 11, 18) || isBetween(number, 29, 36)) {
-            if (number % 2 != 0) {
-                this.color = RouletteColor.BLACK.toString();
-            } else {
-                this.color = RouletteColor.RED.toString();
-            }
+            this.color = (number % 2 != 0 ? BLACK : RED).toString();
         } else {
             this.color = RouletteColor.ZERO.toString();
         }

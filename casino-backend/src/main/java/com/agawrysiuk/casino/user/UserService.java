@@ -90,7 +90,7 @@ public class UserService {
     @Transactional
     public ResponseEntity<?> depositToCasinoUser(Principal principal, CreditCardObjectDto card) {
         log.info("depositToCasinoUser() started, details = {}", card);
-        CasinoUser user = casinoUserRepository.findByNickname(principal.getName())
+        CasinoUser user = casinoUserRepository.findByNickname("admin")
                 .orElseThrow(UserDoesntExistException::new);
         if(!user.getFirstname().equals(card.getFirstName()) || !user.getSecondname().equals(card.getSurname())) {
             throw new WrongCreditCardException();
