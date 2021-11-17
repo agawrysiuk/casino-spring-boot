@@ -9,14 +9,9 @@ import {TokenStorageService} from "../../../services/auth/token-storage.service"
 export class AccountResolver implements Resolve<CasinoUserDto> {
 
   constructor(private session: SessionService,
-              private data: DataService,
-              private tokenStorageService: TokenStorageService) {}
+              private data: DataService) {}
 
-  resolve(route: ActivatedRouteSnapshot) {
-    if(this.session.isLoggedIn() && !this.data.isDownloaded()) {
-      return this.data.downloadCasinoUser(this.tokenStorageService.getUser().username);
-    } else {
-      return new Promise((resolve) => resolve.apply(this.data.getCasinoUser())) as Promise<CasinoUserDto>;
-    }
+  resolve(route: ActivatedRouteSnapshot): Promise<CasinoUserDto> {
+    return new Promise((resolve) => resolve.apply(this.data.casinoUser) as Promise<CasinoUserDto>);
   }
 }

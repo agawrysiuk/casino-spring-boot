@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import {CasinoUserDto} from "../model/data";
+import {CasinoUserDto, EditCasinoUserRequest} from "../model/data";
 import {ConnectionService} from "./connection/connection.service";
+import {tap} from "rxjs/operators";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -11,34 +13,25 @@ export class DataService {
 
   constructor(private connection: ConnectionService) { }
 
-  public downloadCasinoUser(username: string): Promise<CasinoUserDto> {
-    return this.connection.getCasinoUser(username)
-      .then(response => {
-        this.user = response as CasinoUserDto;
-        return this.user;
-      });
+  public getCasinoUser(): void {
+    this.connection.getCasinoUser()
+      .subscribe(response => this.user = {...response});
   }
 
-  public getCasinoUser(): CasinoUserDto {
+  public get casinoUser(): CasinoUserDto {
     return this.user;
   }
 
-  public setCasinoUser(editedUser: CasinoUserDto) {
+  public setCasinoUser(editedUser: EditCasinoUserRequest): Observable<CasinoUserDto> {
     return this.connection.editCasinoUser(editedUser)
-      .then(response => {
-        this.user = response;
-      });
+      .pipe(tap(response => this.user = response));
   }
 
-  updateBalance(balance: number) {
+  updateBalance(balance: number): void {
     this.user.balance = balance;
   }
 
-  isDownloaded() {
-    return !!this.user.nickname;
-  }
-
-  clear() {
+  clear(): void {
     this.user = null;
   }
 }

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {API, httpOptions} from "./connection-utils";
-import {CasinoUserDto, CreditCardObject, PasswordDto} from "../../model/data";
+import {CasinoUserDto, CreditCardObject, EditCasinoUserRequest, EditPasswordRequest} from "../../model/data";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -10,19 +11,19 @@ export class ConnectionService {
 
   constructor(private http: HttpClient) { }
 
-  public getCasinoUser(username: string): Promise<CasinoUserDto> {
-    return this.http.get(API + "/casino-user?name=" + username).toPromise() as Promise<CasinoUserDto>;
+  public getCasinoUser(): Observable<CasinoUserDto> {
+    return this.http.get<CasinoUserDto>(API + "/casino-user");
   }
 
-  public editCasinoUser(editedUser: CasinoUserDto): Promise<CasinoUserDto> {
-    return this.http.post(API + "/casino-user", editedUser).toPromise() as Promise<CasinoUserDto>;
+  public editCasinoUser(editedUser: EditCasinoUserRequest): Observable<CasinoUserDto> {
+    return this.http.post<CasinoUserDto>(API + "/casino-user", editedUser);
   }
 
-  public editPassword(editedPassword: PasswordDto): Promise<any> {
-    return this.http.post(API + "/edit-password", editedPassword, httpOptions).toPromise();
+  public editPassword(editedPassword: EditPasswordRequest): Observable<any> {
+    return this.http.post<any>(API + "/edit-password", editedPassword, httpOptions);
   }
 
-  public deposit(deposit: CreditCardObject): Promise<any> {
-    return this.http.post(API + "/deposit", deposit, httpOptions).toPromise();
+  public deposit(deposit: CreditCardObject): Observable<any> {
+    return this.http.post<any>(API + "/deposit", deposit, httpOptions);
   }
 }

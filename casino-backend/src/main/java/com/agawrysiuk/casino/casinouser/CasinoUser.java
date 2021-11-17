@@ -1,16 +1,15 @@
 package com.agawrysiuk.casino.casinouser;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.agawrysiuk.casino.casinouser.dto.EditCasinoUserRequest;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import java.math.BigDecimal;
 import java.sql.Date;
 
-@Data
+@Getter
+@Setter(AccessLevel.PRIVATE)
 @Entity
 @Builder
 @NoArgsConstructor
@@ -37,4 +36,19 @@ public class CasinoUser {
     private Date birthdate;
     @Column(name = "COUNTRY")
     private String country;
+
+    public CasinoUser(String nickname) {
+        this.nickname = nickname;
+    }
+
+    void update(EditCasinoUserRequest request) {
+        this.setCountry(request.getCountry());
+        this.setFirstname(request.getFirstName());
+        this.setSecondname(request.getSecondName());
+        this.setBirthdate(request.getBirthDate());
+    }
+
+    public void updateBalance(BigDecimal balance) {
+        this.balance = balance;
+    }
 }

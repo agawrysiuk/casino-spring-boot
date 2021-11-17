@@ -79,4 +79,9 @@ public class UserDetailsImpl implements UserDetails {
         UserDetailsImpl user = (UserDetailsImpl) o;
         return Objects.equals(username, user.username);
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username);
+    }
 }

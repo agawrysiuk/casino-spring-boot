@@ -19,8 +19,14 @@ export interface CasinoUserDto {
   country: string;
 }
 
-export interface PasswordDto {
-  username: string;
+export interface EditCasinoUserRequest {
+  firstName: string;
+  secondName: string;
+  birthDate: Date;
+  country: string;
+}
+
+export interface EditPasswordRequest {
   oldPassword: string;
   password: string;
   matchingPassword: string;

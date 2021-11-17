@@ -37,8 +37,7 @@ public class CasinoUserRepositoryTest {
 
     @Test
     public void findCasinoUserByName() {
-        CasinoUser casinoUser = new CasinoUser();
-        casinoUser.setNickname("admin");
+        CasinoUser casinoUser = new CasinoUser("admin");
         entityManager.persist(casinoUser);
         entityManager.flush();
 

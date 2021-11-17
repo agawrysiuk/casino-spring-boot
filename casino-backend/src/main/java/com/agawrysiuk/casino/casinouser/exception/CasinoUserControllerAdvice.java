@@ -1,6 +1,5 @@
 package com.agawrysiuk.casino.casinouser.exception;
 
-import com.agawrysiuk.casino.user.exception.UsernameExistsException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TokenStorageService} from "../../../services/auth/token-storage.service";
 import {ConnectionService} from "../../../services/connection/connection.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
-import {CasinoUserDto} from "../../../model/data";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-deposit',
@@ -25,7 +24,7 @@ export class DepositComponent implements OnInit {
       surname: ['', Validators.required],
       cardNumber: ['', Validators.required],
       expiryDate: ['', Validators.required],
-      ccv: ['', [Validators.required,Validators.pattern(new RegExp('[0-9]'))]],
+      ccv: ['', [Validators.required, Validators.pattern(new RegExp('[0-9]'))]],
       depositAmount: ['', Validators.required],
     })
   }
@@ -34,11 +33,13 @@ export class DepositComponent implements OnInit {
   }
 
   deposit() {
-    if(this.depositForm.valid) {
+    if (this.depositForm.valid) {
       this.error = undefined;
       this.data.deposit(this.depositForm.value)
-        .then(() => setTimeout(() => this.route.navigate(['/account'])))
-        .catch(() => this.error = "Error");
+        .subscribe(
+          () => setTimeout(() => this.route.navigate(['/account'])),
+          catchError => this.error = "Error"
+        );
     }
   }
 }

@@ -1,5 +1,7 @@
 package com.agawrysiuk.casino.casinouser;
 
+import com.agawrysiuk.casino.casinouser.dto.CasinoUserDto;
+import com.agawrysiuk.casino.casinouser.dto.EditCasinoUserRequest;
 import com.agawrysiuk.casino.casinouser.exception.IncorrectRequestException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -14,19 +16,13 @@ public class CasinoUserController {
     private final CasinoUserService casinoUserService;
 
     @GetMapping("/casino-user")
-    public CasinoUserDto get(@RequestParam("name") String nickname, HttpServletRequest request) {
-        if(!request.getUserPrincipal().getName().equals(nickname)) {
-            throw new IncorrectRequestException("Incorrect GET request!");
-        }
-        return casinoUserService.get(nickname);
+    public CasinoUserDto get(HttpServletRequest request) {
+        return casinoUserService.get(request.getUserPrincipal().getName());
     }
 
     @PostMapping("/casino-user")
-    public CasinoUserDto update(@RequestBody CasinoUserDto casinoUserDto, HttpServletRequest request) {
-        if(!request.getUserPrincipal().getName().equals(casinoUserDto.getNickname())) {
-            throw new IncorrectRequestException("Incorrect POST request!");
-        }
-        return casinoUserService.update(casinoUserDto);
+    public CasinoUserDto update(@RequestBody EditCasinoUserRequest casinoUserDto, HttpServletRequest request) {
+        return casinoUserService.update(request.getUserPrincipal().getName(), casinoUserDto);
     }
 
 }

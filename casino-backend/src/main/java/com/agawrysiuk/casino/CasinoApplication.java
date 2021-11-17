@@ -1,10 +1,10 @@
 package com.agawrysiuk.casino;
 
 import com.agawrysiuk.casino.casinouser.CasinoUser;
-import com.agawrysiuk.casino.casinouser.CasinoUserDto;
+import com.agawrysiuk.casino.casinouser.dto.CasinoUserDto;
 import com.agawrysiuk.casino.casinouser.CasinoUserRepository;
 import com.agawrysiuk.casino.casinouser.CasinoUserService;
-import com.agawrysiuk.casino.user.dto.CreditCardObjectDto;
+import com.agawrysiuk.casino.casinouser.dto.EditCasinoUserRequest;
 import com.agawrysiuk.casino.user.dto.UserDto;
 import com.agawrysiuk.casino.user.UserService;
 import org.springframework.boot.SpringApplication;
@@ -29,8 +29,7 @@ public class CasinoApplication {
                 ,true
         );
 
-        context.getBean(CasinoUserService.class).update(CasinoUserDto.builder()
-                .nickname("admin")
+        context.getBean(CasinoUserService.class).update("admin", EditCasinoUserRequest.builder()
                 .firstName("Adam")
                 .secondName("Miałczyński")
                 .country("Poland")
@@ -40,7 +39,7 @@ public class CasinoApplication {
 
         CasinoUserRepository repository = context.getBean(CasinoUserRepository.class);
         CasinoUser user = repository.findByNickname("admin").get();
-        user.setBalance(new BigDecimal("50.00"));
+        user.updateBalance(BigDecimal.valueOf(50));
         repository.save(user);
 
 

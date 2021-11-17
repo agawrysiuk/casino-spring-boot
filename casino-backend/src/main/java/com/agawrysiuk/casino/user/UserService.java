@@ -3,7 +3,7 @@ package com.agawrysiuk.casino.user;
 import com.agawrysiuk.casino.casinouser.CasinoUser;
 import com.agawrysiuk.casino.casinouser.CasinoUserRepository;
 import com.agawrysiuk.casino.user.dto.CreditCardObjectDto;
-import com.agawrysiuk.casino.user.dto.PasswordDto;
+import com.agawrysiuk.casino.user.dto.EditPasswordRequest;
 import com.agawrysiuk.casino.user.dto.UserDto;
 import com.agawrysiuk.casino.user.exception.UserDoesntExistException;
 import com.agawrysiuk.casino.user.exception.WrongCreditCardException;
@@ -64,12 +64,10 @@ public class UserService {
         return user;
     }
 
-    public ResponseEntity<?> changePassword(PasswordDto passwordDto) {
-        log.info("changePassword() in service started for user {}", passwordDto.getUsername());
-        User user = userRepository.findByUsername(passwordDto.getUsername()).orElseThrow(UserDoesntExistException::new);
-        user.setPassword(new BCryptPasswordEncoder().encode(passwordDto.getPassword()));
+    public ResponseEntity<?> changePassword(EditPasswordRequest editPasswordRequest, String username) {
+        User user = userRepository.findByUsername(username).orElseThrow(UserDoesntExistException::new);
+        user.setPassword(new BCryptPasswordEncoder().encode(editPasswordRequest.getPassword()));
         userRepository.save(user);
-        log.info("changePassword() in service completed for user {}", passwordDto.getUsername());
         return ResponseEntity.ok().build();
     }
 
@@ -83,7 +81,7 @@ public class UserService {
         log.info("updateCasinoUserBalance() started");
         CasinoUser user = casinoUserRepository.findByNickname(nickname)
                 .orElseThrow(UserDoesntExistException::new);
-        user.setBalance(balance);
+        user.updateBalance(balance);
         casinoUserRepository.save(user);
     }
 
@@ -95,7 +93,7 @@ public class UserService {
         if(!user.getFirstname().equals(card.getFirstName()) || !user.getSecondname().equals(card.getSurname())) {
             throw new WrongCreditCardException();
         }
-        user.setBalance(user.getBalance().add(card.getDepositAmount()));
+        user.updateBalance(user.getBalance().add(card.getDepositAmount()));
         casinoUserRepository.save(user);
         log.info("depositToCasinoUser() finished, deposited = {}", card.getDepositAmount());
         return ResponseEntity.ok().build();

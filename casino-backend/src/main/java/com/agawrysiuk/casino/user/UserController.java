@@ -1,8 +1,7 @@
 package com.agawrysiuk.casino.user;
 
-import com.agawrysiuk.casino.casinouser.exception.IncorrectRequestException;
 import com.agawrysiuk.casino.user.dto.CreditCardObjectDto;
-import com.agawrysiuk.casino.user.dto.PasswordDto;
+import com.agawrysiuk.casino.user.dto.EditPasswordRequest;
 import com.agawrysiuk.casino.user.dto.UserDto;
 import com.agawrysiuk.casino.user.request.LoginRequest;
 import lombok.RequiredArgsConstructor;
@@ -33,11 +32,8 @@ public class UserController {
     }
 
     @PostMapping("/edit-password")
-    public ResponseEntity<?> editPassword(@RequestBody @Valid PasswordDto passwordDto, HttpServletRequest request) {
-        if(!request.getUserPrincipal().getName().equals(passwordDto.getUsername())) {
-            throw new IncorrectRequestException("Incorrect POST request!");
-        }
-        return userFacade.editPassword(passwordDto, request.getUserPrincipal());
+    public ResponseEntity<?> editPassword(@RequestBody @Valid EditPasswordRequest editPasswordRequest, HttpServletRequest request) {
+        return userFacade.editPassword(editPasswordRequest, request.getUserPrincipal());
     }
 
     @PostMapping("/deposit")

@@ -5,6 +5,7 @@ import {ConnectionService} from "../../../services/connection/connection.service
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DataService} from "../../../services/data.service";
 import {AccountResolver} from "./account-resolver";
+import {catchError} from "rxjs/operators";
 
 @Component({
   selector: 'app-account',
@@ -25,7 +26,7 @@ export class AccountComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.casinoUser = this.data.getCasinoUser();
+    this.casinoUser = this.data.casinoUser;
   }
 
   getNickname() {
@@ -44,22 +45,22 @@ export class AccountComponent implements OnInit {
 
   saveEditForm() {
     this.data.setCasinoUser({
-      balance: null,
-      birthDate: this.editForm.value.birthDate,
-      country: this.editForm.value.country,
       firstName: this.editForm.value.firstName,
-      nickname: this.casinoUser.nickname,
-      secondName: this.editForm.value.secondName
+      secondName: this.editForm.value.secondName,
+      birthDate: this.editForm.value.birthDate,
+      country: this.editForm.value.country
     })
-      .then(response => {
-        this.casinoUser = this.data.getCasinoUser();
-        this.editingInfo = false;
-        this.showError = false;
-      })
-      .catch(() => this.showError = true);
+      .subscribe(
+        response => {
+          this.casinoUser = this.data.casinoUser;
+          this.editingInfo = false;
+          this.showError = false;
+        },
+        catchError => this.showError = true
+      );
   }
 
-    isDepositDisabled() {
-        return !this.casinoUser?.firstName && !this.casinoUser?.secondName;
-    }
+  isDepositDisabled() {
+    return !this.casinoUser?.firstName && !this.casinoUser?.secondName;
+  }
 }

@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
   private saveData(data) {
     this.tokenStorage.saveToken(data.token);
     this.tokenStorage.saveUser(data);
-    this.data.downloadCasinoUser(data.username);
+    this.data.getCasinoUser();
   }
 
 }

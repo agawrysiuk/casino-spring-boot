@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TokenStorageService} from "../../../services/auth/token-storage.service";
 import {ConnectionService} from "../../../services/connection/connection.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {checkPasswordMatch} from "../../../utils/form-utils";
-import {PasswordDto} from "../../../model/data";
+import {EditPasswordRequest} from "../../../model/data";
+import {catchError} from "rxjs/operators";
 
 @Component({
   selector: 'app-edit-password',
@@ -34,27 +35,27 @@ export class EditPasswordComponent implements OnInit {
   }
 
   changePassword() {
-    if(this.passwordForm.valid) {
+    if (this.passwordForm.valid) {
       this.error = false;
-      const passwordDto: PasswordDto = {
-        username: this.tokenStorage.getUser().username,
+      const passwordDto: EditPasswordRequest = {
         oldPassword: this.passwordForm.value.oldPassword,
         password: this.passwordForm.value.password,
         matchingPassword: this.passwordForm.value.matchingPassword
       };
       this.data.editPassword(passwordDto)
-        .then(() => {
-          this.success = true;
-          setTimeout(() => this.route.navigate(['account']), 1000);
-        })
-        .catch(error => {
-          this.error = true;
-          this.errorMessage = error.error;
-        });
+        .subscribe(
+          () => {
+            this.success = true;
+            setTimeout(() => this.route.navigate(['account']), 1000);
+          },
+          catchError => {
+            this.error = true;
+            this.errorMessage = catchError.error;
+          });
     }
   }
 
-  checkRetypedPassword() {
+  checkRetypedPassword(): void {
     checkPasswordMatch(this.passwordForm);
   }
 }

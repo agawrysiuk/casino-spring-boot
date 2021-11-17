@@ -9,8 +9,7 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @PasswordMatchesReset
-public class PasswordDto {
-    private String username;
+public class EditPasswordRequest {
     @NotNull
     @NotEmpty
     private String oldPassword;

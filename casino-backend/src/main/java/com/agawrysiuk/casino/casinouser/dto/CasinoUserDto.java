@@ -1,4 +1,4 @@
-package com.agawrysiuk.casino.casinouser;
+package com.agawrysiuk.casino.casinouser.dto;
 
 import lombok.*;
 

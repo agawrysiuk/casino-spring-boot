@@ -1,5 +1,7 @@
 package com.agawrysiuk.casino.casinouser;
 
+import com.agawrysiuk.casino.casinouser.dto.CasinoUserDto;
+import com.agawrysiuk.casino.casinouser.dto.EditCasinoUserRequest;
 import com.agawrysiuk.casino.user.exception.UserDoesntExistException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,39 +20,29 @@ public class CasinoUserService {
         CasinoUser casinoUser = casinoUserRepository.findByNickname(nickname)
                 .orElseThrow(UserDoesntExistException::new);
 
-        return CasinoUserDto.builder()
-                .nickname(casinoUser.getNickname())
-                .firstName(casinoUser.getFirstname())
-                .secondName(casinoUser.getSecondname())
-                .balance(casinoUser.getBalance())
-                .birthDate(casinoUser.getBirthdate())
-                .country(casinoUser.getCountry())
-                .build();
+        return this.map(casinoUser);
     }
 
     @Transactional
-    public CasinoUserDto update(CasinoUserDto casinoUserDto) {
-        CasinoUser casinoUser = casinoUserRepository.findByNickname(casinoUserDto.getNickname())
+    public CasinoUserDto update(String nickname, EditCasinoUserRequest editCasinoUserRequest) {
+        CasinoUser casinoUser = casinoUserRepository.findByNickname(nickname)
                 .orElseThrow(UserDoesntExistException::new);
 
-        log.info("User update for {} started", casinoUserDto.getNickname());
-
-        casinoUser.setCountry(casinoUserDto.getCountry());
-        casinoUser.setFirstname(casinoUserDto.getFirstName());
-        casinoUser.setSecondname(casinoUserDto.getSecondName());
-        casinoUser.setBirthdate(casinoUserDto.getBirthDate());
+        casinoUser.update(editCasinoUserRequest);
 
         CasinoUser saved = casinoUserRepository.save(casinoUser);
 
-        log.info("User update completed! User = {}", saved);
+        return this.map(saved);
+    }
 
-        return  CasinoUserDto.builder()
-                .nickname(saved.getNickname())
-                .firstName(saved.getFirstname())
-                .secondName(saved.getSecondname())
-                .balance(saved.getBalance())
-                .birthDate(saved.getBirthdate())
-                .country(saved.getCountry())
+    private CasinoUserDto map(CasinoUser user) {
+        return CasinoUserDto.builder()
+                .nickname(user.getNickname())
+                .firstName(user.getFirstname())
+                .secondName(user.getSecondname())
+                .balance(user.getBalance())
+                .birthDate(user.getBirthdate())
+                .country(user.getCountry())
                 .build();
     }
 }
