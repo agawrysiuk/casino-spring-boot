@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @Slf4j
 @RestController
+@RequestMapping("/api/game")
 @RequiredArgsConstructor
 public class SlotsController {
 

@@ -3,10 +3,9 @@ import {
   RouletteRequestDto,
   RouletteResponseDto,
   SlotsDto,
-  TwentyOneRequestCode, TwentyOneRequestDto,
+  TwentyOneRequestDto,
   TwentyOneResponseDto
 } from "../model/game";
-import {API, httpOptions} from "./connection/connection-utils";
 import {GameConnectionService} from "./connection/game-connection.service";
 import {DataService} from "./data.service";
 

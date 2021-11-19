@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 @CrossOrigin(origins = "*")
 @Slf4j
 @RestController
+@RequestMapping("/api/game")
 @RequiredArgsConstructor
 public class TwentyOneController {
 

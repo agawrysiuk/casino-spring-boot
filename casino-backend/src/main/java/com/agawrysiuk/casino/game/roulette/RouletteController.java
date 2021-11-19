@@ -10,6 +10,7 @@ import javax.validation.Valid;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @Slf4j
 @RequiredArgsConstructor
+@RequestMapping("/api/game")
 @RestController
 public class RouletteController {
 

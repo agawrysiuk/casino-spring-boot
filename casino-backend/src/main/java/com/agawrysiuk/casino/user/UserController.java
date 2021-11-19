@@ -6,37 +6,35 @@ import com.agawrysiuk.casino.user.dto.UserDto;
 import com.agawrysiuk.casino.user.request.LoginRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
+@RequestMapping("/api/user")
 @RequiredArgsConstructor
 public class UserController {
 
     private final UserFacade userFacade;
 
-    @PostMapping("/register")
+    @PutMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody UserDto userDto) {
         return userFacade.register(userDto);
     }
 
-    @PostMapping("/login")
+    @PutMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         return userFacade.login(loginRequest);
     }
 
-    @PostMapping("/edit-password")
+    @PutMapping("/edit-password")
     public ResponseEntity<?> editPassword(@RequestBody @Valid EditPasswordRequest editPasswordRequest, HttpServletRequest request) {
         return userFacade.editPassword(editPasswordRequest, request.getUserPrincipal());
     }
 
-    @PostMapping("/deposit")
+    @PutMapping("/deposit")
     public ResponseEntity<?> deposit(@RequestBody @Valid CreditCardObjectDto creditCardObjectDto, HttpServletRequest request) {
         return userFacade.deposit(request.getUserPrincipal(), creditCardObjectDto);
     }
