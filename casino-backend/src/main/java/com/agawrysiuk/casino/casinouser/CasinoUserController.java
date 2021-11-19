@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("/api/casino-user")
+@RequestMapping("/api/v1/casino-user")
 @RestController
 @RequiredArgsConstructor
 public class CasinoUserController {

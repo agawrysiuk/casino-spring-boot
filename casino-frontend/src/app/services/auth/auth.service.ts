@@ -9,7 +9,7 @@ import {environment} from "../../../environments/environment";
 })
 export class AuthService {
 
-  private readonly API_ENDPOINT = environment.endpoint;
+  private readonly API_ENDPOINT = environment.endpoint + environment.apiVersion;
 
   constructor(private http: HttpClient) { }
 

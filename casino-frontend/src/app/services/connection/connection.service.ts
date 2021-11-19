@@ -10,7 +10,7 @@ import {environment} from "../../../environments/environment";
 })
 export class ConnectionService {
 
-  private readonly API_ENDPOINT: string = environment.endpoint;
+  private readonly API_ENDPOINT: string = environment.endpoint + environment.apiVersion;
 
   constructor(private http: HttpClient) { }
 
