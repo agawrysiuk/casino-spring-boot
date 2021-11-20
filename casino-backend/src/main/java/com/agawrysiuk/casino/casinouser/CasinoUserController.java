@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("/api/v1/casino-user")
+@RequestMapping("/v1/casino-user")
 @RestController
 @RequiredArgsConstructor
 public class CasinoUserController {
@@ -22,7 +22,7 @@ public class CasinoUserController {
         return new ResponseEntity<>(casinoUserService.get(request.getUserPrincipal().getName()), HttpStatus.OK);
     }
 
-    @PutMapping()
+    @PatchMapping()
     public ResponseEntity<CasinoUserDto> update(@RequestBody EditCasinoUserRequest casinoUserDto, HttpServletRequest request) {
         return new ResponseEntity<>(casinoUserService.update(request.getUserPrincipal().getName(), casinoUserDto), HttpStatus.ACCEPTED);
     }

@@ -5,6 +5,13 @@ If you'd like to know more about it, I invite to you to watch the YouTube presen
 
 https://youtu.be/-FW9obNZ-BA
 
+### Updates on November 2021
+- Changed the folder structure
+- Changed the promises to observables in Angular
+- Added API versioning
+- Changed POST endpoints to PUT/PATCH
+- Added more tests
+
 ### Updates on December 2020 - January 2021
 'master' branch:
 - Added Flyway migrations

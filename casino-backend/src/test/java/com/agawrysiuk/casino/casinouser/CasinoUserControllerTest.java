@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class CasinoUserControllerTest {
 
-    private static final String API_ENDPOINT = "/api/v1/casino-user";
+    private static final String API_ENDPOINT = "/v1/casino-user";
 
     @Autowired
     MockMvc mockMvc;

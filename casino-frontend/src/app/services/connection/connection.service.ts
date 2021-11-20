@@ -19,7 +19,7 @@ export class ConnectionService {
   }
 
   public editCasinoUser(editedUser: EditCasinoUserRequest): Observable<CasinoUserDto> {
-    return this.http.put<CasinoUserDto>(this.API_ENDPOINT + "/casino-user", editedUser);
+    return this.http.patch<CasinoUserDto>(this.API_ENDPOINT + "/casino-user", editedUser);
   }
 
   public editPassword(editedPassword: EditPasswordRequest): Observable<any> {
