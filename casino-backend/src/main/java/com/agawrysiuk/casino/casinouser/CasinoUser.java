@@ -2,11 +2,13 @@ package com.agawrysiuk.casino.casinouser;
 
 import com.agawrysiuk.casino.casinouser.dto.EditCasinoUserRequest;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.UUID;
 
 @Getter
 @Setter(AccessLevel.PRIVATE)
@@ -19,8 +21,12 @@ public class CasinoUser {
 
     @Id
     @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "CE0AOFQ")
-    private Integer id;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
+    private UUID id;
     @Column(name = "NICKNAME")
     private String nickname;
     @Digits(integer=12, fraction=2)
