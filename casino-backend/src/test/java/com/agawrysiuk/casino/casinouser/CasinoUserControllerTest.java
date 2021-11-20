@@ -37,7 +37,7 @@ class CasinoUserControllerTest {
     @WithMockUser(username = "Basic_User")
     void update() throws Exception {
         String requestContent = objectMapper.writeValueAsString(CasinoUser.builder().build());
-        mockMvc.perform(MockMvcRequestBuilders.put(API_ENDPOINT).contentType(MediaType.APPLICATION_JSON).content(requestContent))
+        mockMvc.perform(MockMvcRequestBuilders.patch(API_ENDPOINT).contentType(MediaType.APPLICATION_JSON).content(requestContent))
                 .andExpect(status().isAccepted());
     }
 }
