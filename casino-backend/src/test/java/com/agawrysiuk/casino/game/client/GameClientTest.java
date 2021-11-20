@@ -35,7 +35,7 @@ class GameClientTest {
     private GameClient gameClient;
     @Autowired
     private ObjectMapper mapper;
-    @Value("${api.host.game}")
+    @Value("${casino.api.host.game}")
     private String gameHost;
 
     @BeforeEach

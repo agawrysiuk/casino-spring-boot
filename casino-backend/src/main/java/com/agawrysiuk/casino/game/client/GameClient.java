@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 @RequiredArgsConstructor
 public class GameClient {
 
-    @Value("${api.host.game}")
+    @Value("${casino.api.host.game}")
     private String gameHost;
 
     private final RestTemplate restTemplate;
