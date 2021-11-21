@@ -9,9 +9,8 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.agawrysiuk</groupId>
-	<artifactId>casino</artifactId>
+	<artifactId>casino-backend-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>casino</name>
 	<description>Casino project using Spring Boot</description>
 
 	<properties>
@@ -69,7 +68,6 @@
 			<version>0.9.1</version>
 		</dependency>
 
-
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpasyncclient</artifactId>
@@ -98,10 +96,12 @@
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.agawrysiuk</groupId>
+			<artifactId>casino-payment-api</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
-
-	<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
-
 
 	<build>
 		<plugins>
