@@ -7,6 +7,7 @@ import com.agawrysiuk.casino.casinouser.dto.EditCasinoUserRequest;
 import com.agawrysiuk.casino.user.UserService;
 import com.agawrysiuk.casino.user.dto.UserDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -20,10 +21,14 @@ public class UserLoader implements CommandLineRunner {
     private final UserService userService;
     private final CasinoUserService casinoUserService;
     private final CasinoUserRepository repository;
+    @Value("${casino.bootstrap.dev}")
+    private boolean shouldBootstrap;
 
     @Override
     public void run(String... args) throws Exception {
-        loadAdmin();
+        if (shouldBootstrap) {
+            loadAdmin();
+        }
     }
 
     private void loadAdmin() {
