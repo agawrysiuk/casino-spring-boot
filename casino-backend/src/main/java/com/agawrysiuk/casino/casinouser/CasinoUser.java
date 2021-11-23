@@ -3,6 +3,7 @@ package com.agawrysiuk.casino.casinouser;
 import com.agawrysiuk.casino.casinouser.dto.EditCasinoUserRequest;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
@@ -26,6 +27,7 @@ public class CasinoUser {
             name = "UUID",
             strategy = "org.hibernate.id.UUIDGenerator"
     )
+    @Type(type = "uuid-char")
     private UUID id;
     @Column(name = "NICKNAME")
     private String nickname;

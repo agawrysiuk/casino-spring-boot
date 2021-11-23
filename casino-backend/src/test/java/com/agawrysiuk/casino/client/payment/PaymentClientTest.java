@@ -59,7 +59,7 @@ class PaymentClientTest {
 
         PaymentResponse expected = PaymentResponse.builder()
                 .amount(BigDecimal.valueOf(50))
-                .paymentId(UUID.randomUUID())
+                .id(UUID.randomUUID())
                 .userId(userId)
                 .build();
         mockServer.expect(ExpectedCount.once(),

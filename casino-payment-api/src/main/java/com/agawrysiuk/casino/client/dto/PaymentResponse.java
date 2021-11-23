@@ -15,7 +15,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class PaymentResponse {
 
-    private UUID paymentId;
+    private UUID id;
     private UUID userId;
     private BigDecimal amount;
 
@@ -24,13 +24,13 @@ public class PaymentResponse {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PaymentResponse that = (PaymentResponse) o;
-        return Objects.equals(paymentId, that.paymentId) &&
+        return Objects.equals(id, that.id) &&
                 Objects.equals(userId, that.userId) &&
                 Objects.equals(amount, that.amount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(paymentId, userId, amount);
+        return Objects.hash(id, userId, amount);
     }
 }
