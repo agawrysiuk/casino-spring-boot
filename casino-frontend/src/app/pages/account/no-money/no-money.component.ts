@@ -1,15 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-no-money',
   templateUrl: './no-money.component.html',
   styleUrls: ['./no-money.component.scss']
 })
-export class NoMoneyComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+export class NoMoneyComponent {
 
 }

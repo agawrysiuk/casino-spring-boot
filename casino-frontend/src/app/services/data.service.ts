@@ -14,8 +14,7 @@ export class DataService {
   constructor(private connection: ConnectionService) { }
 
   public getCasinoUser(): void {
-    this.connection.getCasinoUser()
-      .subscribe(response => this.user = {...response});
+    this.connection.getCasinoUser().subscribe(response => this.user = {...response});
   }
 
   public get casinoUser(): CasinoUserDto {

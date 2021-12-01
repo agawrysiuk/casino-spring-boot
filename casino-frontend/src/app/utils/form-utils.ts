@@ -1,9 +1,14 @@
-import {FormGroup} from "@angular/forms";
+import {FormGroup, ValidationErrors} from "@angular/forms";
 
-export function checkPasswordMatch(form: FormGroup): void {
-  if(form.controls.password.value !== form.controls.matchingPassword.value) {
-    form.controls.matchingPassword.setErrors({'invalid': true});
-  } else {
-    form.controls.matchingPassword.setErrors(null);
+export class CustomValidators {
+  static matchPassword(form: FormGroup): ValidationErrors | null {
+
+    const password = form.get("password").value;
+    const confirm = form.get("matchingPassword").value;
+
+
+    if (password != confirm) { return { 'invalid': true } }
+
+    return null;
   }
 }

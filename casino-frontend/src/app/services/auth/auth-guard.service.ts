@@ -21,7 +21,7 @@ export class AuthGuardService implements CanActivate{
     return true;
   }
 
-  private isAuthenticated() {
+  private isAuthenticated(): boolean {
     const token = this.tokenStorage.getToken();
     return token ? !jwtHelper.isTokenExpired(token) : false;
   }

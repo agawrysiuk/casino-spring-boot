@@ -45,7 +45,6 @@ public class UserFacade {
     }
 
     public ResponseEntity<?> login(LoginRequest loginRequest) {
-
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
         );

@@ -1,7 +1,7 @@
 <div class="main-box">
   <div class="main-box-container">
     <h1>Register</h1>
-    <form [formGroup]="form" id="registerForm" action="" method="POST" enctype="utf8" (submit)="register()">
+    <form [formGroup]="form" id="registerForm" (submit)="register()">
       <div>
         <input class="form-input" formControlName="username" id="usernameInput" type="text" placeholder="Username"/>
       </div>
@@ -9,10 +9,10 @@
         <input class="form-input" formControlName="email" id="emailInput" type="email" placeholder="Email"/>
       </div>
       <div>
-        <input class="form-input" formControlName="password" id="passwordInput" type="password" placeholder="Password" (blur)="checkRetypedPassword()"/>
+        <input class="form-input" formControlName="password" id="passwordInput" type="password" placeholder="Password"/>
       </div>
       <div>
-        <input class="form-input" formControlName="matchingPassword" id="matchingPasswordInput" type="password" placeholder="Retype password" (keyup)="checkRetypedPassword()"/>
+        <input class="form-input" formControlName="matchingPassword" id="matchingPasswordInput" type="password" placeholder="Retype password"/>
       </div>
       <input class="green-button" value="Register" name="register" type="submit" form="registerForm"/>
       <p *ngIf="errorMessage">{{errorMessage}}</p>

@@ -87,15 +87,13 @@ public class UserService {
 
     @Transactional
     public ResponseEntity<?> depositToCasinoUser(Principal principal, CreditCardObjectDto card) {
-        log.info("depositToCasinoUser() started, details = {}", card);
-        CasinoUser user = casinoUserRepository.findByNickname("admin")
+        CasinoUser user = casinoUserRepository.findByNickname(principal.getName())
                 .orElseThrow(UserDoesntExistException::new);
         if(!user.getFirstname().equals(card.getFirstName()) || !user.getSecondname().equals(card.getSurname())) {
             throw new WrongCreditCardException();
         }
         user.updateBalance(user.getBalance().add(card.getDepositAmount()));
         casinoUserRepository.save(user);
-        log.info("depositToCasinoUser() finished, deposited = {}", card.getDepositAmount());
         return ResponseEntity.ok().build();
     }
 

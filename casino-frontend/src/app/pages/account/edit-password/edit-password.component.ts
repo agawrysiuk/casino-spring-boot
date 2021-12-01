@@ -1,11 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {TokenStorageService} from "../../../services/auth/token-storage.service";
-import {ConnectionService} from "../../../services/connection/connection.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
-import {checkPasswordMatch} from "../../../utils/form-utils";
-import {EditPasswordRequest} from "../../../model/data";
-import {catchError} from "rxjs/operators";
+import {FormGroup} from "@angular/forms";
+import {Observable} from "rxjs";
+import {EditPasswordService} from "./edit-password.service";
 
 @Component({
   selector: 'app-edit-password',
@@ -15,47 +11,23 @@ import {catchError} from "rxjs/operators";
 export class EditPasswordComponent implements OnInit {
 
   passwordForm: FormGroup
-  errorMessage: string;
-  error: boolean = false;
-  success: boolean = false;
-  buttonClickable: boolean = true;
+  pageState: Observable<EditPasswordPageState>;
 
-  constructor(private tokenStorage: TokenStorageService,
-              private data: ConnectionService,
-              private fb: FormBuilder,
-              private route: Router) {
-    this.passwordForm = this.fb.group({
-      oldPassword: ['', Validators.required],
-      password: ['', Validators.required],
-      matchingPassword: ['', Validators.required]
-    });
-  }
+  constructor(private service: EditPasswordService) {}
 
   ngOnInit(): void {
+    this.pageState = this.service.state;
+    this.passwordForm = this.service.createForm();
   }
 
-  changePassword() {
-    if (this.passwordForm.valid) {
-      this.error = false;
-      const passwordDto: EditPasswordRequest = {
-        oldPassword: this.passwordForm.value.oldPassword,
-        password: this.passwordForm.value.password,
-        matchingPassword: this.passwordForm.value.matchingPassword
-      };
-      this.data.editPassword(passwordDto)
-        .subscribe(
-          () => {
-            this.success = true;
-            setTimeout(() => this.route.navigate(['account']), 1000);
-          },
-          catchError => {
-            this.error = true;
-            this.errorMessage = catchError.error;
-          });
-    }
-  }
-
-  checkRetypedPassword(): void {
-    checkPasswordMatch(this.passwordForm);
+  changePassword(): void {
+    this.service.changePassword(this.passwordForm);
   }
 }
+
+export type EditPasswordPageState = Readonly<{
+  errorMessage: string;
+  error: boolean;
+  success: boolean;
+  buttonClickable: boolean;
+}>

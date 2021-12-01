@@ -27,4 +27,4 @@
     <br/>
   </div>
 </form>
-<p *ngIf="error" style="color: #a00000">{{error}}</p>
+<p *ngIf="error | async" style="color: #a00000">{{error}}</p>

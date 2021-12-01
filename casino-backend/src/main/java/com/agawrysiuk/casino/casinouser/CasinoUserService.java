@@ -6,8 +6,8 @@ import com.agawrysiuk.casino.user.exception.UserDoesntExistException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 
 @Slf4j
 @Service
@@ -23,7 +23,7 @@ public class CasinoUserService {
         return this.map(casinoUser);
     }
 
-    @Transactional
+    @Transactional(rollbackFor = UserDoesntExistException.class)
     public CasinoUserDto update(String nickname, EditCasinoUserRequest editCasinoUserRequest) {
         CasinoUser casinoUser = casinoUserRepository.findByNickname(nickname)
                 .orElseThrow(UserDoesntExistException::new);

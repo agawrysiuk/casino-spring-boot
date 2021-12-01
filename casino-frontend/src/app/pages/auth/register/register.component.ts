@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {UserDto} from "../../../model/data";
 import {AuthService} from "../../../services/auth/auth.service";
-import {checkPasswordMatch} from "../../../utils/form-utils";
+import {CustomValidators} from "../../../utils/form-utils";
 
 @Component({
   selector: 'app-register',
@@ -15,28 +14,24 @@ export class RegisterComponent implements OnInit {
   errorMessage: string | undefined;
 
   constructor(private fb: FormBuilder,
-              private auth: AuthService) {
-    this.form = fb.group({
-      username: ['', Validators.required],
+              private auth: AuthService) {}
+
+  ngOnInit(): void {
+    this.form = this.fb.group({
+      username: ['', Validators.required, Validators.minLength(4)],
       password: ['', Validators.required],
       matchingPassword: ['', Validators.required],
       email: ['', Validators.required, Validators.email]
-    });
+    }, {validators: CustomValidators.matchPassword});
   }
 
-  ngOnInit(): void {
-  }
-
-  register() {
+  register(): void {
     if(this.form.valid) {
-      this.auth.register(this.form.value)
-        .then()
-        .catch(error => this.errorMessage = error.error.message);
+      this.auth.register(this.form.value).subscribe(
+        () => null,
+        error => this.errorMessage = error.error.message
+    );
     }
-  }
-
-  checkRetypedPassword() {
-    checkPasswordMatch(this.form);
   }
 
 }

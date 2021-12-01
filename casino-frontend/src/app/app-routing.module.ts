@@ -1,20 +1,15 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from "./pages/home/home.component";
 import {LoginComponent} from "./pages/auth/login/login.component";
 import {RegisterComponent} from "./pages/auth/register/register.component";
 import {AuthGuardService} from "./services/auth/auth-guard.service";
-import {AccountComponent} from "./pages/account/account/account.component";
-import {EditPasswordComponent} from "./pages/account/edit-password/edit-password.component";
-import {DepositComponent} from "./pages/account/deposit/deposit.component";
 import {SlotsComponent} from "./pages/game/slots/slots.component";
-import {NoMoneyComponent} from "./pages/account/no-money/no-money.component";
 import {SlotsResolver} from "./pages/game/slots/slots-resolver";
 import {RouletteComponent} from "./pages/game/roulette/roulette.component";
 import {RouletteResolver} from "./pages/game/roulette/roulette-resolver";
 import {TwentyOneComponent} from "./pages/game/twenty-one/twenty-one.component";
 import {TwentyOneResolver} from "./pages/game/twenty-one/twenty-one.resolver";
-import {AccountResolver} from "./pages/account/account/account-resolver";
 
 const routes: Routes = [
   {
@@ -24,19 +19,8 @@ const routes: Routes = [
   },
   {
     path: 'account',
-    component: AccountComponent,
     canActivate: [AuthGuardService],
-    resolve: { account : AccountResolver }
-  },
-  {
-    path: 'edit-password',
-    component: EditPasswordComponent,
-    canActivate: [AuthGuardService]
-  },
-  {
-    path: 'deposit',
-    component: DepositComponent,
-    canActivate: [AuthGuardService]
+    loadChildren: () => import('./pages/account/account.module').then(module => module.AccountModule)
   },
   {
     path: 'slots',
@@ -55,11 +39,6 @@ const routes: Routes = [
     component: TwentyOneComponent,
     canActivate: [AuthGuardService],
     resolve: { twentyOne : TwentyOneResolver }
-  },
-  {
-    path: 'no-money',
-    component: NoMoneyComponent,
-    canActivate: [AuthGuardService]
   },
   {
     path: 'login',

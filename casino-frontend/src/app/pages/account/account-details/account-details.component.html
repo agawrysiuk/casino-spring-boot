@@ -1,0 +1,75 @@
+<ng-container *ngIf="pageState | async as pageState">
+  <div class="box-group">
+    <div class="main-box">
+      <div *ngIf="!pageState.editingInfo">
+        <h2 class="bold">You are logged in as {{tokenStorage.user.username}}</h2>
+        <p>Here is information about your account:</p>
+        <div class="box-line">
+          <span class="input-title">Username: </span>
+          <span class="bold">{{pageState.casinoUser.nickname}}</span>
+        </div>
+        <div class="box-line">
+          <span class="input-title">Balance: </span>
+          <span class="bold">{{pageState.casinoUser.balance | number:'1.2-2':'pl-PL'}}</span>
+        </div>
+        <div class="box-line">
+          <span class="input-title">Name: </span>
+          <span class="bold">{{pageState.casinoUser.firstName}}</span>
+        </div>
+        <div class="box-line">
+          <span class="input-title">Surname: </span>
+          <span class="bold">{{pageState.casinoUser.secondName}}</span>
+        </div>
+        <div class="box-line">
+          <span class="input-title">Date of birth: </span>
+          <span class="bold">{{pageState.casinoUser.birthDate | date}}</span>
+        </div>
+        <div class="box-line">
+          <span class="input-title">Country of residence: </span>
+          <span class="bold">{{pageState.casinoUser.country}}</span>
+        </div>
+        <button class="green-button" (click)="createEditForm()" type="button">Edit information</button>
+        <button class="green-button" [routerLink]="['/account/edit-password']" type="button">Change password</button>
+      </div>
+      <div *ngIf="pageState.editingInfo">
+        <h2 class="bold">You are logged in as {{tokenStorage.user.username}}</h2>
+        <p>Edit yor information:</p>
+        <form [formGroup]="editForm">
+          <div>
+            <label>Name: </label>
+            <input class="form-input" formControlName="firstName" type="text" placeholder="Name"/>
+          </div>
+          <div>
+            <label>Surname: </label>
+            <input class="form-input" formControlName="secondName" type="text" placeholder="Surname"/>
+          </div>
+          <div>
+            <label>Date of birth:</label>
+            <input class="form-input" formControlName="birthDate" type="date" placeholder="Date of birth"/>
+          </div>
+          <div>
+            <label>Country of living:</label>
+            <input class="form-input" formControlName="country" type="text" placeholder="Country of living"/>
+          </div>
+        </form>
+        <p *ngIf="pageState.showError">Save information failed!</p>
+        <button class="redirect" (click)="saveEditForm()" type="button" [disabled]="editForm.invalid">Save information
+        </button>
+      </div>
+    </div>
+
+    <div class="main-box">
+      <div class="center-box">
+        <p>Balance:</p>
+        <h1 class="bolder account-amount">{{pageState.casinoUser.balance | number:'1.2-2':'pl-PL'}}</h1>
+        <ng-container *ngIf="!pageState.casinoUser.firstName || !pageState.casinoUser.secondName; else depositTemplate">
+          <p>Fill in your information to deposit.</p>
+        </ng-container>
+        <ng-template #depositTemplate>
+          <button class="deposit" [routerLink]="['/account/deposit']" type="button">Deposit now</button>
+        </ng-template>
+      </div>
+    </div>
+
+  </div>
+</ng-container>

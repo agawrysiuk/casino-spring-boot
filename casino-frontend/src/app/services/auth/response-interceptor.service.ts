@@ -13,11 +13,10 @@ export class ResponseInterceptor implements HttpInterceptor {
               private errorModal: ErrorBoxService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log("Response called")
     return next.handle(req).pipe(
       catchError(error => {
         if(error.status == 469) {
-          this.router.navigate(['no-money']);
+          this.router.navigate(['/account/no-money']);
         } else {
           this.errorModal.showError("Error while loading page. For security reasons, if you were logged in, we will log you out.")
           this.session.logout();
