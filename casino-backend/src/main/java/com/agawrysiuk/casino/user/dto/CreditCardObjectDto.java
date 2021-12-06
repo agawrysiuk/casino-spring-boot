@@ -2,29 +2,26 @@ package com.agawrysiuk.casino.user.dto;
 
 import com.agawrysiuk.casino.util.validator.ValidCreditCard;
 import lombok.Data;
+import org.hibernate.validator.constraints.CreditCardNumber;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 
 @Data
 @ValidCreditCard
 public class CreditCardObjectDto {
-    @NotNull
-    @NotEmpty
+    @NotBlank
     private String firstName;
-    @NotNull
-    @NotEmpty
+    @NotBlank
     private String surname;
-    @NotNull
-    @NotEmpty
+    @NotBlank
+    @CreditCardNumber
     private String cardNumber;
-    @NotNull
-    @NotEmpty
+    @NotBlank
     private String expiryDate;
-    @NotNull
-    @NotEmpty
+    @NotBlank
     private String ccv;
-    @NotNull
+    @Positive
     private BigDecimal depositAmount;
 }

@@ -8,8 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 @Data
 @Builder
@@ -17,18 +16,15 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDto {
-    @NotNull
-    @NotEmpty
+    @NotBlank
     private String username;
 
-    @NotNull
-    @NotEmpty
+    @NotBlank
     @ValidPassword
     private String password;
     private String matchingPassword;
 
+    @NotBlank
     @ValidEmail
-    @NotNull
-    @NotEmpty
     private String email;
 }

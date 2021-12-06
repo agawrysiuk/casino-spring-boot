@@ -4,17 +4,14 @@ import com.agawrysiuk.casino.util.validator.PasswordMatchesReset;
 import com.agawrysiuk.casino.util.validator.ValidPassword;
 import lombok.Data;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 @Data
 @PasswordMatchesReset
 public class EditPasswordRequest {
-    @NotNull
-    @NotEmpty
+    @NotBlank
     private String oldPassword;
-    @NotNull
-    @NotEmpty
+    @NotBlank
     @ValidPassword
     private String password;
     private String matchingPassword;
