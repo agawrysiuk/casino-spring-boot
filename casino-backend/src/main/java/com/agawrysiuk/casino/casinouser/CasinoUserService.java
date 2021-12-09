@@ -2,6 +2,7 @@ package com.agawrysiuk.casino.casinouser;
 
 import com.agawrysiuk.casino.casinouser.dto.CasinoUserDto;
 import com.agawrysiuk.casino.casinouser.dto.EditCasinoUserRequest;
+import com.agawrysiuk.casino.casinouser.mapper.CasinoUserMapper;
 import com.agawrysiuk.casino.user.exception.UserDoesntExistException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,12 +16,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class CasinoUserService {
 
     private final CasinoUserRepository casinoUserRepository;
+    private final CasinoUserMapper casinoUserMapper;
 
     public CasinoUserDto get(String nickname) {
         CasinoUser casinoUser = casinoUserRepository.findByNickname(nickname)
                 .orElseThrow(UserDoesntExistException::new);
 
-        return this.map(casinoUser);
+        return map(casinoUser);
     }
 
     @Transactional(rollbackFor = UserDoesntExistException.class)
@@ -32,17 +34,10 @@ public class CasinoUserService {
 
         CasinoUser saved = casinoUserRepository.save(casinoUser);
 
-        return this.map(saved);
+        return map(saved);
     }
 
     private CasinoUserDto map(CasinoUser user) {
-        return CasinoUserDto.builder()
-                .nickname(user.getNickname())
-                .firstName(user.getFirstname())
-                .secondName(user.getSecondname())
-                .balance(user.getBalance())
-                .birthDate(user.getBirthdate())
-                .country(user.getCountry())
-                .build();
+        return casinoUserMapper.casinoUserDto(user);
     }
 }
